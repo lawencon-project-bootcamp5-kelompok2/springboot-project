@@ -2,6 +2,8 @@ package com.lawencon.app.springbootproject.dao.impl.hibernate;
 
 import java.io.IOException;
 
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -37,6 +39,8 @@ public class MateriDaoImpl extends BaseHibernate implements MateriDao{
 
 	@Override
 	public Materi getFile(String fileId) throws Exception {
+//		Query q = em.createQuery("from Materi where id = :idParam").setParameter("idParam", fileId);
+//		return (Materi) q.getSingleResult();
 		return materiRepo.findById(fileId).orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
 	}
 }

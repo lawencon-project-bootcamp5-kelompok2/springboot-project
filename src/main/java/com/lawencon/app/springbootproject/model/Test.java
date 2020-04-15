@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,8 +26,10 @@ public class Test {
 
 	private byte[] fileSoal;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime waktuMulai;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime waktuSelesai;
 
 	public String getIdTest() {

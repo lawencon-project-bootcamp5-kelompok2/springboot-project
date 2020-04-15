@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -17,7 +17,7 @@ public class Course {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String idCourse;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "idTrainer")
 	private Trainer trainer;
 	

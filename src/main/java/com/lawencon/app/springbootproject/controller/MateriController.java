@@ -33,7 +33,7 @@ public class MateriController extends BaseController<Materi> {
 		try {
 			Materi materi = materiService.upload(file);
 			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-	                .path("/downloadFile/")
+	                .path("/file/downloadFile/")
 	                .path(materi.getId())
 	                .toUriString();
 			return new UploadFileResponse(materi.getFileName(), fileDownloadUri,

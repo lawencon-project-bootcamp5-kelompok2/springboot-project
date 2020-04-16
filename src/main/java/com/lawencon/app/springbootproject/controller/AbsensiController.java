@@ -26,7 +26,7 @@ public class AbsensiController extends BaseController<Absensi>{
 	@Autowired
 	private AbsensiService absensiService;
 	
-	@GetMapping("/findAll")
+	@GetMapping("/list")
 	public ResponseEntity<?> getList(){
 		List<Absensi> listAbsen = new ArrayList<>();
 		try {

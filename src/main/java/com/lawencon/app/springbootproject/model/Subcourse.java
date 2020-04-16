@@ -1,11 +1,15 @@
 package com.lawencon.app.springbootproject.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,11 +27,11 @@ public class Subcourse {
 
 	private String namaSubcourse;
 
-//	@Temporal(TemporalType.DATE)
-	private java.sql.Date tanggalMulai;
+	@Temporal(TemporalType.DATE)
+	private Date tanggalMulai;
 
-//	@Temporal(TemporalType.DATE)
-	private java.sql.Date tanggalSelesai;
+	@Temporal(TemporalType.DATE)
+	private Date tanggalSelesai;
 
 	@OneToOne
 	@JoinColumn(name = "idMateri")
@@ -61,19 +65,19 @@ public class Subcourse {
 		this.namaSubcourse = namaSubcourse;
 	}
 
-	public java.sql.Date getTanggalMulai() {
+	public Date getTanggalMulai() {
 		return tanggalMulai;
 	}
 
-	public void setTanggalMulai(java.sql.Date tanggalMulai) {
+	public void setTanggalMulai(Date tanggalMulai) {
 		this.tanggalMulai = tanggalMulai;
 	}
 
-	public java.sql.Date getTanggalSelesai() {
+	public Date getTanggalSelesai() {
 		return tanggalSelesai;
 	}
 
-	public void setTanggalSelesai(java.sql.Date tanggalSelesai) {
+	public void setTanggalSelesai(Date tanggalSelesai) {
 		this.tanggalSelesai = tanggalSelesai;
 	}
 

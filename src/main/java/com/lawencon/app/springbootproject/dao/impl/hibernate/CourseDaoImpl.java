@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.lawencon.app.springbootproject.dao.CourseDao;
 import com.lawencon.app.springbootproject.model.Course;
-import com.lawencon.app.springbootproject.model.Trainer;
 
 @Repository
 public class CourseDaoImpl extends BaseHibernate implements CourseDao{
@@ -20,38 +19,28 @@ public class CourseDaoImpl extends BaseHibernate implements CourseDao{
 	}
 
 	@Override
-	public String insert(Course course) throws Exception {
-		em.persist(course);
-		return "oke";
-	}
-
-	@Override
-	public Course update(String idCourse, Trainer trainer, String namaCourse) throws Exception {
+	public Course findById(Course course) throws Exception {
 		Query q = em.createQuery("from Course where idCourse = :idParam");
-		q.setParameter("idParam", idCourse);
-		Course course = new Course();
-		course = (Course) q.getSingleResult();
-		course.setIdCourse(idCourse);
-		course.setNamaCourse(namaCourse);
-		course.setIdTrainer(trainer);
-		em.merge(course);
-		return course;
-	}
-
-	@Override
-	public String delete(String idCourse) throws Exception {
-		Query q = em.createQuery("from Course where idCourse = :idParam");
-		q.setParameter("idParam", idCourse);
-		Course course = new Course();
-		course = (Course) q.getSingleResult();
-		course.setIdCourse(idCourse);
-		em.remove(course);
-		return null;
-	}
-
-	@Override
-	public Course findById(String idCourse) throws Exception {
-		Query q = em.createQuery("from Course where idCourse = :idParam").setParameter("idParam", idCourse);
+		q.setParameter("idParam", course.getIdCourse());
 		return (Course) q.getSingleResult();
 	}
+
+	@Override
+	public void insert(Course course) throws Exception {
+		em.persist(course);
+	}
+
+	@Override
+	public Course update(Course course) throws Exception {
+		Course courses = findById(course);
+		courses.setNamaCourse(course.getNamaCourse());
+		em.merge(courses);
+		return courses;
+	}
+
+	@Override
+	public void delete(Course course) throws Exception {
+		em.remove(findById(course));
+	}
+
 }

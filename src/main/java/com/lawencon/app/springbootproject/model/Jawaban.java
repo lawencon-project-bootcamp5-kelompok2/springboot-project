@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -25,8 +24,9 @@ public class Jawaban {
 	@JoinColumn(name = "idStudent")
 	private Student idStudent;
 	
-	@Lob
-	private byte[] fileJawaban;
+	@OneToOne
+	@JoinColumn(name = "idFileJawaban")
+	private FileJawaban fileJawaban;
 	
 	private float nilai;
 
@@ -54,11 +54,11 @@ public class Jawaban {
 		this.idStudent = idStudent;
 	}
 
-	public byte[] getFileJawaban() {
+	public FileJawaban getFileJawaban() {
 		return fileJawaban;
 	}
 
-	public void setFileJawaban(byte[] fileJawaban) {
+	public void setFileJawaban(FileJawaban fileJawaban) {
 		this.fileJawaban = fileJawaban;
 	}
 

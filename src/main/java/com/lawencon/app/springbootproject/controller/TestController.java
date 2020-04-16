@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lawencon.app.springbootproject.model.Course;
-import com.lawencon.app.springbootproject.service.CourseService;
+import com.lawencon.app.springbootproject.model.Test;
+import com.lawencon.app.springbootproject.service.TestService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/course")
-public class CourseController extends BaseController<Course> {
+@RequestMapping("/test")
+public class TestController extends BaseController<Test>{
 
 	@Autowired
-	private CourseService courseService;
+	private TestService testService;
 	
-	@GetMapping("/findAll")
+	@GetMapping("/list")
 	public ResponseEntity<?> getList(){
-		List<?> listCourse = new ArrayList<>();
+		List<?> listTest = new ArrayList<>();
 		try {
-			listCourse = courseService.findAll();
-			return new ResponseEntity<>(listCourse, HttpStatus.OK);
+			listTest = testService.findAll();
+			return new ResponseEntity<>(listTest, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listTest, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<?> getId(@RequestBody String content){
+	public ResponseEntity<?> getListId(@RequestBody String content){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.findById(course);
+			Test test = readValue(content, Test.class);
+			testService.findById(test);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,8 +51,8 @@ public class CourseController extends BaseController<Course> {
 	@PostMapping("/insert")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.insert(course);
+			Test test = readValue(content, Test.class);
+			testService.insert(test);
 			return new ResponseEntity<>("Success Insert", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,8 +63,8 @@ public class CourseController extends BaseController<Course> {
 	@PostMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.update(course);
+			Test test = readValue(content, Test.class);
+			testService.update(test);
 			return new ResponseEntity<>("Success Update", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,8 +75,8 @@ public class CourseController extends BaseController<Course> {
 	@PostMapping("/delete")
 	public ResponseEntity<?> getDelete(@RequestBody String content){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.delete(course);
+			Test test = readValue(content, Test.class);
+			testService.delete(test);
 			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

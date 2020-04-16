@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lawencon.app.springbootproject.dao.CourseDao;
 import com.lawencon.app.springbootproject.model.Course;
-import com.lawencon.app.springbootproject.model.Trainer;
 import com.lawencon.app.springbootproject.service.CourseService;
 
 @Service
@@ -24,22 +23,22 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public Course findById(String idCourse) throws Exception {
-		return courseDao.findById(idCourse);
+	public Course findById(Course course) throws Exception {
+		return courseDao.findById(course);
 	}
 
 	@Override
-	public String insert(Course course) throws Exception {
-		return courseDao.insert(course);
+	public void insert(Course course) throws Exception {
+		courseDao.insert(course);
 	}
 
 	@Override
-	public Course update(String idCourse, Trainer trainer, String namaCourse) throws Exception {
-		return courseDao.update(idCourse, trainer, namaCourse);
+	public Course update(Course course) throws Exception {
+		return courseDao.update(course);
 	}
 
 	@Override
-	public String delete(String idCourse) throws Exception {
-		return courseDao.delete(idCourse);
+	public void delete(Course course) throws Exception {
+		courseDao.delete(course);
 	}
 }

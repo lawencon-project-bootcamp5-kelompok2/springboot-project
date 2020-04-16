@@ -24,7 +24,9 @@ public class Test {
 	@JoinColumn(name = "idSubcourse")
 	private Subcourse idSubcourse;
 
-	private byte[] fileSoal;
+	@OneToOne
+	@JoinColumn(name = "idSoal")
+	private Soal fileSoal;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime waktuMulai;
@@ -48,11 +50,11 @@ public class Test {
 		this.idSubcourse = idSubcourse;
 	}
 
-	public byte[] getFileSoal() {
+	public Soal getFileSoal() {
 		return fileSoal;
 	}
 
-	public void setFileSoal(byte[] fileSoal) {
+	public void setFileSoal(Soal fileSoal) {
 		this.fileSoal = fileSoal;
 	}
 

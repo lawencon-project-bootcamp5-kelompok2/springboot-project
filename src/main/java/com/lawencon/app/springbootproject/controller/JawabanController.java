@@ -8,39 +8,38 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lawencon.app.springbootproject.model.Course;
-import com.lawencon.app.springbootproject.service.CourseService;
+import com.lawencon.app.springbootproject.model.Jawaban;
+import com.lawencon.app.springbootproject.service.JawabanService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/course")
-public class CourseController extends BaseController<Course> {
+@RequestMapping("/")
+public class JawabanController extends BaseController<Jawaban> {
 
 	@Autowired
-	private CourseService courseService;
+	private JawabanService jawabanService;
 	
-	@GetMapping("/findAll")
+	@GetMapping("/list")
 	public ResponseEntity<?> getList(){
-		List<?> listCourse = new ArrayList<>();
+		List<?> listJawaban = new ArrayList<>();
 		try {
-			listCourse = courseService.findAll();
-			return new ResponseEntity<>(listCourse, HttpStatus.OK);
+			listJawaban = jawabanService.findAll();
+			return new ResponseEntity<>(listJawaban, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listJawaban, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<?> getId(@RequestBody String content){
+	public ResponseEntity<?> getListId(@RequestBody String content){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.findById(course);
+			Jawaban jawaban = readValue(content, Jawaban.class);
+			jawabanService.findById(jawaban);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,11 +47,11 @@ public class CourseController extends BaseController<Course> {
 		}
 	}
 	
-	@PostMapping("/insert")
+	@GetMapping("/insert")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.insert(course);
+			Jawaban jawaban = readValue(content, Jawaban.class);
+			jawabanService.insert(jawaban);
 			return new ResponseEntity<>("Success Insert", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,11 +59,11 @@ public class CourseController extends BaseController<Course> {
 		}
 	}
 	
-	@PostMapping("/update")
+	@GetMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.update(course);
+			Jawaban jawaban = readValue(content, Jawaban.class);
+			jawabanService.update(jawaban);
 			return new ResponseEntity<>("Success Update", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,11 +71,11 @@ public class CourseController extends BaseController<Course> {
 		}
 	}
 	
-	@PostMapping("/delete")
+	@GetMapping("/delete")
 	public ResponseEntity<?> getDelete(@RequestBody String content){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.delete(course);
+			Jawaban jawaban = readValue(content, Jawaban.class);
+			jawabanService.delete(jawaban);
 			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

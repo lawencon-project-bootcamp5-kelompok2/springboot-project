@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -21,9 +22,9 @@ public class Student {
 
 	private String namaStudent;
 
-	@OneToMany
+	@OneToOne
 	@JoinColumn(name = "idCourse")
-	private List<Course> course;
+	private Course course;
 
 	private String role;
 
@@ -43,11 +44,11 @@ public class Student {
 		this.namaStudent = namaStudent;
 	}
 
-	public List<Course> getCourse() {
+	public Course getCourse() {
 		return course;
 	}
 
-	public void setCourse(List<Course> course) {
+	public void setCourse(Course course) {
 		this.course = course;
 	}
 

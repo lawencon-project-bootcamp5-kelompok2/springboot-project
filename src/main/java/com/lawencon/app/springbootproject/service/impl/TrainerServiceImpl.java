@@ -42,6 +42,11 @@ public class TrainerServiceImpl implements TrainerService {
 	public Trainer findById(Trainer trainer) {
 		return trainerDao.findById(trainer);
 	}
+
+	@Override
+	public List<?> cetakReportTrainer(String id) throws Exception {
+		return trainerDao.cetakReportTrainer(id);
+	}
 	
 	
 }

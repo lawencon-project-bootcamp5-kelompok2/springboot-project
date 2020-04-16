@@ -12,5 +12,7 @@ public interface TrainerDao {
 	
 	public abstract List<Trainer> findAll();
 	public abstract Trainer findById (Trainer trainer);
+	
+	abstract List<?> cetakReportTrainer(String id) throws Exception;
 
 }

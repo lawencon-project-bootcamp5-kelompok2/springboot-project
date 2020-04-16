@@ -45,5 +45,17 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 		return (Trainer) q.getSingleResult();
 	}
 
+	@Override
+	public List<?> cetakReportTrainer(String id) throws Exception {
+		Query q = em.createNativeQuery("select \r\n" + 
+				"	s.nama_student, a.status, j.nilai \r\n" + 
+				"from \r\n" + 
+				"	student s \r\n" + 
+				"	join absensi a on s.id_student = a.id_student \r\n" + 
+				"	join jawaban j on j.id_student = s.id_student \r\n" + 
+				"	join course c on c.id_course = s.id_course \r\n" + 
+				"	join trainer t on t.id_trainer = c.id_trainer where t.id_trainer = :idParam").setParameter("idParam", id);
+		return q.getResultList();
+	}
 	
 }

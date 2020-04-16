@@ -19,6 +19,24 @@ public class Trainer {
 	private String emailTrainer;
 	private String pwdTrainer;
 	private String role;
+	private String nama;
+	private String hp;
+
+	public String getNama() {
+		return nama;
+	}
+
+	public void setNama(String nama) {
+		this.nama = nama;
+	}
+
+	public String getHp() {
+		return hp;
+	}
+
+	public void setHp(String hp) {
+		this.hp = hp;
+	}
 
 	public String getIdTrainer() {
 		return idTrainer;

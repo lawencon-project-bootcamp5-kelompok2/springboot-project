@@ -1,15 +1,12 @@
 package com.lawencon.app.springbootproject.model;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -28,11 +25,11 @@ public class Test {
 	@JoinColumn(name = "idSoal")
 	private Soal fileSoal;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private LocalDateTime waktuMulai;
+	@CreationTimestamp
+	private java.sql.Timestamp waktuMulai;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private LocalDateTime waktuSelesai;
+	@CreationTimestamp
+	private java.sql.Timestamp waktuSelesai;
 
 	public String getIdTest() {
 		return idTest;
@@ -58,19 +55,19 @@ public class Test {
 		this.fileSoal = fileSoal;
 	}
 
-	public LocalDateTime getWaktuMulai() {
+	public java.sql.Timestamp getWaktuMulai() {
 		return waktuMulai;
 	}
 
-	public void setWaktuMulai(LocalDateTime waktuMulai) {
+	public void setWaktuMulai(java.sql.Timestamp waktuMulai) {
 		this.waktuMulai = waktuMulai;
 	}
 
-	public LocalDateTime getWaktuSelesai() {
+	public java.sql.Timestamp getWaktuSelesai() {
 		return waktuSelesai;
 	}
 
-	public void setWaktuSelesai(LocalDateTime waktuSelesai) {
+	public void setWaktuSelesai(java.sql.Timestamp waktuSelesai) {
 		this.waktuSelesai = waktuSelesai;
 	}
 

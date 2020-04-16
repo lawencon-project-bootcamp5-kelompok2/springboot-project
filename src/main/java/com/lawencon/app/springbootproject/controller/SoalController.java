@@ -22,7 +22,7 @@ import com.lawencon.app.springbootproject.service.SoalService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/file")
+@RequestMapping("/soal")
 public class SoalController extends BaseController<Soal> {
 	
 	@Autowired

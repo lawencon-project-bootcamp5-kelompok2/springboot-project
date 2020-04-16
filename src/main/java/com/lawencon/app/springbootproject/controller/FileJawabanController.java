@@ -22,7 +22,7 @@ import com.lawencon.app.springbootproject.service.FileJawabanService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/file")
+@RequestMapping("/fileJawaban")
 public class FileJawabanController extends BaseController<FileJawaban> {
 	
 	@Autowired

@@ -19,12 +19,20 @@ import com.lawencon.app.springbootproject.service.TrainerService;
 
 @RestController
 @CrossOrigin("*")
+<<<<<<< HEAD
 @RequestMapping("/trainer")
 public class TrainerController extends BaseController<Trainer> {
+||||||| 1095290
+public class TrainerController {
+=======
+@RequestMapping("/trainer")
+public class TrainerController extends BaseController<Trainer>{
+>>>>>>> 322d9ebab0b74354ce2baae37d13bf133516b729
 
 	@Autowired
 	private TrainerService trainerService;
 	
+<<<<<<< HEAD
 	@GetMapping("/list")
 	public ResponseEntity<?> getList(){
 		List<Trainer> listTrainer = new ArrayList<>();
@@ -87,6 +95,75 @@ public class TrainerController extends BaseController<Trainer> {
 	
 	@GetMapping("/trainerreport/{id}")
 	public ResponseEntity<?> getList(@PathVariable String id){
+||||||| 1095290
+	@GetMapping("/trainerreport/{id}")
+	public ResponseEntity<?> getList(@PathVariable String id){
+		List<?> data = new ArrayList<>();
+=======
+	@GetMapping("/list")
+	public ResponseEntity<?> getList(){
+		List<Trainer> listTrainer = new ArrayList<>();
+		try {
+			listTrainer = trainerService.findAll();
+			return new ResponseEntity<>(listTrainer, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(listTrainer, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<?> getListId(@RequestBody String content){
+		try {
+			Trainer trainer = readValue(content, Trainer.class);
+			trainerService.findById(trainer);
+			return new ResponseEntity<>("Success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PostMapping("/insert")
+	public ResponseEntity<?> getInsert(@RequestBody String content){
+		try {
+			Trainer trainer = readValue(content, Trainer.class);
+			trainerService.createTrainer(trainer);
+			return new ResponseEntity<>("Success insert", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed insert", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PostMapping("/update")
+	public ResponseEntity<?> getUpdate(@RequestBody String content){
+		try {
+			Trainer trainer = readValue(content, Trainer.class);
+			trainerService.updateTrainer(trainer);
+			return new ResponseEntity<>("Success update", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed update", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PostMapping("/delete")
+	public ResponseEntity<?> getDelete(@RequestBody String content){
+		try {
+			Trainer trainer = readValue(content, Trainer.class);
+			trainerService.deleteTrainer(trainer);
+			return new ResponseEntity<>("Success delete", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed delete", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/report/{id}")
+	public ResponseEntity<?> getListReport(@PathVariable String id){
+		List<?> data = new ArrayList<>();
+>>>>>>> 322d9ebab0b74354ce2baae37d13bf133516b729
 		try {
 			trainerService.cetakReportTrainer(id);
 			return new ResponseEntity<>(HttpStatus.OK);

@@ -8,13 +8,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity @Table(name = "file")
+@Entity @Table(name = "file_materi")
 public class Materi {
 
 	@Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    private String idMateri;
 
     private String fileName;
 
@@ -33,15 +33,15 @@ public class Materi {
         this.data = data;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getIdMateri() {
+		return idMateri;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setIdMateri(String idMateri) {
+		this.idMateri = idMateri;
+	}
 
-    public String getFileName() {
+	public String getFileName() {
         return fileName;
     }
 

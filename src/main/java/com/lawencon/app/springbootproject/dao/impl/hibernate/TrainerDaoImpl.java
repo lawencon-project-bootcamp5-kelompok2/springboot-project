@@ -20,6 +20,7 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	@Override
 	public void updateTrainer(Trainer trainer) {
 		Trainer t = findById(trainer);
+		t.setNama(trainer.getNama());
 		t.setEmailTrainer(trainer.getEmailTrainer());
 		t.setPwdTrainer(trainer.getPwdTrainer());
 		t.setRole(trainer.getRole());

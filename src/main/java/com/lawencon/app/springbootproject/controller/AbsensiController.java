@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lawencon.app.springbootproject.model.Absensi;
 import com.lawencon.app.springbootproject.model.Student;
 import com.lawencon.app.springbootproject.service.AbsensiService;
@@ -21,7 +20,7 @@ import com.lawencon.app.springbootproject.service.AbsensiService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/absensi")
-public class AbsensiController extends BaseController<Absensi>{
+public class AbsensiController extends BaseController{
 
 	@Autowired
 	private AbsensiService absensiService;
@@ -41,7 +40,7 @@ public class AbsensiController extends BaseController<Absensi>{
 	@GetMapping("/search")
 	public ResponseEntity<?> getListId(@RequestBody String content){
 		try {
-			Student id = new ObjectMapper().readValue(content, Student.class);
+			Student id = readValue(content, Student.class);
 			absensiService.findByStudent(id);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {

@@ -19,7 +19,7 @@ import com.lawencon.app.springbootproject.service.ForumAnswerService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/forum/answer")
-public class ForumAnswerController extends BaseController<ForumAnswer>{
+public class ForumAnswerController extends BaseController{
 
 	@Autowired
 	private ForumAnswerService forumAnswerService;

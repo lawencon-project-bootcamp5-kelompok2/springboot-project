@@ -20,7 +20,7 @@ import com.lawencon.app.springbootproject.service.TrainerService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/trainer")
-public class TrainerController extends BaseController<Trainer> {
+public class TrainerController extends BaseController {
 
 
 	@Autowired

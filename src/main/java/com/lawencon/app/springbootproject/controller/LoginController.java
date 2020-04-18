@@ -21,7 +21,7 @@ import com.lawencon.app.springbootproject.service.LoginService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/login")
-public class LoginController extends BaseController<Login>{
+public class LoginController extends BaseController{
 	
 	@Autowired
 	private LoginService loginService;

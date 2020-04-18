@@ -19,7 +19,7 @@ import com.lawencon.app.springbootproject.service.CourseService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/course")
-public class CourseController extends BaseController<Course> {
+public class CourseController extends BaseController {
 
 	@Autowired
 	private CourseService courseService;

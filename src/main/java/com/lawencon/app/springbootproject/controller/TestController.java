@@ -19,7 +19,7 @@ import com.lawencon.app.springbootproject.service.TestService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/test")
-public class TestController extends BaseController<Test>{
+public class TestController extends BaseController{
 
 	@Autowired
 	private TestService testService;

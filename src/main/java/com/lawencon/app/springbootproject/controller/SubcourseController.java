@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lawencon.app.springbootproject.model.Course;
 import com.lawencon.app.springbootproject.model.Subcourse;
 import com.lawencon.app.springbootproject.service.SubcourseService;
@@ -21,7 +20,7 @@ import com.lawencon.app.springbootproject.service.SubcourseService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/subcourse")
-public class SubcourseController extends BaseController<Subcourse>{
+public class SubcourseController extends BaseController{
 
 	@Autowired
 	private SubcourseService subcourseService;
@@ -53,7 +52,7 @@ public class SubcourseController extends BaseController<Subcourse>{
 	@GetMapping("/search/course")
 	public ResponseEntity<?> getListCourse(@RequestBody String content){
 		try {
-			Course course = new ObjectMapper().readValue(content, Course.class);
+			Course course = readValue(content, Course.class);
 			subcourseService.findByCourse(course);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {

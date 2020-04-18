@@ -23,7 +23,7 @@ import com.lawencon.app.springbootproject.service.SoalService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/soal")
-public class SoalController extends BaseController<Soal> {
+public class SoalController extends BaseController {
 	
 	@Autowired
 	private SoalService soalService;

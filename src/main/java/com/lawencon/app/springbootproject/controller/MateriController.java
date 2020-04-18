@@ -23,7 +23,7 @@ import com.lawencon.app.springbootproject.service.MateriService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/materi")
-public class MateriController extends BaseController<Materi> {
+public class MateriController extends BaseController {
 	
 	@Autowired
 	private MateriService materiService;

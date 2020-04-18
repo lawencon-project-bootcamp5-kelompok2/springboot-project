@@ -19,7 +19,7 @@ import com.lawencon.app.springbootproject.service.JawabanService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/")
-public class JawabanController extends BaseController<Jawaban> {
+public class JawabanController extends BaseController {
 
 	@Autowired
 	private JawabanService jawabanService;

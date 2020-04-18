@@ -20,7 +20,7 @@ import com.lawencon.app.springbootproject.service.StudentService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/student")
-public class StudentController extends BaseController<Student>{
+public class StudentController extends BaseController{
 
 	@Autowired
 	private StudentService studentService;

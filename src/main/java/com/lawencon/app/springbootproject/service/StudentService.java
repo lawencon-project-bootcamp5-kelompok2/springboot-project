@@ -12,4 +12,6 @@ public interface StudentService {
 	
 	public abstract List<Student> findAll();
 	public abstract Student findById (Student student);
+	
+	public String cetakReportStudent(String id) throws Exception;
 }

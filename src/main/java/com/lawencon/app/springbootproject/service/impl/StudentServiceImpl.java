@@ -1,15 +1,25 @@
 package com.lawencon.app.springbootproject.service.impl;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import com.lawencon.app.springbootproject.dao.StudentDao;
 import com.lawencon.app.springbootproject.model.Student;
 import com.lawencon.app.springbootproject.service.StudentService;
+
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 @Transactional
@@ -41,6 +51,23 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Student findById(Student student) {
 		return studentDao.findById(student);
+	}
+
+	@Override
+	public String cetakReportStudent(String id) throws Exception {
+		List<?> data = new ArrayList<>();
+		data = studentDao.cetakReportStudent(id);
+		try {
+			File file = ResourceUtils.getFile("classpath:report/reportStudent.jrxml");
+			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-student.pdf");
+			return "File berhasil diunduh di Local Disk D";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return e.getMessage();			
+		}
 	}
 	
 	

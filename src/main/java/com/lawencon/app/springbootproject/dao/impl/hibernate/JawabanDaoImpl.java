@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.lawencon.app.springbootproject.dao.JawabanDao;
 import com.lawencon.app.springbootproject.model.Jawaban;
-import com.lawencon.app.springbootproject.model.Trainer;
 
 @Repository
 public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{

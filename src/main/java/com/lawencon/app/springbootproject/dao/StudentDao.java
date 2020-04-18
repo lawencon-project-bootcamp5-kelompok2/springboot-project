@@ -12,5 +12,6 @@ public interface StudentDao {
 	
 	public abstract List<Student> findAll();
 	public abstract Student findById (Student student);
-
+	
+	abstract List<?> cetakReportStudent(String id) throws Exception;
 }

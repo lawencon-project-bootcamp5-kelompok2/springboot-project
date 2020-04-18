@@ -44,5 +44,20 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 		return (Student) q.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> cetakReportStudent(String id) throws Exception {
+		Query q = em.createNativeQuery("select \r\n" + 
+				"	sc.nama_subcourse , j.nilai , s.nama_student \r\n" + 
+				"from \r\n" + 
+				"	student s \r\n" + 
+				"	join jawaban j on j.id_student = s.id_student \r\n" + 
+				"	join course c on c.id_course = s.id_course \r\n" + 
+				"	join subcourse sc on sc.id_course = c.id_course \r\n" + 
+				"where \r\n" + 
+				"	s.id_student = :idParam").setParameter("idParam", id);
+		return bMapperHibernate(q.getResultList(), "namaSubcourse", "nilai", "namaStudent");
+	}
+
 	
 }

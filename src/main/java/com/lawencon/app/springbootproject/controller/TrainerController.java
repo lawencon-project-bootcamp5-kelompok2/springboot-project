@@ -96,5 +96,4 @@ public class TrainerController extends BaseController<Trainer> {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
-
 }

@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.lawencon.app.springbootproject.dao.SubcourseDao;
+import com.lawencon.app.springbootproject.model.Course;
 import com.lawencon.app.springbootproject.model.Subcourse;
 
 @Repository
@@ -42,6 +43,12 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 	@Override
 	public void delete(Subcourse subcourse) throws Exception {
 		em.remove(findById(subcourse));
+	}
+
+	@Override
+	public Subcourse findByCourse(Course course) throws Exception {
+		Query q = em.createQuery("from Course where idCourse = :idParam").setParameter("idParam", course.getIdCourse());
+		return (Subcourse) q.getSingleResult();
 	}
 
 }

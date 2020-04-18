@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lawencon.app.springbootproject.model.Course;
 import com.lawencon.app.springbootproject.model.Subcourse;
 import com.lawencon.app.springbootproject.service.SubcourseService;
 
@@ -41,6 +43,18 @@ public class SubcourseController extends BaseController<Subcourse>{
 		try {
 			Subcourse subcourse = readValue(content, Subcourse.class);
 			subcourseService.findById(subcourse);
+			return new ResponseEntity<>("Success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search/course")
+	public ResponseEntity<?> getListCourse(@RequestBody String content){
+		try {
+			Course course = new ObjectMapper().readValue(content, Course.class);
+			subcourseService.findByCourse(course);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

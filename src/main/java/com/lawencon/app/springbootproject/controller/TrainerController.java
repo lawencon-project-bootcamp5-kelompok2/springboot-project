@@ -54,8 +54,7 @@ public class TrainerController extends BaseController {
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Trainer trainer = readValue(content, Trainer.class);
-			trainerService.createTrainer(trainer);
-			return new ResponseEntity<>("Success insert", HttpStatus.OK);
+			return new ResponseEntity<>(trainerService.createTrainer(trainer), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed insert", HttpStatus.BAD_REQUEST);

@@ -10,4 +10,5 @@ public interface CourseDao {
 	abstract void insert(Course course)throws Exception;
 	abstract Course update(Course course)throws Exception;
 	abstract void delete(Course course)throws Exception;
+	abstract Course validCourse(Course course)throws Exception;
 }

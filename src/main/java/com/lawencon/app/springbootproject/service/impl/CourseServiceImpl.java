@@ -28,8 +28,14 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public void insert(Course course) throws Exception {
-		courseDao.insert(course);
+	public String insert(Course course) throws Exception {
+		if(validCourse(course)==true) {
+			return "Data Already Exist";
+		}
+		else {
+			courseDao.insert(course);
+		}
+		return "Success";
 	}
 
 	@Override
@@ -40,5 +46,19 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public void delete(Course course) throws Exception {
 		courseDao.delete(course);
+	}
+
+	@Override
+	public Boolean validCourse(Course course) throws Exception {
+		Course c = null;
+		try {
+			c = courseDao.validCourse(course);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(c != null) {
+			return true;
+		}
+		return false;
 	}
 }

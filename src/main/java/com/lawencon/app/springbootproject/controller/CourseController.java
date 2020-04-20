@@ -52,8 +52,7 @@ public class CourseController extends BaseController {
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Course course = readValue(content, Course.class);
-			courseService.insert(course);
-			return new ResponseEntity<>("Success Insert", HttpStatus.OK);
+			return new ResponseEntity<>(courseService.insert(course), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);

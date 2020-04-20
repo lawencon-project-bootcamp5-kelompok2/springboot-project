@@ -16,14 +16,21 @@ public class Student {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String idStudent;
-
+	private String npm;
 	private String namaStudent;
 
 	@OneToOne
 	@JoinColumn(name = "idCourse")
 	private Course course;
-
 	private String role;
+
+	public String getNpm() {
+		return npm;
+	}
+
+	public void setNpm(String npm) {
+		this.npm = npm;
+	}
 
 	public String getIdStudent() {
 		return idStudent;

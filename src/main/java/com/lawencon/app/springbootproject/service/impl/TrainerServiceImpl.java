@@ -29,8 +29,18 @@ public class TrainerServiceImpl implements TrainerService {
 	private TrainerDao trainerDao;
 
 	@Override
-	public void createTrainer(Trainer trainer) {
-		trainerDao.createTrainer(trainer);
+	public String createTrainer(Trainer trainer) {
+		try {
+			if(validTrainer(trainer)==true) {
+				return "Data Already Exist";
+			}
+			else {
+				trainerDao.createTrainer(trainer);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "Success";
 	}
 
 	@Override
@@ -69,6 +79,18 @@ public class TrainerServiceImpl implements TrainerService {
 			return e.getMessage();			
 		}
 	}
-	
-	
+
+	@Override
+	public Boolean validTrainer(Trainer trainer) throws Exception {
+		Trainer t = null;
+		try {
+			t = trainerDao.validTrainer(trainer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(t != null) {
+			return true;
+		}
+		return false;
+	}
 }

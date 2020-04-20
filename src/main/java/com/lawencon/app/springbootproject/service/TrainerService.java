@@ -6,10 +6,10 @@ import com.lawencon.app.springbootproject.model.Trainer;
 
 public interface TrainerService {
 
-	public abstract void createTrainer (Trainer trainer);
+	public abstract String createTrainer (Trainer trainer);
 	public abstract void updateTrainer (Trainer trainer);
 	public abstract void deleteTrainer (Trainer trainer);
-	
+	abstract Boolean validTrainer(Trainer trainer)throws Exception;
 	public abstract List<Trainer> findAll();
 	public abstract Trainer findById (Trainer trainer);
 	

@@ -20,7 +20,7 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	@Override
 	public void updateTrainer(Trainer trainer) {
 		Trainer t = findById(trainer);
-		t.setNama(trainer.getNama());
+		t.setNamaTrainer(trainer.getNamaTrainer());
 		t.setEmailTrainer(trainer.getEmailTrainer());
 		t.setPwdTrainer(trainer.getPwdTrainer());
 		t.setRole(trainer.getRole());
@@ -58,6 +58,14 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 				"	join course c on c.id_course = s.id_course \r\n" + 
 				"	join trainer t on t.id_trainer = c.id_trainer join subcourse sc on sc.id_course = c.id_course where t.id_trainer = :idParam").setParameter("idParam", id);
 		return bMapperHibernate(q.getResultList(), "namaStudent", "status", "nilai", "namaSubcourse");
+	}
+
+	@Override
+	public Trainer validTrainer(Trainer trainer) throws Exception {
+		Query q = em.createQuery("from Trainer where emailTrainer = :emailParam and namaTrainer = :namaParam");
+		q.setParameter("emailParam", trainer.getEmailTrainer());
+		q.setParameter("namaParam", trainer.getNamaTrainer());
+		return (Trainer) q.getSingleResult();
 	}
 	
 }

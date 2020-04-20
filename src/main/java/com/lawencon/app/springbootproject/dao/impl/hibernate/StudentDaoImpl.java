@@ -59,5 +59,11 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 		return bMapperHibernate(q.getResultList(), "namaSubcourse", "nilai", "namaStudent");
 	}
 
-	
+	@Override
+	public Student validStudent(Student student) throws Exception {
+		Query q = em.createQuery("from Student where npm = :npmParam and namaStudent = :namaParam");
+		q.setParameter("npmParam", student.getNpm());
+		q.setParameter("namaParam", student.getNamaStudent());
+		return (Student) q.getSingleResult();
+	}
 }

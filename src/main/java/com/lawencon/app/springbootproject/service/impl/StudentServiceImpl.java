@@ -29,8 +29,18 @@ public class StudentServiceImpl implements StudentService {
 	private StudentDao studentDao;
 
 	@Override
-	public void createStudent(Student student) {
-		studentDao.createStudent(student);
+	public String createStudent(Student student) {
+		try {
+			if(validStudent(student)==true) {
+				return "Data Already Exist";
+			}
+			else {
+				studentDao.createStudent(student);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "Success";
 	}
 
 	@Override
@@ -69,6 +79,18 @@ public class StudentServiceImpl implements StudentService {
 			return e.getMessage();			
 		}
 	}
-	
-	
+
+	@Override
+	public Boolean validStudent(Student student) throws Exception {
+		Student s = null;
+		try {
+			s = studentDao.validStudent(student);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(s != null) {
+			return true;
+		}
+		return false;
+	}
 }

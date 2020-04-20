@@ -1,10 +1,12 @@
 package com.lawencon.app.springbootproject.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -18,10 +20,11 @@ public class Student {
 	private String idStudent;
 	private String npm;
 	private String namaStudent;
-
-	@OneToOne
-	@JoinColumn(name = "idCourse")
-	private Course course;
+	
+	@ManyToMany
+	@JoinColumn(name = "idKelas")
+	private List<Kelas> kelas;
+	
 	private String role;
 
 	public String getNpm() {
@@ -48,12 +51,12 @@ public class Student {
 		this.namaStudent = namaStudent;
 	}
 
-	public Course getCourse() {
-		return course;
+	public List<Kelas> getKelas() {
+		return kelas;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setKelas(List<Kelas> kelas) {
+		this.kelas = kelas;
 	}
 
 	public String getRole() {

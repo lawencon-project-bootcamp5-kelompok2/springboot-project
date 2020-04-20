@@ -21,7 +21,7 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 	public void updateStudent(Student student) {
 		Student s = findById(student);
 		s.setNamaStudent(student.getNamaStudent());
-		s.setCourse(student.getCourse());
+		s.setKelas(student.getKelas());
 		em.merge(s);
 	}
 

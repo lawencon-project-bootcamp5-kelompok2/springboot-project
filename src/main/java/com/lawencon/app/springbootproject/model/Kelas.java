@@ -18,6 +18,7 @@ public class Kelas {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String idKelas;
 	private String kodeKelas;
+	private String deskripsi;
 	
 	@ManyToOne
 	@JoinColumn(name = "idCourse")
@@ -37,6 +38,14 @@ public class Kelas {
 
 	public void setKodeKelas(String kodeKelas) {
 		this.kodeKelas = kodeKelas;
+	}
+
+	public String getDeskripsi() {
+		return deskripsi;
+	}
+
+	public void setDeskripsi(String deskripsi) {
+		this.deskripsi = deskripsi;
 	}
 
 	public Course getCourse() {

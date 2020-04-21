@@ -10,4 +10,5 @@ public interface KelasDao {
 	abstract void insert(Kelas kelas)throws Exception;
 	abstract void update(Kelas kelas)throws Exception;
 	abstract void delete(Kelas kelas)throws Exception;
+	abstract Kelas validKelas(Kelas kelas)throws Exception;
 }

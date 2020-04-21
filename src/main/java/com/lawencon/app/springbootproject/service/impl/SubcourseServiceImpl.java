@@ -29,8 +29,14 @@ public class SubcourseServiceImpl implements SubcourseService{
 	}
 
 	@Override
-	public void insert(Subcourse subcourse) throws Exception {
-		subcourseDao.insert(subcourse);
+	public String insert(Subcourse subcourse) throws Exception {
+		if(validTime(subcourse)==true) {
+			return "Schedule had been Book with another trainer, choose another Time";
+		}
+		else {
+			subcourseDao.insert(subcourse);
+		}
+		return "Success Insert";
 	}
 
 	@Override
@@ -46,6 +52,20 @@ public class SubcourseServiceImpl implements SubcourseService{
 	@Override
 	public Subcourse findByCourse(Course course) throws Exception {
 		return subcourseDao.findByCourse(course);
+	}
+
+	@Override
+	public Boolean validTime(Subcourse subcourse) throws Exception {
+		Subcourse subCourse = null;
+		try {
+			subCourse = subcourseDao.validTime(subcourse);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(subCourse != null) {
+			return true;
+		}
+		return false;
 	}
 	
 }

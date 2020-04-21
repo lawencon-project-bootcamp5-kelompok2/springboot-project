@@ -33,7 +33,7 @@ public class TrainerServiceImpl implements TrainerService {
 	private SubcourseDao subcourseDao;
 
 	@Override
-	public String createTrainer(Trainer trainer) {
+	public String createTrainer(Trainer trainer) throws Exception{
 		try {
 			if(validTrainer(trainer)==true) {
 				return "Data Already Exist";
@@ -48,22 +48,22 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public void updateTrainer(Trainer trainer) {
+	public void updateTrainer(Trainer trainer) throws Exception{
 		trainerDao.updateTrainer(trainer);
 	}
 
 	@Override
-	public void deleteTrainer(Trainer trainer) {
+	public void deleteTrainer(Trainer trainer) throws Exception{
 		trainerDao.deleteTrainer(trainer);
 	}
 
 	@Override
-	public List<Trainer> findAll() {
+	public List<Trainer> findAll() throws Exception{
 		return trainerDao.findAll();
 	}
 
 	@Override
-	public Trainer findById(Trainer trainer) {
+	public Trainer findById(Trainer trainer) throws Exception{
 		return trainerDao.findById(trainer);
 	}
 

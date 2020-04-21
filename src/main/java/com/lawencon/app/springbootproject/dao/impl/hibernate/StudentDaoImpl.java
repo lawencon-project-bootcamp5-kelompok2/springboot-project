@@ -13,12 +13,12 @@ import com.lawencon.app.springbootproject.model.Student;
 public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 
 	@Override
-	public void createStudent(Student student) {
+	public void createStudent(Student student) throws Exception{
 		em.persist(student);
 	}
 
 	@Override
-	public void updateStudent(Student student) {
+	public void updateStudent(Student student) throws Exception{
 		Student s = findById(student);
 		s.setNamaStudent(student.getNamaStudent());
 		s.setKelas(student.getKelas());
@@ -26,19 +26,19 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 	}
 
 	@Override
-	public void deleteStudent(Student student) {
+	public void deleteStudent(Student student) throws Exception{
 		em.remove(findById(student));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Student> findAll() {
+	public List<Student> findAll() throws Exception{
 		Query q = em.createQuery(" FROM Student");
 		return q.getResultList();
 	}
 
 	@Override
-	public Student findById(Student student) {
+	public Student findById(Student student) throws Exception{
 		Query q = em.createQuery(" FROM Student WHERE idStudent =:idParam");
 		q.setParameter("idParam", student.getIdStudent());
 		return (Student) q.getSingleResult();

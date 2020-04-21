@@ -1,5 +1,6 @@
 package com.lawencon.app.springbootproject.exception;
 
+@SuppressWarnings("serial")
 public class FileStorageException extends RuntimeException {
     public FileStorageException(String message) {
         super(message);

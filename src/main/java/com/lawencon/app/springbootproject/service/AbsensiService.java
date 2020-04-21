@@ -6,10 +6,8 @@ import com.lawencon.app.springbootproject.model.Absensi;
 import com.lawencon.app.springbootproject.model.Student;
 
 public interface AbsensiService {
-
-public abstract void insert (Absensi absensi);
-	
-	public abstract List<Absensi> findAll ();
-	
-	public abstract Absensi findByStudent (Student id);
+	abstract void insert (Absensi absensi) throws Exception;
+	abstract List<Absensi> findAll() throws Exception;
+	abstract Absensi update(Absensi absensi)throws Exception;
+	abstract Absensi findByStudent(Student id) throws Exception;
 }

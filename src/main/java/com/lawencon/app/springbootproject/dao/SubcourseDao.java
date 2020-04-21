@@ -14,4 +14,5 @@ public interface SubcourseDao {
 	abstract void delete(Subcourse subcourse)throws Exception;
 	abstract String getIdTestBySubcourse(String subcourse) throws Exception;
 	abstract String getNamaSubcourse(String subcourse) throws Exception;
+	abstract Subcourse validTime(Subcourse subcourse)throws Exception;
 }

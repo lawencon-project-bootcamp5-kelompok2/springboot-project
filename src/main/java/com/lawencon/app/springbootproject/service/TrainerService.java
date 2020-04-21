@@ -6,11 +6,11 @@ import com.lawencon.app.springbootproject.model.Trainer;
 
 public interface TrainerService {
 
-	public abstract String createTrainer (Trainer trainer);
-	public abstract void updateTrainer (Trainer trainer);
-	public abstract void deleteTrainer (Trainer trainer);
+	abstract String createTrainer (Trainer trainer)throws Exception;
+	abstract void updateTrainer (Trainer trainer)throws Exception;
+	abstract void deleteTrainer (Trainer trainer)throws Exception;
 	abstract Boolean validTrainer(Trainer trainer)throws Exception;
-	public abstract List<Trainer> findAll();
-	public abstract Trainer findById (Trainer trainer);
+	abstract List<Trainer> findAll()throws Exception;
+	abstract Trainer findById (Trainer trainer)throws Exception;
 	abstract String cetakReportTrainer(String idTrainer, String idSubcourse) throws Exception;
 }

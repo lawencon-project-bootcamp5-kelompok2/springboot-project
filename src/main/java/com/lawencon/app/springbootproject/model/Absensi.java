@@ -1,7 +1,5 @@
 package com.lawencon.app.springbootproject.model;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,7 +24,7 @@ public class Absensi {
 	@JoinColumn(name = "idSubcourse")
 	private Subcourse idSubcourse;
 	
-	private Date tanggal;
+	private String tanggal;
 	
 	private String status;
 
@@ -46,19 +44,19 @@ public class Absensi {
 		this.idStudent = idStudent;
 	}
 
-	public Subcourse getIdCourse() {
+	public Subcourse getIdSubcourse() {
 		return idSubcourse;
 	}
 
-	public void setIdCourse(Subcourse idSubcourse) {
+	public void setIdSubcourse(Subcourse idSubcourse) {
 		this.idSubcourse = idSubcourse;
 	}
 
-	public Date getTanggal() {
+	public String getTanggal() {
 		return tanggal;
 	}
 
-	public void setTanggal(Date tanggal) {
+	public void setTanggal(String tanggal) {
 		this.tanggal = tanggal;
 	}
 
@@ -69,6 +67,4 @@ public class Absensi {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
 }

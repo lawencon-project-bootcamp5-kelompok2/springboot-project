@@ -60,4 +60,16 @@ public class AbsensiController extends BaseController{
 			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@PostMapping("/update")
+	public ResponseEntity<?> getUpdate(@RequestBody String content){
+		try {
+			Absensi absensi = readValue(content, Absensi.class);
+			absensiService.update(absensi);
+			return new ResponseEntity<>("Success update", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed update", HttpStatus.BAD_REQUEST);
+		}
+	}
 }

@@ -48,22 +48,22 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void updateStudent(Student student) {
+	public void updateStudent(Student student) throws Exception{
 		studentDao.updateStudent(student);
 	}
 
 	@Override
-	public void deleteStudent(Student student) {
+	public void deleteStudent(Student student) throws Exception{
 		studentDao.deleteStudent(student);
 	}
 
 	@Override
-	public List<Student> findAll() {
+	public List<Student> findAll() throws Exception{
 		return studentDao.findAll();
 	}
 
 	@Override
-	public Student findById(Student student) {
+	public Student findById(Student student) throws Exception{
 		return studentDao.findById(student);
 	}
 

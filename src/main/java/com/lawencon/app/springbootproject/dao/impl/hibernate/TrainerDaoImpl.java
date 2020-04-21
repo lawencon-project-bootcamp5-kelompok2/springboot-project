@@ -13,12 +13,12 @@ import com.lawencon.app.springbootproject.model.Trainer;
 public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 
 	@Override
-	public void createTrainer(Trainer trainer) {
+	public void createTrainer(Trainer trainer) throws Exception{
 		em.persist(trainer);
 	}
 
 	@Override
-	public void updateTrainer(Trainer trainer) {
+	public void updateTrainer(Trainer trainer) throws Exception{
 		Trainer t = findById(trainer);
 		t.setNamaTrainer(trainer.getNamaTrainer());
 		t.setEmailTrainer(trainer.getEmailTrainer());
@@ -28,19 +28,19 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	}
 
 	@Override
-	public void deleteTrainer(Trainer trainer) {
+	public void deleteTrainer(Trainer trainer) throws Exception{
 		em.remove(findById(trainer));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Trainer> findAll() {
+	public List<Trainer> findAll() throws Exception{
 		Query q = em.createQuery(" FROM Trainer");
 		return q.getResultList();
 	}
 
 	@Override
-	public Trainer findById(Trainer trainer) {
+	public Trainer findById(Trainer trainer) throws Exception{
 		Query q = em.createQuery(" FROM Trainer WHERE idTrainer =:idParam");
 		q.setParameter("idParam", trainer.getIdTrainer());
 		return (Trainer) q.getSingleResult();

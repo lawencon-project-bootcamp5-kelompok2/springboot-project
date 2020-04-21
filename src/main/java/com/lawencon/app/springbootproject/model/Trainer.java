@@ -1,5 +1,6 @@
 package com.lawencon.app.springbootproject.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,8 +16,10 @@ public class Trainer {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String idTrainer;
-
+	
+	@Column(unique = true)
 	private String emailTrainer;
+	
 	private String pwdTrainer;
 	private String role;
 	private String namaTrainer;

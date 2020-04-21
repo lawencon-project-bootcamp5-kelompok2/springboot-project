@@ -35,6 +35,7 @@ public class KelasDaoImpl extends BaseHibernate implements KelasDao{
 		Kelas k = findById(kelas);
 		k.setKodeKelas(kelas.getKodeKelas());
 		k.setCourse(kelas.getCourse());
+		k.setOpenKelas(kelas.getOpenKelas());
 		em.merge(k);
 	}
 
@@ -43,4 +44,10 @@ public class KelasDaoImpl extends BaseHibernate implements KelasDao{
 		em.remove(findById(kelas));
 	}
 
+	@Override
+	public Kelas validKelas(Kelas kelas) throws Exception {
+		Query q = em.createQuery("from Kelas where openKelas = :openParam");
+		q.setParameter("openParam", kelas.getOpenKelas());
+		return (Kelas) q.getSingleResult();
+	}
 }

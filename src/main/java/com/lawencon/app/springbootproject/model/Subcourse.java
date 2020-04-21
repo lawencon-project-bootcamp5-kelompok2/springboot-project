@@ -34,10 +34,6 @@ public class Subcourse {
 	private Date tanggalSelesai;
 
 	@OneToOne
-	@JoinColumn(name = "idMateri")
-	private Materi materi;
-
-	@OneToOne
 	@JoinColumn(name = "idForum")
 	private Forum idForum;
 
@@ -79,14 +75,6 @@ public class Subcourse {
 
 	public void setTanggalSelesai(Date tanggalSelesai) {
 		this.tanggalSelesai = tanggalSelesai;
-	}
-
-	public Materi getMateri() {
-		return materi;
-	}
-
-	public void setMateri(Materi materi) {
-		this.materi = materi;
 	}
 
 	public Forum getIdForum() {

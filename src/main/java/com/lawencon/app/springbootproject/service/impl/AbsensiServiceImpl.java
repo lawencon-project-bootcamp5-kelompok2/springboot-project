@@ -20,20 +20,22 @@ public class AbsensiServiceImpl implements AbsensiService {
 	private AbsensiDao absensiDao;
 
 	@Override
-	public void insert(Absensi absensi) {
+	public void insert(Absensi absensi) throws Exception{
 		absensiDao.insert(absensi);
 	}
 
 	@Override
-	public List<Absensi> findAll() {
+	public List<Absensi> findAll() throws Exception{
 		return absensiDao.findAll();
 	}
 
 	@Override
-	public Absensi findByStudent(Student id) {
+	public Absensi findByStudent(Student id) throws Exception{
 		return absensiDao.findByStudent(id);
 	}
-	
-	
 
+	@Override
+	public Absensi update(Absensi absensi) throws Exception {
+		return absensiDao.update(absensi);
+	}
 }

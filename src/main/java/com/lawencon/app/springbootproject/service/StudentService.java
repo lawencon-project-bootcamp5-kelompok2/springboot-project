@@ -6,11 +6,11 @@ import com.lawencon.app.springbootproject.model.Student;
 
 public interface StudentService {
 
-	abstract String createStudent (Student student);
-	abstract void updateStudent (Student student);
-	abstract void deleteStudent (Student student);
-	abstract List<Student> findAll();
-	abstract Student findById (Student student);
+	abstract String createStudent (Student student)throws Exception;
+	abstract void updateStudent (Student student)throws Exception;
+	abstract void deleteStudent (Student student)throws Exception;
+	abstract List<Student> findAll()throws Exception;
+	abstract Student findById (Student student)throws Exception;
 	abstract Boolean validStudent(Student student)throws Exception;
-	public String cetakReportStudent(String idStudent, String idCourse) throws Exception;
+	abstract String cetakReportStudent(String idStudent, String idCourse) throws Exception;
 }

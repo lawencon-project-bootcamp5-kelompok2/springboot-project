@@ -29,8 +29,14 @@ public class KelasServiceImpl implements KelasService{
 	}
 
 	@Override
-	public void insert(Kelas kelas) throws Exception {
-		kelasDao.insert(kelas);
+	public String insert(Kelas kelas) throws Exception {
+		if(validKelas(kelas)==true) {
+			return "Class already exist on that schedule";
+		}
+		else {
+			kelasDao.insert(kelas);
+		}
+		return "Success";
 	}
 
 	@Override
@@ -41,5 +47,19 @@ public class KelasServiceImpl implements KelasService{
 	@Override
 	public void delete(Kelas kelas) throws Exception {
 		kelasDao.delete(kelas);
+	}
+
+	@Override
+	public Boolean validKelas(Kelas kelas) throws Exception {
+		Kelas k = null;
+		try {
+			k = kelasDao.validKelas(kelas);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(k != null) {
+			return true;
+		}
+		return false;
 	}
 }

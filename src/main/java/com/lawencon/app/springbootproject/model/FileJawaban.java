@@ -14,7 +14,7 @@ public class FileJawaban {
 	@Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    private String idFileJawaban;
 
     private String fileName;
 
@@ -33,15 +33,15 @@ public class FileJawaban {
         this.data = data;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getIdFileJawaban() {
+		return idFileJawaban;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setIdFileJawaban(String idFileJawaban) {
+		this.idFileJawaban = idFileJawaban;
+	}
 
-    public String getFileName() {
+	public String getFileName() {
         return fileName;
     }
 

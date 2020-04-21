@@ -14,7 +14,7 @@ public class Soal {
 	@Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    private String idSoal;
 
     private String fileName;
 
@@ -33,15 +33,15 @@ public class Soal {
         this.data = data;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getIdSoal() {
+		return idSoal;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setIdSoal(String idSoal) {
+		this.idSoal = idSoal;
+	}
 
-    public String getFileName() {
+	public String getFileName() {
         return fileName;
     }
 

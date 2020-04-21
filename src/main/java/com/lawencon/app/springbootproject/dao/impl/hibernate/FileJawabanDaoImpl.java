@@ -35,7 +35,7 @@ public class FileJawabanDaoImpl extends BaseHibernate implements FileJawabanDao{
 	@Override
 	public FileJawaban getFile(String fileId) throws Exception {
 		try {
-			Query q = em.createQuery("from Materi where id = :idParam").setParameter("idParam", fileId);
+			Query q = em.createQuery("from FileJawaban where idFileJawaban = :idParam").setParameter("idParam", fileId);
 			return (FileJawaban) q.getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();

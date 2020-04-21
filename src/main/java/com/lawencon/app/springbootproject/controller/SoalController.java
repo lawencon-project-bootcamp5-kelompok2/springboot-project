@@ -34,7 +34,7 @@ public class SoalController extends BaseController {
 			Soal soal = soalService.upload(file);
 			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 	                .path("/file/downloadFile/")
-	                .path(soal.getId())
+	                .path(soal.getIdSoal())
 	                .toUriString();
 			return new UploadFileResponse(soal.getFileName(), fileDownloadUri,
 	                file.getContentType(), file.getSize());

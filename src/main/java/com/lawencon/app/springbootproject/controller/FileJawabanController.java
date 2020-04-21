@@ -34,7 +34,7 @@ public class FileJawabanController extends BaseController {
 			FileJawaban fileJawaban = fileJawabanService.upload(file);
 			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 	                .path("/file/downloadFile/")
-	                .path(fileJawaban.getId())
+	                .path(fileJawaban.getIdFileJawaban())
 	                .toUriString();
 			return new UploadFileResponse(fileJawaban.getFileName(), fileDownloadUri,
 	                file.getContentType(), file.getSize());

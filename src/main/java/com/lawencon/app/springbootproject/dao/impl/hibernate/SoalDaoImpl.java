@@ -35,7 +35,7 @@ public class SoalDaoImpl extends BaseHibernate implements SoalDao{
 	@Override
 	public Soal getFile(String fileId) throws Exception {
 		try {
-			Query q = em.createQuery("from Materi where id = :idParam").setParameter("idParam", fileId);
+			Query q = em.createQuery("from Soal where idSoal = :idParam").setParameter("idParam", fileId);
 			return (Soal) q.getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();

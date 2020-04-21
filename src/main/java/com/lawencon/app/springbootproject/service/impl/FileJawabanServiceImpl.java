@@ -17,8 +17,8 @@ public class FileJawabanServiceImpl implements FileJawabanService{
 	private FileJawabanDao fileJawabanDao;
 
 	@Override
-	public FileJawaban upload(MultipartFile materi) throws Exception {
-		return fileJawabanDao.upload(materi);
+	public FileJawaban upload(MultipartFile fileJawaban) throws Exception {
+		return fileJawabanDao.upload(fileJawaban);
 	}
 
 	@Override

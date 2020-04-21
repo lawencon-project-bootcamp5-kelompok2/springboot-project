@@ -17,8 +17,8 @@ public class SoalServiceImpl implements SoalService{
 	private SoalDao soalDao;
 
 	@Override
-	public Soal upload(MultipartFile materi) throws Exception {
-		return soalDao.upload(materi);
+	public Soal upload(MultipartFile soal) throws Exception {
+		return soalDao.upload(soal);
 	}
 
 	@Override

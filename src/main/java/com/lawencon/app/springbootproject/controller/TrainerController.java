@@ -85,10 +85,10 @@ public class TrainerController extends BaseController {
 		}
 	}
 	
-	@GetMapping("/report/{id}")
-	public ResponseEntity<?> getList(@PathVariable String id){
+	@GetMapping("/report/{idTrainer}/{idSubcourse}")
+	public ResponseEntity<?> getList(@PathVariable String idTrainer, @PathVariable String idSubcourse){
 		try {
-			trainerService.cetakReportTrainer(id);
+			trainerService.cetakReportTrainer(idTrainer, idSubcourse);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -12,6 +12,5 @@ public interface TrainerService {
 	abstract Boolean validTrainer(Trainer trainer)throws Exception;
 	public abstract List<Trainer> findAll();
 	public abstract Trainer findById (Trainer trainer);
-	
-	abstract String cetakReportTrainer(String id) throws Exception;
+	abstract String cetakReportTrainer(String idTrainer, String idSubcourse) throws Exception;
 }

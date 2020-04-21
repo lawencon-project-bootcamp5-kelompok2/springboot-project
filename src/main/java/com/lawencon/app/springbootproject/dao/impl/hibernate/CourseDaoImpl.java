@@ -50,5 +50,19 @@ public class CourseDaoImpl extends BaseHibernate implements CourseDao{
 		q.setParameter("trainerParam", course.getTrainer());
 		return (Course) q.getSingleResult();
 	}
+	
+	@Override
+	public String getIdCourse(String id) throws Exception {
+		Query q = em.createNativeQuery("SELECT id_course from course where id_course = :idParam");
+		q.setParameter("idParam", id);
+		return (String) q.getSingleResult();
+	}
+
+	@Override
+	public String getNamaCourse(String id) throws Exception {
+		Query q = em.createNativeQuery("SELECT nama_course from course where id_course = :idParam");
+		q.setParameter("idParam", id);
+		return (String) q.getSingleResult();
+	}
 
 }

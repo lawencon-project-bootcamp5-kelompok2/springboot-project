@@ -12,7 +12,6 @@ public interface TrainerDao {
 	abstract Trainer validTrainer(Trainer trainer)throws Exception;
 	abstract List<Trainer> findAll();
 	abstract Trainer findById (Trainer trainer);
-	
-	abstract List<?> cetakReportTrainer(String id) throws Exception;
-
+	abstract List<?> cetakReportTrainer(String idTrainer, String idTest, String idSubcourse) throws Exception;
+	abstract String getNamaTrainer(String id) throws Exception;
 }

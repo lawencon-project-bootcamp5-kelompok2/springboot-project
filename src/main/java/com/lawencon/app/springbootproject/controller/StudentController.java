@@ -84,10 +84,10 @@ public class StudentController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/studentreport/{id}")
-	public ResponseEntity<?> getList(@PathVariable String id){
+	@GetMapping("/report/{idStudent}/{idCourse}")
+	public ResponseEntity<?> getList(@PathVariable String idStudent, @PathVariable String idCourse){
 		try {
-			studentService.cetakReportStudent(id);
+			studentService.cetakReportStudent(idStudent, idCourse);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

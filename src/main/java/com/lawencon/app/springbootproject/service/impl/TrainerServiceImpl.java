@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
+import com.lawencon.app.springbootproject.dao.SubcourseDao;
 import com.lawencon.app.springbootproject.dao.TrainerDao;
 import com.lawencon.app.springbootproject.model.Trainer;
 import com.lawencon.app.springbootproject.service.TrainerService;
@@ -27,6 +28,9 @@ public class TrainerServiceImpl implements TrainerService {
 
 	@Autowired
 	private TrainerDao trainerDao;
+	
+	@Autowired
+	private SubcourseDao subcourseDao;
 
 	@Override
 	public String createTrainer(Trainer trainer) {
@@ -64,15 +68,16 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public String cetakReportTrainer(String id) throws Exception {
+	public String cetakReportTrainer(String idTrainer, String idSubcourse) throws Exception {
+		String idTest = subcourseDao.getIdTestBySubcourse(idSubcourse);
 		List<?> data = new ArrayList<>();
-		data = trainerDao.cetakReportTrainer(id);
+		data = trainerDao.cetakReportTrainer(idTrainer, idTest, idSubcourse);
 		try {
 			File file = ResourceUtils.getFile("classpath:report/reportTrainer.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-trainer.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-"+trainerDao.getNamaTrainer(idTrainer)+"-"+subcourseDao.getNamaSubcourse(idSubcourse)+".pdf");
 			return "File berhasil diunduh di Local Disk D";
 		} catch (Exception e) {
 			e.printStackTrace();

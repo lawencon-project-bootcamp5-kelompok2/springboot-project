@@ -11,4 +11,6 @@ public interface CourseDao {
 	abstract Course update(Course course)throws Exception;
 	abstract void delete(Course course)throws Exception;
 	abstract Course validCourse(Course course)throws Exception;
+	abstract String getIdCourse(String id) throws Exception;
+	abstract String getNamaCourse(String id) throws Exception;
 }

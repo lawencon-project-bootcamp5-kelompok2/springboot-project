@@ -12,4 +12,6 @@ public interface SubcourseDao {
 	abstract void insert(Subcourse subcourse)throws Exception;
 	abstract Subcourse update(Subcourse subcourse)throws Exception;
 	abstract void delete(Subcourse subcourse)throws Exception;
+	abstract String getIdTestBySubcourse(String subcourse) throws Exception;
+	abstract String getNamaSubcourse(String subcourse) throws Exception;
 }

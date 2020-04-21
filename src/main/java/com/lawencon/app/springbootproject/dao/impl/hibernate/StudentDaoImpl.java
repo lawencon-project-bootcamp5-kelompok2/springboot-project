@@ -66,4 +66,26 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 		q.setParameter("namaParam", student.getNamaStudent());
 		return (Student) q.getSingleResult();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> cetakReportStudent(String idStudent, String idCourse) throws Exception {
+		Query q = em.createNativeQuery("select distinct " + 
+				"	s.nama_student , j.nilai, sc.nama_subcourse, c.nama_course " + 
+				"	from " + 
+				"	student s " + 
+				"	join jawaban j on j.id_student = s.id_student " + 
+				"	join test t on t.id_test = j.id_test " + 
+				"	join subcourse sc on sc.id_subcourse = t.id_subcourse " + 
+				"	join course c on c.id_course = sc.id_course " +
+				"	where s.id_student = :studentParam and c.id_course = :courseParam")
+				.setParameter("studentParam", idStudent).setParameter("courseParam", idCourse);
+		return bMapperHibernate(q.getResultList(), "namaSubcourse", "nilai", "namaStudent", "namaCourse");
+	}
+
+	@Override
+	public String getNamaStudent(String idStudent) throws Exception {
+		Query q = em.createNativeQuery("SELECT nama_student FROM student WHERE id_student = :idParam").setParameter("idParam", idStudent);
+		return (String) q.getSingleResult();
+	}
 }

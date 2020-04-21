@@ -46,9 +46,17 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 		return (Trainer) q.getSingleResult();
 	}
 
+	@Override
+	public Trainer validTrainer(Trainer trainer) throws Exception {
+		Query q = em.createQuery("from Trainer where emailTrainer = :emailParam and namaTrainer = :namaParam");
+		q.setParameter("emailParam", trainer.getEmailTrainer());
+		q.setParameter("namaParam", trainer.getNamaTrainer());
+		return (Trainer) q.getSingleResult();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<?> cetakReportTrainer(String id) throws Exception {
+	public List<?> cetakReportTrainer(String idTrainer, String idTest, String idSubcourse) throws Exception {
 		Query q = em.createNativeQuery("select \r\n" + 
 				"	s.nama_student as namaStudent, a.status, j.nilai, sc.nama_subcourse \r\n" + 
 				"from \r\n" + 
@@ -56,16 +64,17 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 				"	join absensi a on s.id_student = a.id_student \r\n" + 
 				"	join jawaban j on j.id_student = s.id_student \r\n" + 
 				"	join course c on c.id_course = s.id_course \r\n" + 
-				"	join trainer t on t.id_trainer = c.id_trainer join subcourse sc on sc.id_course = c.id_course where t.id_trainer = :idParam").setParameter("idParam", id);
+				"	join trainer t on t.id_trainer = c.id_trainer " + 
+				"	join subcourse sc on sc.id_course = c.id_course " + 
+				"	where t.id_trainer = :idTrainer and j.id_test = :idTest and sc.id_subcourse = :idSubcourse ")
+				.setParameter("idTrainer", idTrainer).setParameter("idTest", idTest).setParameter("idSubcourse", idSubcourse);
 		return bMapperHibernate(q.getResultList(), "namaStudent", "status", "nilai", "namaSubcourse");
 	}
 
 	@Override
-	public Trainer validTrainer(Trainer trainer) throws Exception {
-		Query q = em.createQuery("from Trainer where emailTrainer = :emailParam and namaTrainer = :namaParam");
-		q.setParameter("emailParam", trainer.getEmailTrainer());
-		q.setParameter("namaParam", trainer.getNamaTrainer());
-		return (Trainer) q.getSingleResult();
+	public String getNamaTrainer(String id) throws Exception {
+		Query q = em.createNativeQuery("SELECT nama FROM trainer WHERE id_trainer = :idParam").setParameter("idParam", id);
+		return (String) q.getSingleResult();
 	}
 	
 }

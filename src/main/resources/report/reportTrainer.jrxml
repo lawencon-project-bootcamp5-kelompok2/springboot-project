@@ -9,23 +9,44 @@
 		<band/>
 	</background>
 	<title>
-		<band height="72">
+		<band height="160">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="1851d9ff-b733-4d96-90f4-9b6647ab2669"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="180" backcolor="#00AAFF" uuid="1851d9ff-b733-4d96-90f4-9b6647ab2669"/>
 				<staticText>
-					<reportElement x="20" y="20" width="390" height="43" forecolor="#FFFFFF" uuid="1b87c08d-b8c1-4c60-920c-40b4a5f919fe"/>
+					<reportElement x="20" y="110" width="310" height="43" forecolor="#000000" uuid="1b87c08d-b8c1-4c60-920c-40b4a5f919fe"/>
 					<textElement>
 						<font size="22" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Rekap Proses Pembelajaran]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="400" y="50" width="165" height="30" forecolor="#FFFFFF" uuid="a6c23a43-0215-42ca-9c79-9b09d713ac9f"/>
+					<reportElement x="400" y="140" width="165" height="30" forecolor="#000000" uuid="a6c23a43-0215-42ca-9c79-9b09d713ac9f"/>
 					<textElement textAlignment="Right">
 						<font size="18"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{namaSubcourse}]]></textFieldExpression>
 				</textField>
+				<image>
+					<reportElement x="10" y="10" width="222" height="75" uuid="2d313f3b-c281-4f62-84b9-5d271a1bfaee"/>
+					<imageExpression><![CDATA["images/logonew.png"]]></imageExpression>
+				</image>
+				<line>
+					<reportElement x="20" y="80" width="555" height="1" uuid="a83961a7-b8fe-4483-bea0-3a0d113e8508"/>
+				</line>
+				<staticText>
+					<reportElement x="345" y="10" width="230" height="30" forecolor="#FFFFFF" uuid="07447634-560b-48a2-b232-54c10c9d8222"/>
+					<textElement>
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<text><![CDATA[Menteng Dalam, Tebet, Jakarta Selatan]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="310" y="40" width="265" height="30" forecolor="#FFFFFF" uuid="b2de65fa-ca22-4a08-860e-03eba32393a2"/>
+					<textElement>
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<text><![CDATA[Telp: (021)123456	Email: contact@ebooth.com]]></text>
+				</staticText>
 			</frame>
 		</band>
 	</title>

@@ -50,5 +50,17 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 		Query q = em.createQuery("from Course where idCourse = :idParam").setParameter("idParam", course.getIdCourse());
 		return (Subcourse) q.getSingleResult();
 	}
+	
+	@Override
+	public String getIdTestBySubcourse(String subcourse) throws Exception {
+		Query q = em.createNativeQuery("SELECT id_test FROM test WHERE id_subcourse = :idParam").setParameter("idParam", subcourse);
+		return (String) q.getSingleResult();
+	}
+	
+	@Override
+	public String getNamaSubcourse(String subcourse) throws Exception {
+		Query q = em.createNativeQuery("SELECT nama_subcourse FROM subcourse WHERE id_subcourse = :idParam").setParameter("idParam", subcourse);
+		return (String) q.getSingleResult();
+	}
 
 }

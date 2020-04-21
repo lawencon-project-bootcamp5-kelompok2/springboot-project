@@ -11,6 +11,6 @@ public interface StudentService {
 	abstract void deleteStudent (Student student);
 	abstract List<Student> findAll();
 	abstract Student findById (Student student);
-	abstract String cetakReportStudent(String id) throws Exception;
 	abstract Boolean validStudent(Student student)throws Exception;
+	public String cetakReportStudent(String idStudent, String idCourse) throws Exception;
 }

@@ -23,8 +23,8 @@ public class Absensi {
 	private Student idStudent;
 	
 	@OneToOne
-	@JoinColumn(name = "idCourse")
-	private Course idCourse;
+	@JoinColumn(name = "idSubcourse")
+	private Subcourse idSubcourse;
 	
 	private Date tanggal;
 	
@@ -46,12 +46,12 @@ public class Absensi {
 		this.idStudent = idStudent;
 	}
 
-	public Course getIdCourse() {
-		return idCourse;
+	public Subcourse getIdCourse() {
+		return idSubcourse;
 	}
 
-	public void setIdCourse(Course idCourse) {
-		this.idCourse = idCourse;
+	public void setIdCourse(Subcourse idSubcourse) {
+		this.idSubcourse = idSubcourse;
 	}
 
 	public Date getTanggal() {

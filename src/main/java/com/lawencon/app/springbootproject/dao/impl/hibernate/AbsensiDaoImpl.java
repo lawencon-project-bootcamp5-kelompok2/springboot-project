@@ -50,5 +50,21 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 		}
 		em.merge(absensi);
 		return absensi;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> cetakAbsen(String idSubcourse, String idTrainer) throws Exception {
+		Query q = em.createNativeQuery("select distinct " + 
+				"	sc.nama_subcourse, s.nama_student, a.tanggal, a.status, t.nama_trainer " + 
+				"from \r\n" + 
+				"	student s \r\n" + 
+				"	join absensi a on s.id_student = a.id_student " + 
+				"	join subcourse sc on sc.id_subcourse = a.id_subcourse " +	
+				"	join course c on c.id_course = sc.id_course \r\n" + 
+				"	join trainer t on t.id_trainer = c.id_trainer " + 
+				"	where sc.id_subcourse = :idSubcourse and t.id_trainer = :idTrainer ")
+				.setParameter("idSubcourse", idSubcourse).setParameter("idTrainer", idTrainer);
+		return bMapperHibernate(q.getResultList(), "namaSubcourse", "namaStudent", "tanggal", "status", "namaTrainer");
 	}	
 }

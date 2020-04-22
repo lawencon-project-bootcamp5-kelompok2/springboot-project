@@ -24,12 +24,8 @@
 					<textElement>
 						<font size="16"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{namaSubcourse}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{namaStudent}]]></textFieldExpression>
 				</textField>
-				<image>
-					<reportElement x="10" y="10" width="222" height="75" uuid="2d313f3b-c281-4f62-84b9-5d271a1bfaee"/>
-					<imageExpression><![CDATA["images/logonew.png"]]></imageExpression>
-				</image>
 				<line>
 					<reportElement x="20" y="80" width="555" height="1" uuid="664eeda5-4d67-4a02-97b4-058d4e529944"/>
 				</line>
@@ -48,33 +44,16 @@
 					<textFieldExpression><![CDATA[$F{namaCourse}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="305" y="10" width="270" height="30" forecolor="#FFFFFF" uuid="83390460-53e9-4582-ba93-13e3fa138bf4"/>
-					<textElement>
-						<font fontName="Times New Roman" size="14"/>
-					</textElement>
-					<text><![CDATA[Menteng Dalam, Tebet, Jakarta Selatan]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="235" y="40" width="142" height="30" forecolor="#FFFFFF" uuid="2aea9211-38d1-49e1-8a00-f96a020dd5d1"/>
-					<textElement>
-						<font fontName="Times New Roman" size="13"/>
-					</textElement>
-					<text><![CDATA[Telp : (021) 123456]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="377" y="40" width="198" height="30" forecolor="#FFFFFF" uuid="5487aa5c-fb12-48d5-a053-a340953a5631"/>
-					<textElement>
-						<font fontName="Times New Roman" size="13"/>
-					</textElement>
-					<text><![CDATA[Email : contact@ebooth.com]]></text>
-				</staticText>
-				<staticText>
 					<reportElement x="390" y="140" width="63" height="30" uuid="a7af5b56-329e-4f27-99da-e0076874498b"/>
 					<textElement>
 						<font size="16"/>
 					</textElement>
 					<text><![CDATA[Nama :]]></text>
 				</staticText>
+				<image>
+					<reportElement x="0" y="0" width="595" height="81" uuid="19ad7966-5107-432a-811f-5952e1338e41"/>
+					<imageExpression><![CDATA["report/header.JPG"]]></imageExpression>
+				</image>
 			</frame>
 		</band>
 	</title>
@@ -118,7 +97,7 @@
 				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{namaStudent}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{namaSubcourse}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="370" y="0" width="185" height="20" uuid="dc260d88-9973-4086-94d9-4bf9a5486c03">

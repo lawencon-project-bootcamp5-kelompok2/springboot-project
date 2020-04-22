@@ -80,7 +80,7 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 				"	join course c on c.id_course = sc.id_course " +
 				"	where s.id_student = :studentParam and c.id_course = :courseParam")
 				.setParameter("studentParam", idStudent).setParameter("courseParam", idCourse);
-		return bMapperHibernate(q.getResultList(), "namaSubcourse", "nilai", "namaStudent", "namaCourse");
+		return bMapperHibernate(q.getResultList(), "namaStudent", "nilai", "namaSubcourse", "namaCourse");
 	}
 
 	@Override

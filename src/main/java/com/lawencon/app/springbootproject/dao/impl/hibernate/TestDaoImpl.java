@@ -35,6 +35,7 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 		Test test1 = findById(test.getIdTest());
 		test1.setWaktuMulai(test.getWaktuMulai());
 		test1.setWaktuSelesai(test.getWaktuSelesai());
+		test1.setDeskripsi(test.getDeskripsi());
 		em.merge(test1);
 		return test1;
 	}

@@ -1,6 +1,6 @@
 package com.lawencon.app.springbootproject.model;
 
-import java.util.Date;
+import java.sql.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,8 +23,7 @@ public class Kelas {
 	@Column(unique = true)
 	private String kodeKelas;
 	
-	@Temporal(TemporalType.TIME)
-	private Date openKelas;
+	private Time openKelas;
 	
 	private String deskripsi;
 	
@@ -50,11 +47,11 @@ public class Kelas {
 		this.kodeKelas = kodeKelas;
 	}
 
-	public Date getOpenKelas() {
+	public Time getOpenKelas() {
 		return openKelas;
 	}
 
-	public void setOpenKelas(Date openKelas) {
+	public void setOpenKelas(Time openKelas) {
 		this.openKelas = openKelas;
 	}
 

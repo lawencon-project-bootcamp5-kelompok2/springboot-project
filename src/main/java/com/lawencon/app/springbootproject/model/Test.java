@@ -36,6 +36,8 @@ public class Test {
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date waktuSelesai;
+	
+	private String deskripsi;
 
 	public String getIdTest() {
 		return idTest;
@@ -75,6 +77,14 @@ public class Test {
 
 	public void setWaktuSelesai(Date waktuSelesai) {
 		this.waktuSelesai = waktuSelesai;
+	}
+
+	public String getDeskripsi() {
+		return deskripsi;
+	}
+
+	public void setDeskripsi(String deskripsi) {
+		this.deskripsi = deskripsi;
 	}
 
 }

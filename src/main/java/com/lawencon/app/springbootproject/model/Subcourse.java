@@ -32,6 +32,10 @@ public class Subcourse {
 
 	@Temporal(TemporalType.DATE)
 	private Date tanggalSelesai;
+	
+	@OneToOne
+	@JoinColumn(name = "idMateri")
+	private Materi idMateri;
 
 	@OneToOne
 	@JoinColumn(name = "idForum")
@@ -75,6 +79,14 @@ public class Subcourse {
 
 	public void setTanggalSelesai(Date tanggalSelesai) {
 		this.tanggalSelesai = tanggalSelesai;
+	}
+
+	public Materi getIdMateri() {
+		return idMateri;
+	}
+
+	public void setIdMateri(Materi idMateri) {
+		this.idMateri = idMateri;
 	}
 
 	public Forum getIdForum() {

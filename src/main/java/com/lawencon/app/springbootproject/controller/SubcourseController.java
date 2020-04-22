@@ -50,7 +50,7 @@ public class SubcourseController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search/course/{idCourse")
+	@GetMapping("/search/course/{idCourse}")
 	public ResponseEntity<?> getListCourse(@PathVariable("idCourse") String idCourse){
 		try {
 			subcourseService.findByCourse(idCourse);

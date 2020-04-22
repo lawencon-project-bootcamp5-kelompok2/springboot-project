@@ -7,13 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lawencon.app.springbootproject.model.Course;
 import com.lawencon.app.springbootproject.model.Subcourse;
 import com.lawencon.app.springbootproject.service.SubcourseService;
 
@@ -37,11 +39,10 @@ public class SubcourseController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> getListId(@RequestBody String content){
+	@GetMapping("/search/{idSubcourse}")
+	public ResponseEntity<?> getListId(@PathVariable("idSubcourse") String idSubcourse){
 		try {
-			Subcourse subcourse = readValue(content, Subcourse.class);
-			subcourseService.findById(subcourse);
+			subcourseService.findById(idSubcourse);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,11 +50,10 @@ public class SubcourseController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search/course")
-	public ResponseEntity<?> getListCourse(@RequestBody String content){
+	@GetMapping("/search/course/{idCourse")
+	public ResponseEntity<?> getListCourse(@PathVariable("idCourse") String idCourse){
 		try {
-			Course course = readValue(content, Course.class);
-			subcourseService.findByCourse(course);
+			subcourseService.findByCourse(idCourse);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,7 +73,7 @@ public class SubcourseController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Subcourse subcourse = readValue(content, Subcourse.class);
@@ -85,11 +85,10 @@ public class SubcourseController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/delete")
-	public ResponseEntity<?> getDelete(@RequestBody String content){
+	@DeleteMapping("/delete/{idSubcourse}")
+	public ResponseEntity<?> getDelete(@PathVariable("idSubcourse") String idSubcourse){
 		try {
-			Subcourse subcourse = readValue(content, Subcourse.class);
-			subcourseService.delete(subcourse);
+			subcourseService.delete(idSubcourse);
 			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

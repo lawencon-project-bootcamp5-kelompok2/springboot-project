@@ -19,9 +19,9 @@ public class ForumDaoImpl extends BaseHibernate implements ForumDao{
 	}
 
 	@Override
-	public Forum findById(Forum forum) throws Exception {
+	public Forum findById(String idForum) throws Exception {
 		Query q = em.createQuery("from Forum where idForum = :idParam").
-				setParameter("idParam", forum.getIdForum());
+				setParameter("idParam", idForum);
 		return (Forum) q.getSingleResult();
 	}
 
@@ -32,7 +32,7 @@ public class ForumDaoImpl extends BaseHibernate implements ForumDao{
 
 	@Override
 	public Forum update(Forum forum) throws Exception {
-		Forum forums = findById(forum);
+		Forum forums = findById(forum.getIdForum());
 		forums.setSubjek(forum.getSubjek());
 		forums.setDeskripsi(forum.getDeskripsi());
 		em.merge(forums);
@@ -40,8 +40,8 @@ public class ForumDaoImpl extends BaseHibernate implements ForumDao{
 	}
 
 	@Override
-	public void delete(Forum forum) throws Exception {
-		em.remove(findById(forum));
+	public void delete(String idForum) throws Exception {
+		em.remove(findById(idForum));
 	}
 
 }

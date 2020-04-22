@@ -7,8 +7,8 @@ import com.lawencon.app.springbootproject.model.Test;
 public interface TestDao {
 
 	abstract List<?> findAll()throws Exception;
-	abstract Test findById(Test test)throws Exception;
+	abstract Test findById(String idTest)throws Exception;
 	abstract void insert(Test test)throws Exception;
 	abstract Test update(Test test)throws Exception;
-	abstract void delete(Test test)throws Exception;
+	abstract void delete(String idTest)throws Exception;
 }

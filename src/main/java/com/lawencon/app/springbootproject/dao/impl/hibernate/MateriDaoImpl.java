@@ -1,6 +1,7 @@
 package com.lawencon.app.springbootproject.dao.impl.hibernate;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.Query;
 
@@ -42,5 +43,11 @@ public class MateriDaoImpl extends BaseHibernate implements MateriDao{
 			new ELearningFileNotFoundException("File not found with id : "+fileId);
 		}
 		return null;
+	}
+
+	@Override
+	public List<?> findAll() throws Exception {
+		Query q = em.createQuery("from Materi");
+		return q.getResultList();
 	}
 }

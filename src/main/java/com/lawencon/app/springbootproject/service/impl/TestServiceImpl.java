@@ -23,8 +23,8 @@ public class TestServiceImpl implements TestService{
 	}
 
 	@Override
-	public Test findById(Test test) throws Exception {
-		return testDao.findById(test);
+	public Test findById(String idTest) throws Exception {
+		return testDao.findById(idTest);
 	}
 
 	@Override
@@ -38,8 +38,8 @@ public class TestServiceImpl implements TestService{
 	}
 
 	@Override
-	public void delete(Test test) throws Exception {
-		testDao.delete(test);
+	public void delete(String idTest) throws Exception {
+		testDao.delete(idTest);
 	}
 
 }

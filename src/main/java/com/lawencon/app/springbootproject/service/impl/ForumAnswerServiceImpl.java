@@ -23,8 +23,8 @@ public class ForumAnswerServiceImpl implements ForumAnswerService{
 	}
 
 	@Override
-	public ForumAnswer findById(ForumAnswer forumAnswer) throws Exception {
-		return forumAnswerDao.findById(forumAnswer);
+	public ForumAnswer findById(String idAnswer) throws Exception {
+		return forumAnswerDao.findById(idAnswer);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class ForumAnswerServiceImpl implements ForumAnswerService{
 	}
 
 	@Override
-	public void delete(ForumAnswer forumAnswer) throws Exception {
-		forumAnswerDao.delete(forumAnswer);
+	public void delete(String idAnswer) throws Exception {
+		forumAnswerDao.delete(idAnswer);
 	}
 }

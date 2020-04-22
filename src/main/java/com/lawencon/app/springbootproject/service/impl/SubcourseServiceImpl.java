@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lawencon.app.springbootproject.dao.SubcourseDao;
-import com.lawencon.app.springbootproject.model.Course;
 import com.lawencon.app.springbootproject.model.Subcourse;
 import com.lawencon.app.springbootproject.service.SubcourseService;
 
@@ -24,8 +23,8 @@ public class SubcourseServiceImpl implements SubcourseService{
 	}
 
 	@Override
-	public Subcourse findById(Subcourse subcourse) throws Exception {
-		return subcourseDao.findById(subcourse);
+	public Subcourse findById(String idSubcourse) throws Exception {
+		return subcourseDao.findById(idSubcourse);
 	}
 
 	@Override
@@ -45,13 +44,13 @@ public class SubcourseServiceImpl implements SubcourseService{
 	}
 
 	@Override
-	public void delete(Subcourse subcourse) throws Exception {
-		subcourseDao.delete(subcourse);
+	public void delete(String idSubcourse) throws Exception {
+		subcourseDao.delete(idSubcourse);
 	}
 
 	@Override
-	public Subcourse findByCourse(Course course) throws Exception {
-		return subcourseDao.findByCourse(course);
+	public Subcourse findByCourse(String idCourse) throws Exception {
+		return subcourseDao.findByCourse(idCourse);
 	}
 
 	@Override

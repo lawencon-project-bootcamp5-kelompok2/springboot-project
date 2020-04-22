@@ -19,9 +19,9 @@ public class KelasDaoImpl extends BaseHibernate implements KelasDao{
 	}
 
 	@Override
-	public Kelas findById(Kelas kelas) throws Exception {
+	public Kelas findById(String idKelas) throws Exception {
 		Query q = em.createQuery("from Kelas where idKelas = :idParam");
-		q.setParameter("idParam", kelas.getIdKelas());
+		q.setParameter("idParam", idKelas);
 		return (Kelas) q.getSingleResult();
 	}
 
@@ -32,7 +32,7 @@ public class KelasDaoImpl extends BaseHibernate implements KelasDao{
 
 	@Override
 	public void update(Kelas kelas) throws Exception {
-		Kelas k = findById(kelas);
+		Kelas k = findById(kelas.getIdKelas());
 		k.setKodeKelas(kelas.getKodeKelas());
 		k.setCourse(kelas.getCourse());
 		k.setOpenKelas(kelas.getOpenKelas());
@@ -40,8 +40,8 @@ public class KelasDaoImpl extends BaseHibernate implements KelasDao{
 	}
 
 	@Override
-	public void delete(Kelas kelas) throws Exception {
-		em.remove(findById(kelas));
+	public void delete(String idKelas) throws Exception {
+		em.remove(findById(idKelas));
 	}
 
 	@Override

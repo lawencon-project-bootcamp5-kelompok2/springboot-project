@@ -19,9 +19,9 @@ public class CourseDaoImpl extends BaseHibernate implements CourseDao{
 	}
 
 	@Override
-	public Course findById(Course course) throws Exception {
+	public Course findById(String idCourse) throws Exception {
 		Query q = em.createQuery("from Course where idCourse = :idParam");
-		q.setParameter("idParam", course.getIdCourse());
+		q.setParameter("idParam", idCourse);
 		return (Course) q.getSingleResult();
 	}
 
@@ -32,15 +32,15 @@ public class CourseDaoImpl extends BaseHibernate implements CourseDao{
 
 	@Override
 	public Course update(Course course) throws Exception {
-		Course courses = findById(course);
+		Course courses = findById(course.getIdCourse());
 		courses.setNamaCourse(course.getNamaCourse());
 		em.merge(courses);
 		return courses;
 	}
 
 	@Override
-	public void delete(Course course) throws Exception {
-		em.remove(findById(course));
+	public void delete(String idCourse) throws Exception {
+		em.remove(findById(idCourse));
 	}
 
 	@Override

@@ -19,15 +19,15 @@ public class ForumAnswerDaoImpl extends BaseHibernate implements ForumAnswerDao{
 	}
 
 	@Override
-	public ForumAnswer findById(ForumAnswer forumAnswer) throws Exception {
+	public ForumAnswer findById(String idAnswer) throws Exception {
 		Query q = em.createQuery("from Forum where idAnswer = :idParam");
-		q.setParameter("idParam", forumAnswer.getIdAnswer());
+		q.setParameter("idParam", idAnswer);
 		return (ForumAnswer) q.getSingleResult();
 	}
 
 	@Override
 	public ForumAnswer update(ForumAnswer forumAnswer) throws Exception {
-		ForumAnswer answer = findById(forumAnswer);
+		ForumAnswer answer = findById(forumAnswer.getIdAnswer());
 		answer.setEmailAnswer(forumAnswer.getEmailAnswer());
 		em.merge(answer);
 		return answer;
@@ -39,8 +39,8 @@ public class ForumAnswerDaoImpl extends BaseHibernate implements ForumAnswerDao{
 	}
 
 	@Override
-	public void delete(ForumAnswer forumAnswer) throws Exception {
-		em.remove(findById(forumAnswer));
+	public void delete(String idAnswer) throws Exception {
+		em.remove(findById(idAnswer));
 	}
 
 }

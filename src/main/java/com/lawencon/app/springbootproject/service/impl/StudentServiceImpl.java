@@ -53,8 +53,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void deleteStudent(Student student) throws Exception{
-		studentDao.deleteStudent(student);
+	public void deleteStudent(String idStudent) throws Exception{
+		studentDao.deleteStudent(idStudent);
 	}
 
 	@Override
@@ -63,8 +63,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student findById(Student student) throws Exception{
-		return studentDao.findById(student);
+	public Student findById(String idStudent) throws Exception{
+		return studentDao.findById(idStudent);
 	}
 
 	@Override

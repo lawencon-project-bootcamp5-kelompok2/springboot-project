@@ -6,8 +6,8 @@ import com.lawencon.app.springbootproject.model.ForumAnswer;
 
 public interface ForumAnswerService {
 	abstract List<?> findAll()throws Exception;
-	abstract ForumAnswer findById(ForumAnswer forumAnswer)throws Exception;
+	abstract ForumAnswer findById(String idAnswer)throws Exception;
 	abstract ForumAnswer update(ForumAnswer forumAnswer)throws Exception;
 	abstract void createForumAnswer(ForumAnswer forumAnswer)throws Exception;
-	abstract void delete(ForumAnswer forumAnswer)throws Exception;
+	abstract void delete(String idAnswer)throws Exception;
 }

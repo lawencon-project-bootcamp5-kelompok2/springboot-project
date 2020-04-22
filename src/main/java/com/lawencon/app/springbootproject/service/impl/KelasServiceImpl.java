@@ -24,8 +24,8 @@ public class KelasServiceImpl implements KelasService{
 	}
 
 	@Override
-	public Kelas findById(Kelas kelas) throws Exception {
-		return kelasDao.findById(kelas);
+	public Kelas findById(String idKelas) throws Exception {
+		return kelasDao.findById(idKelas);
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class KelasServiceImpl implements KelasService{
 	}
 
 	@Override
-	public void delete(Kelas kelas) throws Exception {
-		kelasDao.delete(kelas);
+	public void delete(String idKelas) throws Exception {
+		kelasDao.delete(idKelas);
 	}
 
 	@Override

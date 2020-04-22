@@ -23,8 +23,8 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public Course findById(Course course) throws Exception {
-		return courseDao.findById(course);
+	public Course findById(String idCourse) throws Exception {
+		return courseDao.findById(idCourse);
 	}
 
 	@Override
@@ -44,8 +44,8 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public void delete(Course course) throws Exception {
-		courseDao.delete(course);
+	public void delete(String idCourse) throws Exception {
+		courseDao.delete(idCourse);
 	}
 
 	@Override

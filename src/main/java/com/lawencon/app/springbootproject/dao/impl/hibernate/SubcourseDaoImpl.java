@@ -7,7 +7,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.lawencon.app.springbootproject.dao.SubcourseDao;
-import com.lawencon.app.springbootproject.model.Course;
 import com.lawencon.app.springbootproject.model.Subcourse;
 
 @Repository
@@ -20,9 +19,9 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 	}
 
 	@Override
-	public Subcourse findById(Subcourse subcourse) throws Exception {
+	public Subcourse findById(String idSubcourse) throws Exception {
 		Query q = em.createQuery("from Subcourse where idSubcourse = :idParam");
-		q.setParameter("idParam", subcourse.getIdSubcourse());
+		q.setParameter("idParam", idSubcourse);
 		return (Subcourse) q.getSingleResult();
 	}
 
@@ -33,7 +32,7 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 
 	@Override
 	public Subcourse update(Subcourse subcourse) throws Exception {
-		Subcourse subCourse = findById(subcourse);
+		Subcourse subCourse = findById(subcourse.getIdSubcourse());
 		subCourse.setNamaSubcourse(subcourse.getNamaSubcourse());
 		subCourse.setTanggalMulai(subcourse.getTanggalMulai());
 		subCourse.setTanggalSelesai(subcourse.getTanggalSelesai());
@@ -42,13 +41,14 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 	}
 
 	@Override
-	public void delete(Subcourse subcourse) throws Exception {
-		em.remove(findById(subcourse));
+	public void delete(String idSubcourse) throws Exception {
+		em.remove(findById(idSubcourse));
 	}
 
 	@Override
-	public Subcourse findByCourse(Course course) throws Exception {
-		Query q = em.createQuery("from Course where idCourse = :idParam").setParameter("idParam", course.getIdCourse());
+	public Subcourse findByCourse(String idCourse) throws Exception {
+		Query q = em.createQuery("from Course where idCourse = :idParam").
+				setParameter("idParam", idCourse);
 		return (Subcourse) q.getSingleResult();
 	}
 	

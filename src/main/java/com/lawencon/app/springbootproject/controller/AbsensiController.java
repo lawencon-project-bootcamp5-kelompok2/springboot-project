@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Absensi;
-import com.lawencon.app.springbootproject.model.Student;
 import com.lawencon.app.springbootproject.service.AbsensiService;
 
 @RestController
@@ -38,11 +38,10 @@ public class AbsensiController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> getListId(@RequestBody String content){
+	@GetMapping("/search/{idStudent}")
+	public ResponseEntity<?> getListId(@PathVariable("idStudent") String idStudent){
 		try {
-			Student id = readValue(content, Student.class);
-			absensiService.findByStudent(id);
+			absensiService.findByStudent(idStudent);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,7 +61,7 @@ public class AbsensiController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Absensi absensi = readValue(content, Absensi.class);

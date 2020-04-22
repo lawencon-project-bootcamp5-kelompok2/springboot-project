@@ -53,8 +53,8 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public void deleteTrainer(Trainer trainer) throws Exception{
-		trainerDao.deleteTrainer(trainer);
+	public void deleteTrainer(String idTrainer) throws Exception{
+		trainerDao.deleteTrainer(idTrainer);
 	}
 
 	@Override
@@ -63,8 +63,8 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public Trainer findById(Trainer trainer) throws Exception{
-		return trainerDao.findById(trainer);
+	public Trainer findById(String idTrainer) throws Exception{
+		return trainerDao.findById(idTrainer);
 	}
 
 	@Override

@@ -23,8 +23,8 @@ public class JawabanServiceImpl implements JawabanService{
 	}
 
 	@Override
-	public Jawaban findById(Jawaban jawaban) throws Exception {
-		return jawabanDao.findById(jawaban);
+	public Jawaban findById(String idJawaban) throws Exception {
+		return jawabanDao.findById(idJawaban);
 	}
 
 	@Override
@@ -38,8 +38,8 @@ public class JawabanServiceImpl implements JawabanService{
 	}
 
 	@Override
-	public void delete(Jawaban jawaban) throws Exception {
-		jawabanDao.delete(jawaban);
+	public void delete(String idJawaban) throws Exception {
+		jawabanDao.delete(idJawaban);
 	}
 
 }

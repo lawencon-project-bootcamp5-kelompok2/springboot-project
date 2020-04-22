@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,11 +39,10 @@ public class StudentController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> getListId(@RequestBody String content){
+	@GetMapping("/search/{idStudent}")
+	public ResponseEntity<?> getListId(@PathVariable("idStudent") String idStudent){
 		try {
-			Student student = readValue(content, Student.class);
-			studentService.findById(student);
+			studentService.findById(idStudent);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,7 +61,7 @@ public class StudentController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Student student = readValue(content, Student.class);
@@ -72,11 +73,10 @@ public class StudentController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/delete")
-	public ResponseEntity<?> getDelete(@RequestBody String content){
+	@DeleteMapping("/delete/{idStudent}")
+	public ResponseEntity<?> getDelete(@PathVariable("idStudent") String idStudent){
 		try {
-			Student student = readValue(content, Student.class);
-			studentService.deleteStudent(student);
+			studentService.deleteStudent(idStudent);
 			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

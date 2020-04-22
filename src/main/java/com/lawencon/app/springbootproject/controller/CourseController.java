@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,11 +39,10 @@ public class CourseController extends BaseController {
 		}
 	}
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> getId(@RequestBody String content){
+	@GetMapping("/search/{idCourse}")
+	public ResponseEntity<?> getId(@PathVariable("idCourse") String idCourse){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.findById(course);
+			courseService.findById(idCourse);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,7 +61,7 @@ public class CourseController extends BaseController {
 		}
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Course course = readValue(content, Course.class);
@@ -71,11 +73,10 @@ public class CourseController extends BaseController {
 		}
 	}
 	
-	@PostMapping("/delete")
-	public ResponseEntity<?> getDelete(@RequestBody String content){
+	@DeleteMapping("/delete/{idCourse}")
+	public ResponseEntity<?> getDelete(@PathVariable("idCourse") String idCourse){
 		try {
-			Course course = readValue(content, Course.class);
-			courseService.delete(course);
+			courseService.delete(idCourse);
 			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

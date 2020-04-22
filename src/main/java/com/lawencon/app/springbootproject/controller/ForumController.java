@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,11 +39,10 @@ public class ForumController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> getListId(@RequestBody String content){
+	@GetMapping("/search/{idForum}")
+	public ResponseEntity<?> getListId(@PathVariable("idForum") String idForum){
 		try {
-			Forum forum = readValue(content, Forum.class);
-			forumService.findById(forum);
+			forumService.findById(idForum);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,7 +62,7 @@ public class ForumController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Forum forum = readValue(content, Forum.class);
@@ -72,11 +74,10 @@ public class ForumController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/delete")
-	public ResponseEntity<?> getDelete(@RequestBody String content){
+	@DeleteMapping("/delete/{idForum}")
+	public ResponseEntity<?> getDelete(@PathVariable("idForum") String idForum){
 		try {
-			Forum forum = readValue(content, Forum.class);
-			forumService.delete(forum);
+			forumService.delete(idForum);
 			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -19,7 +19,7 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 
 	@Override
 	public void updateTrainer(Trainer trainer) throws Exception{
-		Trainer t = findById(trainer);
+		Trainer t = findById(trainer.getIdTrainer());
 		t.setNamaTrainer(trainer.getNamaTrainer());
 		t.setEmailTrainer(trainer.getEmailTrainer());
 		t.setPwdTrainer(trainer.getPwdTrainer());
@@ -28,8 +28,8 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	}
 
 	@Override
-	public void deleteTrainer(Trainer trainer) throws Exception{
-		em.remove(findById(trainer));
+	public void deleteTrainer(String idTrainer) throws Exception{
+		em.remove(findById(idTrainer));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -40,9 +40,9 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	}
 
 	@Override
-	public Trainer findById(Trainer trainer) throws Exception{
+	public Trainer findById(String idTrainer) throws Exception{
 		Query q = em.createQuery(" FROM Trainer WHERE idTrainer =:idParam");
-		q.setParameter("idParam", trainer.getIdTrainer());
+		q.setParameter("idParam", idTrainer);
 		return (Trainer) q.getSingleResult();
 	}
 

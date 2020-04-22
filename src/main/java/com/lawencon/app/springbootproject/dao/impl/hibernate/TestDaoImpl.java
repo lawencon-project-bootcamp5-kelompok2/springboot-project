@@ -19,9 +19,9 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 	}
 
 	@Override
-	public Test findById(Test test) throws Exception {
+	public Test findById(String idTest) throws Exception {
 		Query q = em.createQuery("form Test where idTest = :idParam");
-		q.setParameter("idParam", test.getIdTest());
+		q.setParameter("idParam", idTest);
 		return (Test) q.getSingleResult();
 	}
 
@@ -32,7 +32,7 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 
 	@Override
 	public Test update(Test test) throws Exception {
-		Test test1 = findById(test);
+		Test test1 = findById(test.getIdTest());
 		test1.setWaktuMulai(test.getWaktuMulai());
 		test1.setWaktuSelesai(test.getWaktuSelesai());
 		em.merge(test1);
@@ -40,7 +40,7 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 	}
 
 	@Override
-	public void delete(Test test) throws Exception {
-		em.remove(findById(test));
+	public void delete(String idTest) throws Exception {
+		em.remove(findById(idTest));
 	}
 }

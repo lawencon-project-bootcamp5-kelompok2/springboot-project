@@ -19,15 +19,15 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 
 	@Override
 	public void updateStudent(Student student) throws Exception{
-		Student s = findById(student);
+		Student s = findById(student.getIdStudent());
 		s.setNamaStudent(student.getNamaStudent());
 		s.setKelas(student.getKelas());
 		em.merge(s);
 	}
 
 	@Override
-	public void deleteStudent(Student student) throws Exception{
-		em.remove(findById(student));
+	public void deleteStudent(String idStudent) throws Exception{
+		em.remove(findById(idStudent));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -38,9 +38,9 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 	}
 
 	@Override
-	public Student findById(Student student) throws Exception{
+	public Student findById(String idStudent) throws Exception{
 		Query q = em.createQuery(" FROM Student WHERE idStudent =:idParam");
-		q.setParameter("idParam", student.getIdStudent());
+		q.setParameter("idParam", idStudent);
 		return (Student) q.getSingleResult();
 	}
 

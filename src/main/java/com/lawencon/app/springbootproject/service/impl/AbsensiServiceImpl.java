@@ -14,7 +14,6 @@ import com.lawencon.app.springbootproject.dao.AbsensiDao;
 import com.lawencon.app.springbootproject.dao.SubcourseDao;
 import com.lawencon.app.springbootproject.dao.TrainerDao;
 import com.lawencon.app.springbootproject.model.Absensi;
-import com.lawencon.app.springbootproject.model.Student;
 import com.lawencon.app.springbootproject.service.AbsensiService;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -48,8 +47,8 @@ public class AbsensiServiceImpl implements AbsensiService {
 	}
 
 	@Override
-	public Absensi findByStudent(Student id) throws Exception{
-		return absensiDao.findByStudent(id);
+	public Absensi findByStudent(String idStudent) throws Exception{
+		return absensiDao.findByStudent(idStudent);
 	}
 
 	@Override

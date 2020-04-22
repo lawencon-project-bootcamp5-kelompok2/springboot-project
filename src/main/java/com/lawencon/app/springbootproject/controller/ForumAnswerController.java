@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,11 +39,10 @@ public class ForumAnswerController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> getListId(@RequestBody String content){
+	@GetMapping("/search/{idAnswer}")
+	public ResponseEntity<?> getListId(@PathVariable("idAnswer") String idAnswer){
 		try {
-			ForumAnswer forumAnswer = readValue(content, ForumAnswer.class);
-			forumAnswerService.findById(forumAnswer);
+			forumAnswerService.findById(idAnswer);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,7 +50,7 @@ public class ForumAnswerController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/create")
+	@PostMapping("/create")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			ForumAnswer forumAnswer = readValue(content, ForumAnswer.class);
@@ -60,7 +62,7 @@ public class ForumAnswerController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			ForumAnswer forumAnswer = readValue(content, ForumAnswer.class);
@@ -72,11 +74,10 @@ public class ForumAnswerController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/delete")
-	public ResponseEntity<?> getDelete(@RequestBody String content){
+	@DeleteMapping("/delete")
+	public ResponseEntity<?> getDelete(@PathVariable("idAnswer") String idAnswer){
 		try {
-			ForumAnswer forumAnswer = readValue(content, ForumAnswer.class);
-			forumAnswerService.delete(forumAnswer);
+			forumAnswerService.delete(idAnswer);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,11 +39,10 @@ public class TestController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> getListId(@RequestBody String content){
+	@GetMapping("/search/{idTest}")
+	public ResponseEntity<?> getListId(@PathVariable("idTest") String idTest){
 		try {
-			Test test = readValue(content, Test.class);
-			testService.findById(test);
+			testService.findById(idTest);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,7 +62,7 @@ public class TestController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Test test = readValue(content, Test.class);
@@ -72,11 +74,10 @@ public class TestController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/delete")
-	public ResponseEntity<?> getDelete(@RequestBody String content){
+	@DeleteMapping("/delete/{idTest}")
+	public ResponseEntity<?> getDelete(@PathVariable("idTest") String idTest){
 		try {
-			Test test = readValue(content, Test.class);
-			testService.delete(test);
+			testService.delete(idTest);
 			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

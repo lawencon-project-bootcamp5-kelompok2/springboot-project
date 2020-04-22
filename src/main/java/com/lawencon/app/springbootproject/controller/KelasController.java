@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,11 +39,10 @@ public class KelasController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search")
-	public ResponseEntity<?> getListId(@RequestBody String content){
+	@GetMapping("/search/{idKelas}")
+	public ResponseEntity<?> getListId(@PathVariable("idKelas") String idKelas){
 		try {
-			Kelas kelas = readValue(content, Kelas.class);
-			kelasService.findById(kelas);
+			kelasService.findById(idKelas);
 			return new ResponseEntity<>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,15 +54,14 @@ public class KelasController extends BaseController{
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Kelas kelas = readValue(content, Kelas.class);
-			kelasService.insert(kelas);
-			return new ResponseEntity<>("Success Insert", HttpStatus.OK);
+			return new ResponseEntity<>(kelasService.insert(kelas), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Kelas kelas = readValue(content, Kelas.class);
@@ -72,11 +73,10 @@ public class KelasController extends BaseController{
 		}
 	}
 	
-	@PostMapping("/delete")
-	public ResponseEntity<?> getDelete(@RequestBody String content){
+	@DeleteMapping("/delete/{idKelas}")
+	public ResponseEntity<?> getDelete(@PathVariable("idKelas") String idKelas){
 		try {
-			Kelas kelas = readValue(content, Kelas.class);
-			kelasService.delete(kelas);
+			kelasService.delete(idKelas);
 			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

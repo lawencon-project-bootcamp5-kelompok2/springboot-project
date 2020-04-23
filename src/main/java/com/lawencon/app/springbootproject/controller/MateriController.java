@@ -32,7 +32,7 @@ public class MateriController extends BaseController {
 	@Autowired
 	private MateriService materiService;
 	
-	@PostMapping("/uploadFile")
+	@PostMapping("/insert")
 	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
 		try {
 			Materi materi = materiService.upload(file);
@@ -44,6 +44,16 @@ public class MateriController extends BaseController {
 	                file.getContentType(), file.getSize());
 		} catch (Exception e) {
 			return null;
+		}
+	}
+	
+	@PostMapping("/uploadFile")
+	public ResponseEntity<?> getInsert(@RequestParam("file") MultipartFile file){
+		try {
+			materiService.upload(file);
+			return new ResponseEntity<>("Success Upload", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Failed Upload", HttpStatus.BAD_REQUEST);
 		}
 	}
 	

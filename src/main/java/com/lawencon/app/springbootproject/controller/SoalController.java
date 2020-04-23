@@ -32,7 +32,7 @@ public class SoalController extends BaseController {
 	@Autowired
 	private SoalService soalService;
 	
-	@PostMapping("/uploadFile")
+	@PostMapping("/insert")
 	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
 		try {
 			Soal soal = soalService.upload(file);
@@ -44,6 +44,16 @@ public class SoalController extends BaseController {
 	                file.getContentType(), file.getSize());
 		} catch (Exception e) {
 			return null;
+		}
+	}
+	
+	@PostMapping("/uploadFile")
+	public ResponseEntity<?> getInsert(@RequestParam("file") MultipartFile file){
+		try {
+			soalService.upload(file);
+			return new ResponseEntity<>("Success Upload", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Failed Upload", HttpStatus.BAD_REQUEST);
 		}
 	}
 	

@@ -57,7 +57,7 @@ public class Materi {
         this.fileType = fileType;
     }
 
-    public byte[] getData() {
+	public byte[] getData() {
         return data;
     }
 

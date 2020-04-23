@@ -46,10 +46,10 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 	}
 
 	@Override
-	public Subcourse findByCourse(String idCourse) throws Exception {
+	public List<?> findByCourse(String idCourse) throws Exception {
 		Query q = em.createQuery("from Course where idCourse = :idParam").
 				setParameter("idParam", idCourse);
-		return (Subcourse) q.getSingleResult();
+		return q.getResultList();
 	}
 	
 	@Override

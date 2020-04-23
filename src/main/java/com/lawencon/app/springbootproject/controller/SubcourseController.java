@@ -52,12 +52,13 @@ public class SubcourseController extends BaseController{
 	
 	@GetMapping("/search/course/{idCourse}")
 	public ResponseEntity<?> getListCourse(@PathVariable("idCourse") String idCourse){
+		List<?> listCourse = new ArrayList<>();
 		try {
-			subcourseService.findByCourse(idCourse);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			listCourse = subcourseService.findByCourse(idCourse);
+			return new ResponseEntity<>(listCourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
 		}
 	}
 	

@@ -49,7 +49,7 @@ public class SubcourseServiceImpl implements SubcourseService{
 	}
 
 	@Override
-	public Subcourse findByCourse(String idCourse) throws Exception {
+	public List<?> findByCourse(String idCourse) throws Exception {
 		return subcourseDao.findByCourse(idCourse);
 	}
 

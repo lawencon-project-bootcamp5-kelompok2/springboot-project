@@ -14,19 +14,23 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "pertemuan_per_materi")
-public class PertemuanPerMateri {
+@Table(name = "pertemuan")
+public class Pertemuan {
 
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String idPertemuan;
+	
 	private String pertemuan;
+	
 	@Temporal(TemporalType.DATE)
 	private Date tanggalPertemuan;
+	
 	@OneToOne
 	@JoinColumn(name = "idSubcourse")
 	private Subcourse idSubcourse;
+	
 	public String getIdPertemuan() {
 		return idPertemuan;
 	}

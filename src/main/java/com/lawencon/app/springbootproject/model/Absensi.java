@@ -24,6 +24,10 @@ public class Absensi {
 	@JoinColumn(name = "idSubcourse")
 	private Subcourse idSubcourse;
 	
+	@OneToOne
+	@JoinColumn(name = "idPertemuan")
+	private Pertemuan pertemuan;
+	
 	private String tanggal;
 	
 	private String status;
@@ -50,6 +54,14 @@ public class Absensi {
 
 	public void setIdSubcourse(Subcourse idSubcourse) {
 		this.idSubcourse = idSubcourse;
+	}
+
+	public Pertemuan getPertemuan() {
+		return pertemuan;
+	}
+
+	public void setPertemuan(Pertemuan pertemuan) {
+		this.pertemuan = pertemuan;
 	}
 
 	public String getTanggal() {

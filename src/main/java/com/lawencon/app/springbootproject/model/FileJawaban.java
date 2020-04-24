@@ -22,15 +22,18 @@ public class FileJawaban {
 
     @Lob
     private byte[] data;
+    
+    private String uploadTime;
 
     public FileJawaban() {
 
     }
 
-    public FileJawaban(String fileName, String fileType, byte[] data) {
+    public FileJawaban(String fileName, String fileType, byte[] data, String uploadTime) {
         this.fileName = fileName;
         this.fileType = fileType;
         this.data = data;
+        this.uploadTime = uploadTime;
     }
 
     public String getIdFileJawaban() {
@@ -65,4 +68,11 @@ public class FileJawaban {
         this.data = data;
     }
 
+	public String getUploadTime() {
+		return uploadTime;
+	}
+
+	public void setUploadTime(String uploadTime) {
+		this.uploadTime = uploadTime;
+	}
 }

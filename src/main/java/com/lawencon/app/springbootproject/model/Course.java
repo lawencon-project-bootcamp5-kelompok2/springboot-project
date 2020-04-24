@@ -23,6 +23,8 @@ public class Course {
 	
 	private String namaCourse;
 	
+	private String deskripsi;
+	
 	public String getIdCourse() {
 		return idCourse;
 	}
@@ -49,5 +51,13 @@ public class Course {
 
 	public void setTrainer(Trainer trainer) {
 		this.trainer = trainer;
-	}	
+	}
+
+	public String getDeskripsi() {
+		return deskripsi;
+	}
+
+	public void setDeskripsi(String deskripsi) {
+		this.deskripsi = deskripsi;
+	}
 }

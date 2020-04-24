@@ -33,4 +33,8 @@ public class FileJawabanServiceImpl implements FileJawabanService{
 		return fileJawabanDao.findAll();
 	}
 
+	@Override
+	public FileJawaban validTimer(FileJawaban uploadTime) throws Exception {
+		return fileJawabanDao.validTimer(uploadTime);
+	}
 }

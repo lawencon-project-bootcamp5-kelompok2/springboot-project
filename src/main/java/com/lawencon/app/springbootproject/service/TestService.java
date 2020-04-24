@@ -10,4 +10,5 @@ public interface TestService {
 	abstract void insert(Test test)throws Exception;
 	abstract Test update(Test test)throws Exception;
 	abstract void delete(String idTest)throws Exception;
+	abstract Test findWaktuSelesai(Test test)throws Exception;
 }

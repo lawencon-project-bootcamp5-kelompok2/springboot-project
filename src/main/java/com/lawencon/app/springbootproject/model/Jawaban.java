@@ -69,6 +69,4 @@ public class Jawaban {
 	public void setNilai(float nilai) {
 		this.nilai = nilai;
 	}
-	
-	
 }

@@ -10,4 +10,5 @@ public interface FileJawabanService {
 	abstract FileJawaban upload(MultipartFile fileJawaban) throws Exception;
 	abstract FileJawaban getFile(String fileId) throws Exception;
 	abstract List<?> findAll() throws Exception;
+	abstract FileJawaban validTimer(FileJawaban uploadTime)throws Exception;
 }

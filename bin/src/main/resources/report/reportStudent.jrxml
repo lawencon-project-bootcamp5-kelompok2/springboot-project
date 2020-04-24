@@ -1,32 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportStudent" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="353ad06f-3534-4feb-8e7a-df2732b590cd">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
 	<field name="namaStudent" class="java.lang.String"/>
 	<field name="nilai" class="java.lang.Float"/>
 	<field name="namaSubcourse" class="java.lang.String"/>
+	<field name="namaCourse" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
 	<title>
-		<band height="72">
+		<band height="163">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="1d9782f4-65d7-456b-9f98-5d2341677333"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="183" backcolor="#00AAFF" uuid="1d9782f4-65d7-456b-9f98-5d2341677333"/>
 				<staticText>
-					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="7514df3b-2721-4ab2-aa64-27097f497a35"/>
+					<reportElement x="20" y="90" width="330" height="43" forecolor="#050505" uuid="7514df3b-2721-4ab2-aa64-27097f497a35"/>
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[NILAI]]></text>
+					<text><![CDATA[NILAI E-LEARNING]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="440" y="50" width="100" height="30" forecolor="#FFFFFF" uuid="910dd511-e327-4b12-baae-0e4408c6c854"/>
+					<reportElement x="453" y="140" width="123" height="30" forecolor="#000000" uuid="910dd511-e327-4b12-baae-0e4408c6c854"/>
 					<textElement>
 						<font size="16"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{namaStudent}]]></textFieldExpression>
 				</textField>
+				<line>
+					<reportElement x="20" y="80" width="555" height="1" uuid="664eeda5-4d67-4a02-97b4-058d4e529944"/>
+				</line>
+				<staticText>
+					<reportElement x="20" y="140" width="60" height="30" uuid="a73ba564-94bf-4819-b8ec-5adbf75f66ca"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Materi :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="80" y="140" width="100" height="30" uuid="1fc2fe60-6375-49af-b430-10dc0b1093cb"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{namaCourse}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="390" y="140" width="63" height="30" uuid="a7af5b56-329e-4f27-99da-e0076874498b"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Nama :]]></text>
+				</staticText>
+				<image>
+					<reportElement x="0" y="0" width="595" height="81" uuid="19ad7966-5107-432a-811f-5952e1338e41"/>
+					<imageExpression><![CDATA["report/header.JPG"]]></imageExpression>
+				</image>
 			</frame>
 		</band>
 	</title>
@@ -45,7 +72,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Materi]]></text>
+				<text><![CDATA[Sub Materi]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="25059ba2-e519-4422-b5c6-e7a2613c09e2">

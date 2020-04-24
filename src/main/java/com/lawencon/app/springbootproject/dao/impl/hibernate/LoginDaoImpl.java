@@ -27,20 +27,20 @@ public class LoginDaoImpl extends BaseHibernate implements LoginDao{
 	}
 
 	@Override
-	public Login update(int id, String user, String pass, String role) throws Exception {
+	public Login update(String id, String user, String pass, String role) throws Exception {
 		Query q = em.createQuery("from Login where idLogin = :idParam");
 		q.setParameter("idParam", id);
 		Login log = new Login();
 		log = (Login) q.getSingleResult();
-		log.setUsername(user);
+		log.setNama(user);
 		log.setPassword(pass);
-		log.setRole(role);
+		//log.setRole(role);
 		em.merge(log);
 		return log;
 	}
 
 	@Override
-	public String deleteById(int id) throws Exception {
+	public String deleteById(String id) throws Exception {
 		Query q = em.createQuery("from Login where idLogin = :idParam");
 		q.setParameter("idParam", id);
 		Login log = new Login();
@@ -62,6 +62,24 @@ public class LoginDaoImpl extends BaseHibernate implements LoginDao{
 		Query q = em.createQuery("from Login where username = :userParam");
 		q.setParameter("userParam", user);
 		return q.getResultList();
+	}
+
+	@Override
+	public Login findByEmail(String email) {
+		Query q = em.createQuery(" FROM Login WHERE email =:emailParam");
+		q.setParameter("emailParam", email);
+		return (Login) q.getSingleResult();
+	}
+
+	@Override
+	public Boolean existsByEmail(String email) {
+		Query q = em.createQuery("SELECT COUNT(*) FROM Login WHERE email =:emailParam");
+		q.setParameter("emailParam", email);
+		Long result = (Long) q.getSingleResult();
+		if (result == 1)
+			return true;
+		else
+			return false;
 	}
 
 }

@@ -96,7 +96,7 @@ public class LoginController extends BaseController{
 	}
 	
 	@PostMapping("/update/{id}/{user}/{pass}/{role}")
-	public ResponseEntity<?> getUpdate(@PathVariable("id") int id, @PathVariable("user") String user, @PathVariable("pass") String pass, @PathVariable("role") String role){
+	public ResponseEntity<?> getUpdate(@PathVariable("id") String id, @PathVariable("user") String user, @PathVariable("pass") String pass, @PathVariable("role") String role){
 		try {
 			loginService.update(id, user, pass, role);
 		} catch (Exception e) {
@@ -106,7 +106,7 @@ public class LoginController extends BaseController{
 	}
 	
 	@PostMapping("/deleteId/{id}")
-	public ResponseEntity<?> getDeleteById(@PathVariable("id") int id){
+	public ResponseEntity<?> getDeleteById(@PathVariable("id") String id){
 		try {
 			loginService.deleteById(id);
 		} catch (Exception e) {
@@ -117,16 +117,13 @@ public class LoginController extends BaseController{
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) throws Exception {
-		if (studentService.existsByEmail(signUpRequest.getEmail())) {
-			return ResponseEntity
-					.badRequest()
+		if (loginService.existsByEmail(signUpRequest.getEmail())) {
+			return ResponseEntity.badRequest()
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
 
 		// Create new user's account
-		Student user = new Student(signUpRequest.getNamaStudent(), 
-							 signUpRequest.getEmail(),
-							 encoder.encode(signUpRequest.getPassword()));
+		Login user = new Login(signUpRequest.getNama(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
@@ -138,7 +135,8 @@ public class LoginController extends BaseController{
 		} 
 
 		user.setRoles(roles);
-		studentService.createStudent(user);
+		loginService.insertUser(user);
+		
 
 		return ResponseEntity.ok(new MessageResponse("Student registered successfully!"));
 	}

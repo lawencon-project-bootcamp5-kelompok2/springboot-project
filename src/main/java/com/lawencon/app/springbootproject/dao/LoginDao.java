@@ -9,6 +9,9 @@ public interface LoginDao {
 	abstract List<?> findByUsername(String user) throws Exception;
 	abstract Login validUser(String user, String pass) throws Exception;
 	abstract String insertUser(Login login) throws Exception;
-	abstract Login update(int id, String user, String pass, String role) throws Exception;
-	abstract String deleteById(int id) throws Exception;
+	abstract Login update(String id, String user, String pass, String role) throws Exception;
+	abstract String deleteById(String id) throws Exception;
+	
+	Login findByEmail(String email);
+	Boolean existsByEmail(String email);
 }

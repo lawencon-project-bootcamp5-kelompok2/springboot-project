@@ -18,9 +18,9 @@ public class Trainer {
 	private String idTrainer;
 	
 	@Column(unique = true)
-	private String emailTrainer;
+	private String email;
 	
-	private String pwdTrainer;
+	private String password;
 	private String role;
 	private String namaTrainer;
 	private String hp;
@@ -49,20 +49,20 @@ public class Trainer {
 		this.idTrainer = idTrainer;
 	}
 
-	public String getEmailTrainer() {
-		return emailTrainer;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmailTrainer(String emailTrainer) {
-		this.emailTrainer = emailTrainer;
+	public void setEmail(String emailTrainer) {
+		this.email = emailTrainer;
 	}
 
-	public String getPwdTrainer() {
-		return pwdTrainer;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPwdTrainer(String pwdTrainer) {
-		this.pwdTrainer = pwdTrainer;
+	public void setPassword(String pwdTrainer) {
+		this.password = pwdTrainer;
 	}
 
 	public String getRole() {

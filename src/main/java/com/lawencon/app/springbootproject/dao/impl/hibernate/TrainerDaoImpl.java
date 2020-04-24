@@ -21,8 +21,8 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	public void updateTrainer(Trainer trainer) throws Exception{
 		Trainer t = findById(trainer.getIdTrainer());
 		t.setNamaTrainer(trainer.getNamaTrainer());
-		t.setEmailTrainer(trainer.getEmailTrainer());
-		t.setPwdTrainer(trainer.getPwdTrainer());
+		t.setEmail(trainer.getEmail());
+		t.setPassword(trainer.getPassword());
 		t.setRole(trainer.getRole());
 		em.merge(t);
 	}
@@ -48,8 +48,8 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 
 	@Override
 	public Trainer validTrainer(Trainer trainer) throws Exception {
-		Query q = em.createQuery("from Trainer where emailTrainer = :emailParam and namaTrainer = :namaParam");
-		q.setParameter("emailParam", trainer.getEmailTrainer());
+		Query q = em.createQuery("from Trainer where email = :emailParam and namaTrainer = :namaParam");
+		q.setParameter("emailParam", trainer.getEmail());
 		q.setParameter("namaParam", trainer.getNamaTrainer());
 		return (Trainer) q.getSingleResult();
 	}

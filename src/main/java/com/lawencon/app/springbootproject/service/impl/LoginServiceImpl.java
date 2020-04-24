@@ -46,18 +46,23 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String update(int id, String user, String pass, String role) throws Exception {
+	public String update(String id, String user, String pass, String role) throws Exception {
 		loginDao.update(id, user, pass, role);
 		return "Failed...";
 	}
 
 	@Override
-	public String deleteById(int id) throws Exception {
+	public String deleteById(String id) throws Exception {
 		return loginDao.deleteById(id);
 	}
 
 	@Override
 	public List<?> findUsername(String user) throws Exception {
 		return loginDao.findByUsername(user);
+	}
+
+	@Override
+	public Boolean existsByEmail(String email) {
+		return loginDao.existsByEmail(email);
 	}
 }

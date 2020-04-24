@@ -7,20 +7,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lawencon.app.springbootproject.dao.StudentDao;
-import com.lawencon.app.springbootproject.model.Student;
+import com.lawencon.app.springbootproject.dao.LoginDao;
+import com.lawencon.app.springbootproject.model.Login;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
-	StudentDao studentDao;
+	LoginDao loginDao;
 
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Student user = new Student();
+		Login user = new Login();
 		try {
-			user = studentDao.findByEmail(email);
+			user = loginDao.findByEmail(email);
 		} catch (Exception e) {
 			new UsernameNotFoundException("User Not Found with email: " + email);
 		}

@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lawencon.app.springbootproject.model.Student;
+import com.lawencon.app.springbootproject.model.Login;
 
 @SuppressWarnings("serial")
 public class UserDetailsImpl implements UserDetails {
@@ -35,14 +35,14 @@ public class UserDetailsImpl implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	public static UserDetailsImpl build(Student user) {
+	public static UserDetailsImpl build(Login user) {
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
 				.collect(Collectors.toList());
 
 		return new UserDetailsImpl(
-				user.getIdStudent(), 
-				user.getNamaStudent(), 
+				user.getIdLogin(), 
+				user.getNama(),
 				user.getEmail(),
 				user.getPassword(), 
 				authorities);

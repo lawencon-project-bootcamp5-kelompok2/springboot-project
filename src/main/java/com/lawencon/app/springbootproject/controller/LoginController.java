@@ -28,6 +28,7 @@ import com.lawencon.app.springbootproject.model.ERole;
 import com.lawencon.app.springbootproject.model.Login;
 import com.lawencon.app.springbootproject.model.Role;
 import com.lawencon.app.springbootproject.model.Student;
+import com.lawencon.app.springbootproject.model.Trainer;
 import com.lawencon.app.springbootproject.payload.request.LoginRequest;
 import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 import com.lawencon.app.springbootproject.payload.response.JwtResponse;
@@ -36,6 +37,7 @@ import com.lawencon.app.springbootproject.repository.RoleRepository;
 import com.lawencon.app.springbootproject.security.jwt.JwtUtils;
 import com.lawencon.app.springbootproject.service.LoginService;
 import com.lawencon.app.springbootproject.service.StudentService;
+import com.lawencon.app.springbootproject.service.TrainerService;
 import com.lawencon.app.springbootproject.service.impl.UserDetailsImpl;
 
 
@@ -49,6 +51,9 @@ public class LoginController extends BaseController{
 
 	@Autowired
 	StudentService studentService;
+	
+	@Autowired
+	TrainerService trainerService;
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -132,13 +137,51 @@ public class LoginController extends BaseController{
 			Role userRole = roleRepository.findByName(ERole.ROLE_STUDENT)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			roles.add(userRole);
-		} 
+			
+			Student s = new Student();
+			s.setEmail(user.getEmail());
+			s.setNamaStudent(user.getNama());
+			s.setPassword(user.getPassword());
+			s.setRole(userRole.getName().toString());
+			studentService.createStudent(s);
+			
+		} else {
+			strRoles.forEach(role -> {
+				switch (role) {
+				case "admin":
+					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(adminRole);
+					break;
+				case "trainer":
+					Role modRole = roleRepository.findByName(ERole.ROLE_TRAINER)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(modRole);
+					
+					Trainer t = new Trainer();
+					t.setEmail(user.getEmail());
+					t.setNamaTrainer(user.getNama());
+					t.setPassword(user.getPassword());
+					t.setRole(modRole.getName().toString());
+					try {
+						trainerService.createTrainer(t);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					break;
+				default:
+					Role userRole = roleRepository.findByName(ERole.ROLE_STUDENT)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(userRole);
+				}
+			});
+		}
 
 		user.setRoles(roles);
 		loginService.insertUser(user);
-		
 
-		return ResponseEntity.ok(new MessageResponse("Student registered successfully!"));
+		return ResponseEntity.ok(new MessageResponse("Registered successfully!"));
 	}
 	
 	@PostMapping("/signin")

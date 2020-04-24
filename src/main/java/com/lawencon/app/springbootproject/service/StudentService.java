@@ -13,4 +13,6 @@ public interface StudentService {
 	abstract Student findById (String idStudent)throws Exception;
 	abstract Boolean validStudent(Student student)throws Exception;
 	abstract String cetakReportStudent(String idStudent, String idCourse) throws Exception;
+	
+	boolean existsByEmail(String email);
 }

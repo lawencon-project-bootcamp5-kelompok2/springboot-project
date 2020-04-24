@@ -15,4 +15,7 @@ public interface StudentDao {
 	abstract Student validStudent(Student student)throws Exception;
 	abstract List<?> cetakReportStudent(String idStudent, String idCourse) throws Exception;
 	abstract String getNamaStudent(String idStudent) throws Exception;
+	
+	Student findByEmail(String email);
+	Boolean existsByEmail(String email);
 }

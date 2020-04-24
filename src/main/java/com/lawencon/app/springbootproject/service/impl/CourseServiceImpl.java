@@ -61,4 +61,14 @@ public class CourseServiceImpl implements CourseService{
 		}
 		return false;
 	}
+
+	@Override
+	public String getIdCourse(String id) throws Exception {
+		return courseDao.getIdCourse(id);
+	}
+
+	@Override
+	public String getNamaCourse(String id) throws Exception {
+		return courseDao.getNamaCourse(id);
+	}
 }

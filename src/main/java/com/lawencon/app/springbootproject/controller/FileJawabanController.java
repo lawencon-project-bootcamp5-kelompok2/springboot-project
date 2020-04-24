@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lawencon.app.springbootproject.model.FileJawaban;
-import com.lawencon.app.springbootproject.model.UploadFileResponse;
 import com.lawencon.app.springbootproject.service.FileJawabanService;
 
 @RestController
@@ -32,26 +30,25 @@ public class FileJawabanController extends BaseController {
 	@Autowired
 	private FileJawabanService fileJawabanService;
 	
-	@PostMapping("/insert")
-	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-		try {
-			FileJawaban fileJawaban = fileJawabanService.upload(file);
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-	                .path("/file/downloadFile/")
-	                .path(fileJawaban.getIdFileJawaban())
-	                .toUriString();
-			return new UploadFileResponse(fileJawaban.getFileName(), fileDownloadUri,
-	                file.getContentType(), file.getSize());
-		} catch (Exception e) {
-			return null;
-		}
-	}
+//	@PostMapping("/insert")
+//	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+//		try {
+//			FileJawaban fileJawaban = fileJawabanService.upload(file);
+//			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//	                .path("/file/downloadFile/")
+//	                .path(fileJawaban.getIdFileJawaban())
+//	                .toUriString();
+//			return new UploadFileResponse(fileJawaban.getFileName(), fileDownloadUri,
+//	                file.getContentType(), file.getSize());
+//		} catch (Exception e) {
+//			return null;
+//		}
+//	}
 	
 	@PostMapping("/uploadFile")
 	public ResponseEntity<?> getInsert(@RequestParam("file") MultipartFile file){
 		try {
-			fileJawabanService.upload(file);
-			return new ResponseEntity<>("Success Upload", HttpStatus.OK);
+			return new ResponseEntity<>(fileJawabanService.upload(file), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>("Failed Upload", HttpStatus.BAD_REQUEST);
 		}

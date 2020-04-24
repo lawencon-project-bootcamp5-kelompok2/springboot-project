@@ -13,4 +13,5 @@ public interface TrainerService {
 	abstract List<Trainer> findAll()throws Exception;
 	abstract Trainer findById (String idTrainer)throws Exception;
 	abstract String cetakReportTrainer(String idTrainer, String idSubcourse) throws Exception;
+	abstract Trainer getNamaTrainer(String idTrainer) throws Exception;
 }

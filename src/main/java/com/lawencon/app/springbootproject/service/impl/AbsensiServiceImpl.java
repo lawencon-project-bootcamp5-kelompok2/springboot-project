@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import com.lawencon.app.springbootproject.dao.AbsensiDao;
-import com.lawencon.app.springbootproject.dao.SubcourseDao;
-import com.lawencon.app.springbootproject.dao.TrainerDao;
 import com.lawencon.app.springbootproject.model.Absensi;
 import com.lawencon.app.springbootproject.service.AbsensiService;
+import com.lawencon.app.springbootproject.service.SubcourseService;
+import com.lawencon.app.springbootproject.service.TrainerService;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -31,10 +31,10 @@ public class AbsensiServiceImpl implements AbsensiService {
 	private AbsensiDao absensiDao;
 	
 	@Autowired
-	private TrainerDao trainerDao;
+	private TrainerService trainerService;
 	
 	@Autowired
-	private SubcourseDao subcourseDao;
+	private SubcourseService subcourseService;
 
 	@Override
 	public void insert(Absensi absensi) throws Exception{
@@ -65,7 +65,7 @@ public class AbsensiServiceImpl implements AbsensiService {
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-absensi-"+trainerDao.getNamaTrainer(idTrainer)+"-"+subcourseDao.getNamaSubcourse(idSubcourse)+".pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-absensi-"+trainerService.getNamaTrainer(idTrainer)+"-"+subcourseService.getNamaSubcourse(idSubcourse)+".pdf");
 			return "File berhasil diunduh di Local Disk D";
 		} catch (Exception e) {
 			e.printStackTrace();

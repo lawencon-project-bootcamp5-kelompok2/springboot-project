@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
-import com.lawencon.app.springbootproject.dao.SubcourseDao;
 import com.lawencon.app.springbootproject.dao.TrainerDao;
 import com.lawencon.app.springbootproject.model.Trainer;
+import com.lawencon.app.springbootproject.service.SubcourseService;
 import com.lawencon.app.springbootproject.service.TrainerService;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -30,7 +30,7 @@ public class TrainerServiceImpl implements TrainerService {
 	private TrainerDao trainerDao;
 	
 	@Autowired
-	private SubcourseDao subcourseDao;
+	private SubcourseService subcourseService;
 
 	@Override
 	public String createTrainer(Trainer trainer) throws Exception{
@@ -69,7 +69,7 @@ public class TrainerServiceImpl implements TrainerService {
 
 	@Override
 	public String cetakReportTrainer(String idTrainer, String idSubcourse) throws Exception {
-		String idTest = subcourseDao.getIdTestBySubcourse(idSubcourse);
+		String idTest = subcourseService.getIdTestBySubcourse(idSubcourse);
 		List<?> data = new ArrayList<>();
 		data = trainerDao.cetakReportTrainer(idTrainer, idTest, idSubcourse);
 		try {
@@ -77,7 +77,7 @@ public class TrainerServiceImpl implements TrainerService {
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-"+trainerDao.getNamaTrainer(idTrainer)+"-"+subcourseDao.getNamaSubcourse(idSubcourse)+".pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-"+trainerDao.getNamaTrainer(idTrainer)+"-"+subcourseService.getNamaSubcourse(idSubcourse)+".pdf");
 			return "File berhasil diunduh di Local Disk D";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,5 +97,10 @@ public class TrainerServiceImpl implements TrainerService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Trainer getNamaTrainer(String idTrainer) throws Exception {
+		return trainerDao.getNamaTrainer(idTrainer);
 	}
 }

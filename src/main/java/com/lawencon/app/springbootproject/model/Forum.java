@@ -3,6 +3,8 @@ package com.lawencon.app.springbootproject.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,6 +19,10 @@ public class Forum {
 	private String emailSender;
 	private String subjek;
 	private String deskripsi;
+	
+	@OneToOne
+	@JoinColumn(name = "idSubcourse")
+	private Subcourse idSubcourse;
 
 	public String getIdForum() {
 		return idForum;
@@ -48,6 +54,14 @@ public class Forum {
 
 	public void setDeskripsi(String deskripsi) {
 		this.deskripsi = deskripsi;
+	}
+
+	public Subcourse getIdSubcourse() {
+		return idSubcourse;
+	}
+
+	public void setIdSubcourse(Subcourse idSubcourse) {
+		this.idSubcourse = idSubcourse;
 	}
 
 }

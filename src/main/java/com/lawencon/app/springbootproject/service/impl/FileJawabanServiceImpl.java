@@ -19,8 +19,14 @@ public class FileJawabanServiceImpl implements FileJawabanService{
 	private FileJawabanDao fileJawabanDao;
 
 	@Override
-	public FileJawaban upload(MultipartFile fileJawaban) throws Exception {
-		return fileJawabanDao.upload(fileJawaban);
+	public String upload(MultipartFile fileJawaban) throws Exception {
+		if(validTimer()==true) {
+			return "Upload Denied";
+		}
+		else {
+			fileJawabanDao.upload(fileJawaban);
+		}
+		return "Success Upload";
 	}
 
 	@Override
@@ -34,7 +40,16 @@ public class FileJawabanServiceImpl implements FileJawabanService{
 	}
 
 	@Override
-	public FileJawaban validTimer(FileJawaban uploadTime) throws Exception {
-		return fileJawabanDao.validTimer(uploadTime);
+	public Boolean validTimer() throws Exception {
+		FileJawaban jawaban = null;
+		try {
+			jawaban = fileJawabanDao.validTimer();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(jawaban != null) {
+			return true;
+		}
+		return false;
 	}
 }

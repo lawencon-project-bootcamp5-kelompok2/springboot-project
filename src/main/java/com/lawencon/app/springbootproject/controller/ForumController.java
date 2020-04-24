@@ -50,6 +50,17 @@ public class ForumController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/search/subcourse/{idSubcourse}")
+	public ResponseEntity<?> getForumByIdSubcourse(@PathVariable("idSubcourse") String idSubcourse){
+		try {
+			forumService.findByIdSubcourse(idSubcourse);
+			return new ResponseEntity<>("Success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/create")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {

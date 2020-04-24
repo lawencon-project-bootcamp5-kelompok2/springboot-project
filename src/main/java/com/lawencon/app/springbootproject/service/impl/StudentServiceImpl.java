@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
-import com.lawencon.app.springbootproject.dao.CourseDao;
 import com.lawencon.app.springbootproject.dao.StudentDao;
 import com.lawencon.app.springbootproject.model.Student;
+import com.lawencon.app.springbootproject.service.CourseService;
 import com.lawencon.app.springbootproject.service.StudentService;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -30,7 +30,7 @@ public class StudentServiceImpl implements StudentService {
 	private StudentDao studentDao;
 	
 	@Autowired
-	private CourseDao courseDao;
+	private CourseService courseService;
 
 	@Override
 	public String createStudent(Student student) {
@@ -76,7 +76,7 @@ public class StudentServiceImpl implements StudentService {
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-"+studentDao.getNamaStudent(idStudent)+"-"+courseDao.getNamaCourse(idCourse)+".pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-"+studentDao.getNamaStudent(idStudent)+"-"+courseService.getNamaCourse(idCourse)+".pdf");
 			return "File berhasil diunduh di Local Disk D";
 		} catch (Exception e) {
 			e.printStackTrace();

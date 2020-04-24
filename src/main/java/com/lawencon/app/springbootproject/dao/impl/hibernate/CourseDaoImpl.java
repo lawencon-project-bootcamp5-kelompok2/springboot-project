@@ -34,6 +34,7 @@ public class CourseDaoImpl extends BaseHibernate implements CourseDao{
 	public Course update(Course course) throws Exception {
 		Course courses = findById(course.getIdCourse());
 		courses.setNamaCourse(course.getNamaCourse());
+		courses.setDeskripsi(course.getDeskripsi());
 		em.merge(courses);
 		return courses;
 	}

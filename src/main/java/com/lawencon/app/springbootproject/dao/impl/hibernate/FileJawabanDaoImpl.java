@@ -1,8 +1,6 @@
 package com.lawencon.app.springbootproject.dao.impl.hibernate;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -23,13 +21,12 @@ public class FileJawabanDaoImpl extends BaseHibernate implements FileJawabanDao{
 	@Override
 	public FileJawaban upload(MultipartFile fileJawaban) {
 		String fileName = StringUtils.cleanPath(fileJawaban.getOriginalFilename());
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
 		try {
 			if (fileName.contains("..")) {
 				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
 			}
-			FileJawaban file = new FileJawaban(fileName, fileJawaban.getContentType(), fileJawaban.getBytes(), String.valueOf(dateFormat.format(date)));
+			FileJawaban file = new FileJawaban(fileName, fileJawaban.getContentType(), fileJawaban.getBytes(), date);
 			em.persist(file);
 			return file;
 			
@@ -57,9 +54,16 @@ public class FileJawabanDaoImpl extends BaseHibernate implements FileJawabanDao{
 	}
 
 	@Override
-	public FileJawaban validTimer(FileJawaban uploadTime) throws Exception {
-		Query q = em.createQuery("From FileJawaban where uploadTime = :uploadParam");
-		q.setParameter("uploadTime", uploadTime.getUploadTime());
+	public FileJawaban validTimer() throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "fj.upload_time, t.waktu_selesai, "
+				+ "case when fj.status is null then 'upload denied' "
+				+ "else null "
+				+ "end as warning "
+				+ "from "
+				+ "file_jawaban fj, test t "
+				+ "where "
+				+ "fj.upload_time >= t.waktu_selesai");
 		return (FileJawaban) q.getSingleResult();
 	}
 }

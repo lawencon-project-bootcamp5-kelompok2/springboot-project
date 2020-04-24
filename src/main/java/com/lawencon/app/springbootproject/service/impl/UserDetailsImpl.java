@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lawencon.app.springbootproject.model.Student;
 
+@SuppressWarnings("serial")
 public class UserDetailsImpl implements UserDetails {
 
 	private String id;

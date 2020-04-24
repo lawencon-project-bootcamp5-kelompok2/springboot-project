@@ -43,12 +43,4 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 	public void delete(String idTest) throws Exception {
 		em.remove(findById(idTest));
 	}
-
-	@Override
-	public Test findWaktuSelesai(Test test) throws Exception {
-		Query q = em.createQuery("from Test where idTest = :idParam and waktuSelesai = :selesai");
-		q.setParameter("idParam", test.getIdTest());
-		q.setParameter("selesai", test.getWaktuSelesai());
-		return (Test) q.getSingleResult();
-	}
 }

@@ -66,5 +66,15 @@ public class SubcourseServiceImpl implements SubcourseService{
 		}
 		return false;
 	}
+
+	@Override
+	public String getIdTestBySubcourse(String subcourse) throws Exception {
+		return subcourseDao.getIdTestBySubcourse(subcourse);
+	}
+
+	@Override
+	public String getNamaSubcourse(String subcourse) throws Exception {
+		return subcourseDao.getNamaSubcourse(subcourse);
+	}
 	
 }

@@ -1,10 +1,14 @@
 package com.lawencon.app.springbootproject.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,13 +27,14 @@ public class FileJawaban {
     @Lob
     private byte[] data;
     
-    private String uploadTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date uploadTime;
 
     public FileJawaban() {
 
     }
 
-    public FileJawaban(String fileName, String fileType, byte[] data, String uploadTime) {
+    public FileJawaban(String fileName, String fileType, byte[] data, Date uploadTime) {
         this.fileName = fileName;
         this.fileType = fileType;
         this.data = data;
@@ -68,11 +73,11 @@ public class FileJawaban {
         this.data = data;
     }
 
-	public String getUploadTime() {
+	public Date getUploadTime() {
 		return uploadTime;
 	}
 
-	public void setUploadTime(String uploadTime) {
+	public void setUploadTime(Date uploadTime) {
 		this.uploadTime = uploadTime;
 	}
 }

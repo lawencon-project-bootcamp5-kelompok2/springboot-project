@@ -41,4 +41,9 @@ public class ForumServiceImpl implements ForumService{
 	public void delete(String idForum) throws Exception {
 		forumDao.delete(idForum);
 	}
+
+	@Override
+	public Forum findByIdSubcourse(String idSubcourse) throws Exception {
+		return forumDao.findByIdSubcourse(idSubcourse);
+	}
 }

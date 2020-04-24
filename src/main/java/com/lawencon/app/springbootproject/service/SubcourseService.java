@@ -12,5 +12,7 @@ public interface SubcourseService {
 	abstract String insert(Subcourse subcourse)throws Exception;
 	abstract Subcourse update(Subcourse subcourse)throws Exception;
 	abstract void delete(String idSubcourse)throws Exception;
+	abstract String getIdTestBySubcourse(String subcourse) throws Exception;
+	abstract String getNamaSubcourse(String subcourse) throws Exception;
 	abstract Boolean validTime(Subcourse subcourse)throws Exception;
 }

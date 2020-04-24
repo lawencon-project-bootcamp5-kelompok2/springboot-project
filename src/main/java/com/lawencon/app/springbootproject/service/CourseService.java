@@ -11,4 +11,6 @@ public interface CourseService {
 	abstract Course update(Course course)throws Exception;
 	abstract void delete(String idCourse)throws Exception;
 	abstract Boolean validCourse(Course course)throws Exception;
+	abstract String getIdCourse(String id) throws Exception;
+	abstract String getNamaCourse(String id) throws Exception;
 }

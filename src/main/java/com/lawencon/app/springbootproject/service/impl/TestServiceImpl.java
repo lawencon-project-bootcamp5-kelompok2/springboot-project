@@ -41,10 +41,4 @@ public class TestServiceImpl implements TestService{
 	public void delete(String idTest) throws Exception {
 		testDao.delete(idTest);
 	}
-
-	@Override
-	public Test findWaktuSelesai(Test test) throws Exception {
-		return testDao.findWaktuSelesai(test);
-	}
-
 }

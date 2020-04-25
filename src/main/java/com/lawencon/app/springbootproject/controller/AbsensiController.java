@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class AbsensiController extends BaseController{
 	private AbsensiService absensiService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getList(){
 		List<Absensi> listAbsen = new ArrayList<>();
 		try {
@@ -39,6 +41,7 @@ public class AbsensiController extends BaseController{
 	}
 	
 	@GetMapping("/search/{idStudent}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idStudent") String idStudent){
 		try {
 			absensiService.findByStudent(idStudent);
@@ -50,6 +53,7 @@ public class AbsensiController extends BaseController{
 	}
 	
 	@PostMapping("/insert")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Absensi absensi = readValue(content, Absensi.class);
@@ -62,6 +66,7 @@ public class AbsensiController extends BaseController{
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Absensi absensi = readValue(content, Absensi.class);
@@ -74,6 +79,7 @@ public class AbsensiController extends BaseController{
 	}
 	
 	@GetMapping("/report/{idSubcourse}/{idTrainer}")
+	@PreAuthorize("hasRole('TRAINER')")
 	public ResponseEntity<?> getUpdate(@PathVariable String idSubcourse, @PathVariable String idTrainer){
 		try {
 			absensiService.cetakAbsen(idSubcourse, idTrainer);

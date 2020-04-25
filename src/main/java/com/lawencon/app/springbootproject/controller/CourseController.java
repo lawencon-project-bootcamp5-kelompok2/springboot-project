@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class CourseController extends BaseController {
 	private CourseService courseService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getList(){
 		List<?> listCourse = new ArrayList<>();
 		try {
@@ -40,6 +42,7 @@ public class CourseController extends BaseController {
 	}
 	
 	@GetMapping("/search/{idCourse}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getId(@PathVariable("idCourse") String idCourse){
 		try {
 			courseService.findById(idCourse);
@@ -51,6 +54,7 @@ public class CourseController extends BaseController {
 	}
 	
 	@PostMapping("/insert")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Course course = readValue(content, Course.class);
@@ -62,6 +66,7 @@ public class CourseController extends BaseController {
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Course course = readValue(content, Course.class);
@@ -74,6 +79,7 @@ public class CourseController extends BaseController {
 	}
 	
 	@DeleteMapping("/delete/{idCourse}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getDelete(@PathVariable("idCourse") String idCourse){
 		try {
 			courseService.delete(idCourse);

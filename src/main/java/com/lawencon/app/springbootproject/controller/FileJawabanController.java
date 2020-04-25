@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,6 +47,7 @@ public class FileJawabanController extends BaseController {
 //	}
 	
 	@PostMapping("/uploadFile")
+	@PreAuthorize("hasRole('STUDENT')")
 	public ResponseEntity<?> getInsert(@RequestParam("file") MultipartFile file){
 		try {
 			return new ResponseEntity<>(fileJawabanService.upload(file), HttpStatus.OK);
@@ -55,6 +57,7 @@ public class FileJawabanController extends BaseController {
 	}
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getList(){
 		List<?> listFileJawaban = new ArrayList<>();
 		try {
@@ -67,6 +70,7 @@ public class FileJawabanController extends BaseController {
 	}
 	
     @GetMapping("/downloadFile/{fileId}")
+    @PreAuthorize("hasRole('TRAINER')")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
     	try {
             FileJawaban fileJawaban = fileJawabanService.getFile(fileId);

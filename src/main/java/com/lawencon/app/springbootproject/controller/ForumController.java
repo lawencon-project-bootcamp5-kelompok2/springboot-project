@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class ForumController extends BaseController{
 	private ForumService forumService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getList(){
 		List<?> listForum = new ArrayList<>();
 		try {
@@ -40,6 +42,7 @@ public class ForumController extends BaseController{
 	}
 	
 	@GetMapping("/search/{idForum}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getListId(@PathVariable("idForum") String idForum){
 		try {
 			forumService.findById(idForum);
@@ -51,6 +54,7 @@ public class ForumController extends BaseController{
 	}
 	
 	@GetMapping("/search/subcourse/{idSubcourse}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getForumByIdSubcourse(@PathVariable("idSubcourse") String idSubcourse){
 		try {
 			forumService.findByIdSubcourse(idSubcourse);
@@ -62,6 +66,7 @@ public class ForumController extends BaseController{
 	}
 	
 	@PostMapping("/create")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Forum forum = readValue(content, Forum.class);
@@ -74,6 +79,7 @@ public class ForumController extends BaseController{
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Forum forum = readValue(content, Forum.class);
@@ -86,6 +92,7 @@ public class ForumController extends BaseController{
 	}
 	
 	@DeleteMapping("/delete/{idForum}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getDelete(@PathVariable("idForum") String idForum){
 		try {
 			forumService.delete(idForum);

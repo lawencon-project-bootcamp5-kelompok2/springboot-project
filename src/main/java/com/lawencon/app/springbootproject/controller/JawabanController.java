@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class JawabanController extends BaseController {
 	private JawabanService jawabanService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('TRAINER')")
 	public ResponseEntity<?> getList(){
 		List<?> listJawaban = new ArrayList<>();
 		try {
@@ -40,6 +42,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@GetMapping("/search/{idJawaban}")
+	@PreAuthorize("hasRole('TRAINER')")
 	public ResponseEntity<?> getListId(@PathVariable("idJawaban") String idJawaban){
 		try {
 			jawabanService.findById(idJawaban);
@@ -51,6 +54,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@PostMapping("/insert")
+	@PreAuthorize("hasRole('STUDENT')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Jawaban jawaban = readValue(content, Jawaban.class);
@@ -63,6 +67,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('STUDENT')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Jawaban jawaban = readValue(content, Jawaban.class);
@@ -75,6 +80,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@DeleteMapping("/delete/{idJawaban}")
+	@PreAuthorize("hasRole('STUDENT')")
 	public ResponseEntity<?> getDelete(@PathVariable("idJawaban") String idJawaban){
 		try {
 			jawabanService.delete(idJawaban);

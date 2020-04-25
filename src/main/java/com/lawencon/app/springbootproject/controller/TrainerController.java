@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class TrainerController extends BaseController {
 	private TrainerService trainerService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getList(){
 		List<Trainer> listTrainer = new ArrayList<>();
 		try {
@@ -41,6 +43,7 @@ public class TrainerController extends BaseController {
 	}
 	
 	@GetMapping("/search/{idTrainer}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idTrainer") String idTrainer){
 		try {
 			trainerService.findById(idTrainer);
@@ -52,6 +55,7 @@ public class TrainerController extends BaseController {
 	}
 	
 	@PostMapping("/insert")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Trainer trainer = readValue(content, Trainer.class);
@@ -63,6 +67,7 @@ public class TrainerController extends BaseController {
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Trainer trainer = readValue(content, Trainer.class);
@@ -75,6 +80,7 @@ public class TrainerController extends BaseController {
 	}
 	
 	@DeleteMapping("/delete/{idTrainer}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getDelete(@PathVariable("idTrainer") String idTrainer){
 		try {
 			trainerService.deleteTrainer(idTrainer);
@@ -86,6 +92,7 @@ public class TrainerController extends BaseController {
 	}
 	
 	@GetMapping("/report/{idTrainer}/{idSubcourse}")
+	@PreAuthorize("hasRole('TRAINER')")
 	public ResponseEntity<?> getList(@PathVariable String idTrainer, @PathVariable String idSubcourse){
 		try {
 			trainerService.cetakReportTrainer(idTrainer, idSubcourse);

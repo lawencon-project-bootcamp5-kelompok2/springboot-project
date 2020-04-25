@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class StudentController extends BaseController{
 	private StudentService studentService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getList(){
 		List<?> listStudent = new ArrayList<>();
 		try {
@@ -40,6 +42,7 @@ public class StudentController extends BaseController{
 	}
 	
 	@GetMapping("/search/{idStudent}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idStudent") String idStudent){
 		try {
 			studentService.findById(idStudent);
@@ -62,6 +65,7 @@ public class StudentController extends BaseController{
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('ADMIN')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Student student = readValue(content, Student.class);
@@ -74,6 +78,7 @@ public class StudentController extends BaseController{
 	}
 	
 	@DeleteMapping("/delete/{idStudent}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('ADMIN')")
 	public ResponseEntity<?> getDelete(@PathVariable("idStudent") String idStudent){
 		try {
 			studentService.deleteStudent(idStudent);
@@ -85,6 +90,7 @@ public class StudentController extends BaseController{
 	}
 	
 	@GetMapping("/report/{idStudent}/{idCourse}")
+	@PreAuthorize("hasRole('STUDENT')")
 	public ResponseEntity<?> getList(@PathVariable String idStudent, @PathVariable String idCourse){
 		try {
 			studentService.cetakReportStudent(idStudent, idCourse);

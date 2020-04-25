@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class MateriController extends BaseController {
 	private MateriService materiService;
 	
 	@PostMapping("/insert")
+	@PreAuthorize("hasRole('TRAINER')")
 	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
 		try {
 			Materi materi = materiService.upload(file);
@@ -48,6 +50,7 @@ public class MateriController extends BaseController {
 	}
 	
 	@PostMapping("/uploadFile")
+	@PreAuthorize("hasRole('TRAINER')")
 	public ResponseEntity<?> getInsert(@RequestParam("file") MultipartFile file){
 		try {
 			materiService.upload(file);
@@ -58,6 +61,7 @@ public class MateriController extends BaseController {
 	}
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getList(){
 		List<?> listMateri = new ArrayList<>();
 		try {
@@ -70,6 +74,7 @@ public class MateriController extends BaseController {
 	}
 	
     @GetMapping("/downloadFile/{fileId}")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
     	try {
             Materi materi = materiService.getFile(fileId);

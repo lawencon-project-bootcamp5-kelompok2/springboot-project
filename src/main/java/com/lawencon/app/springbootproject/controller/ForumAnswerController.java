@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class ForumAnswerController extends BaseController{
 	private ForumAnswerService forumAnswerService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getList(){
 		List<?> listAnswer = new ArrayList<>();
 		try {
@@ -40,6 +42,7 @@ public class ForumAnswerController extends BaseController{
 	}
 	
 	@GetMapping("/search/{idAnswer}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getListId(@PathVariable("idAnswer") String idAnswer){
 		try {
 			forumAnswerService.findById(idAnswer);
@@ -51,6 +54,7 @@ public class ForumAnswerController extends BaseController{
 	}
 	
 	@PostMapping("/create")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			ForumAnswer forumAnswer = readValue(content, ForumAnswer.class);
@@ -63,6 +67,7 @@ public class ForumAnswerController extends BaseController{
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			ForumAnswer forumAnswer = readValue(content, ForumAnswer.class);
@@ -75,6 +80,7 @@ public class ForumAnswerController extends BaseController{
 	}
 	
 	@DeleteMapping("/delete")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getDelete(@PathVariable("idAnswer") String idAnswer){
 		try {
 			forumAnswerService.delete(idAnswer);

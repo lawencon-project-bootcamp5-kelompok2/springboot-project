@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class PertemuanController extends BaseController {
 	private PertemuanService pertemuanService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getList(){
 		List<?> listPertemuan = new ArrayList<>();
 		try {
@@ -40,6 +42,7 @@ public class PertemuanController extends BaseController {
 	}
 	
 	@GetMapping("/search/{idPertemuan}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idPertemuan") String idPertemuan){
 		try {
 			pertemuanService.findById(idPertemuan);
@@ -51,6 +54,7 @@ public class PertemuanController extends BaseController {
 	}
 	
 	@PostMapping("/insert")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Pertemuan pertemuan = readValue(content, Pertemuan.class);
@@ -62,6 +66,7 @@ public class PertemuanController extends BaseController {
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Pertemuan pertemuan = readValue(content, Pertemuan.class);
@@ -74,6 +79,7 @@ public class PertemuanController extends BaseController {
 	}
 	
 	@DeleteMapping("/delete/{idPertemuan}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getDelete(@PathVariable("idPertemuan") String idPertemuan){
 		try {
 			pertemuanService.delete(idPertemuan);

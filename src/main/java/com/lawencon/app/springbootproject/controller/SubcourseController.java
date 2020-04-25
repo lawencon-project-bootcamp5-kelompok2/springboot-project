@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class SubcourseController extends BaseController{
 	private SubcourseService subcourseService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getList(){
 		List<?> listCourse = new ArrayList<>();
 		try {
@@ -40,6 +42,7 @@ public class SubcourseController extends BaseController{
 	}
 	
 	@GetMapping("/search/{idSubcourse}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idSubcourse") String idSubcourse){
 		try {
 			subcourseService.findById(idSubcourse);
@@ -51,6 +54,7 @@ public class SubcourseController extends BaseController{
 	}
 	
 	@GetMapping("/search/course/{idCourse}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListCourse(@PathVariable("idCourse") String idCourse){
 		List<?> listCourse = new ArrayList<>();
 		try {
@@ -63,6 +67,7 @@ public class SubcourseController extends BaseController{
 	}
 	
 	@PostMapping("/insert")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Subcourse subcourse = readValue(content, Subcourse.class);
@@ -75,6 +80,7 @@ public class SubcourseController extends BaseController{
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Subcourse subcourse = readValue(content, Subcourse.class);
@@ -87,6 +93,7 @@ public class SubcourseController extends BaseController{
 	}
 	
 	@DeleteMapping("/delete/{idSubcourse}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getDelete(@PathVariable("idSubcourse") String idSubcourse){
 		try {
 			subcourseService.delete(idSubcourse);

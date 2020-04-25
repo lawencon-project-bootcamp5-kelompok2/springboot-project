@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class KelasController extends BaseController{
 	private KelasService kelasService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getList(){
 		List<?> listKelas = new ArrayList<>();
 		try {
@@ -40,6 +42,7 @@ public class KelasController extends BaseController{
 	}
 	
 	@GetMapping("/search/{idKelas}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idKelas") String idKelas){
 		try {
 			kelasService.findById(idKelas);
@@ -51,6 +54,7 @@ public class KelasController extends BaseController{
 	}
 	
 	@PostMapping("/insert")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Kelas kelas = readValue(content, Kelas.class);
@@ -62,6 +66,7 @@ public class KelasController extends BaseController{
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Kelas kelas = readValue(content, Kelas.class);
@@ -74,6 +79,7 @@ public class KelasController extends BaseController{
 	}
 	
 	@DeleteMapping("/delete/{idKelas}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getDelete(@PathVariable("idKelas") String idKelas){
 		try {
 			kelasService.delete(idKelas);

@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -68,6 +69,7 @@ public class LoginController extends BaseController{
 	private LoginService loginService;
 	
 	@GetMapping("/show")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<Login>> getList(){
 		List<Login> listUser = new ArrayList<>();
 		try {
@@ -79,6 +81,7 @@ public class LoginController extends BaseController{
 	}
 	
 	@GetMapping("/show/username/{user}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getListUsername(@PathVariable("user") String user){
 		List<?> listUser = new ArrayList<>();
 		try {
@@ -101,6 +104,7 @@ public class LoginController extends BaseController{
 	}
 	
 	@PostMapping("/update/{id}/{user}/{pass}/{role}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getUpdate(@PathVariable("id") String id, @PathVariable("user") String user, @PathVariable("pass") String pass, @PathVariable("role") String role){
 		try {
 			loginService.update(id, user, pass, role);
@@ -111,6 +115,7 @@ public class LoginController extends BaseController{
 	}
 	
 	@PostMapping("/deleteId/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getDeleteById(@PathVariable("id") String id){
 		try {
 			loginService.deleteById(id);

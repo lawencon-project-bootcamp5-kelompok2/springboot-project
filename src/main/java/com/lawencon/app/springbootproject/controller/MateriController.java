@@ -35,15 +35,16 @@ public class MateriController extends BaseController {
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('TRAINER')")
-	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
 		try {
 			Materi materi = materiService.upload(file);
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-	                .path("/file/downloadFile/")
-	                .path(materi.getIdMateri())
-	                .toUriString();
-			return new UploadFileResponse(materi.getFileName(), fileDownloadUri,
-	                file.getContentType(), file.getSize());
+//			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//	                .path("/file/downloadFile/")
+//	                .path(materi.getIdMateri())
+//	                .toUriString();
+//			return new UploadFileResponse(materi.getFileName(), fileDownloadUri,
+//	                file.getContentType(), file.getSize());
+			return new ResponseEntity<>(materi, HttpStatus.OK);
 		} catch (Exception e) {
 			return null;
 		}

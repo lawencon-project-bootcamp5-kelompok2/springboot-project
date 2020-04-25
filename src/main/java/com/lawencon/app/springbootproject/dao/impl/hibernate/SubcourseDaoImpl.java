@@ -32,12 +32,13 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 
 	@Override
 	public Subcourse update(Subcourse subcourse) throws Exception {
-		Subcourse subCourse = findById(subcourse.getIdSubcourse());
-		subCourse.setNamaSubcourse(subcourse.getNamaSubcourse());
-		subCourse.setTanggalMulai(subcourse.getTanggalMulai());
-		subCourse.setTanggalSelesai(subcourse.getTanggalSelesai());
-		em.merge(subCourse);
-		return subCourse;
+//		Subcourse subCourse = findById(subcourse.getIdSubcourse());
+		subcourse.setNamaSubcourse(subcourse.getNamaSubcourse());
+		subcourse.setTanggalMulai(subcourse.getTanggalMulai());
+		subcourse.setTanggalSelesai(subcourse.getTanggalSelesai());
+		subcourse.setIdMateri(subcourse.getIdMateri());
+		em.merge(subcourse);
+		return subcourse;
 	}
 
 	@Override
@@ -47,7 +48,7 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 
 	@Override
 	public List<?> findByCourse(String idCourse) throws Exception {
-		Query q = em.createQuery("from Course where idCourse = :idParam").
+		Query q = em.createQuery("from Subcourse where idCourse = :idParam").
 				setParameter("idParam", idCourse);
 		return q.getResultList();
 	}

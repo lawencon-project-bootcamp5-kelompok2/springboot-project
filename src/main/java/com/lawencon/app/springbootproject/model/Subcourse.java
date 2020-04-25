@@ -36,6 +36,18 @@ public class Subcourse {
 	@OneToOne
 	@JoinColumn(name = "idForum")
 	private Forum idForum;
+	
+	@OneToOne
+	@JoinColumn(name = "idMateri")
+	private Materi idMateri;
+
+	public Materi getIdMateri() {
+		return idMateri;
+	}
+
+	public void setIdMateri(Materi idMateri) {
+		this.idMateri = idMateri;
+	}
 
 	public String getIdSubcourse() {
 		return idSubcourse;

@@ -45,8 +45,8 @@ public class ForumAnswerController extends BaseController{
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getListId(@PathVariable("idAnswer") String idAnswer){
 		try {
-			forumAnswerService.findById(idAnswer);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			ForumAnswer forumAnswer = forumAnswerService.findById(idAnswer);
+			return new ResponseEntity<>(forumAnswer, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);

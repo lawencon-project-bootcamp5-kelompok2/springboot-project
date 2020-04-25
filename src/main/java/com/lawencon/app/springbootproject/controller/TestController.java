@@ -42,8 +42,8 @@ public class TestController extends BaseController{
 	@GetMapping("/search/{idTest}")
 	public ResponseEntity<?> getListId(@PathVariable("idTest") String idTest){
 		try {
-			testService.findById(idTest);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			Test test = testService.findById(idTest);
+			return new ResponseEntity<>(test, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);

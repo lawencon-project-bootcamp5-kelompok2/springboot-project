@@ -45,8 +45,8 @@ public class KelasController extends BaseController{
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idKelas") String idKelas){
 		try {
-			kelasService.findById(idKelas);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			Kelas kelas = kelasService.findById(idKelas);
+			return new ResponseEntity<>(kelas, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);

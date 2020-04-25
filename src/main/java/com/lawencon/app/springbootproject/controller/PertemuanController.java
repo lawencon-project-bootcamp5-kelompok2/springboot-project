@@ -45,8 +45,8 @@ public class PertemuanController extends BaseController {
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idPertemuan") String idPertemuan){
 		try {
-			pertemuanService.findById(idPertemuan);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			Pertemuan pertemuan = pertemuanService.findById(idPertemuan);
+			return new ResponseEntity<>(pertemuan, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);

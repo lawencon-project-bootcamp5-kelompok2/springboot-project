@@ -45,8 +45,8 @@ public class CourseController extends BaseController {
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getId(@PathVariable("idCourse") String idCourse){
 		try {
-			courseService.findById(idCourse);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			Course course = courseService.findById(idCourse);
+			return new ResponseEntity<>(course, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);

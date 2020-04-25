@@ -45,8 +45,8 @@ public class JawabanController extends BaseController {
 	@PreAuthorize("hasRole('TRAINER')")
 	public ResponseEntity<?> getListId(@PathVariable("idJawaban") String idJawaban){
 		try {
-			jawabanService.findById(idJawaban);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			Jawaban jawaban = jawabanService.findById(idJawaban);
+			return new ResponseEntity<>(jawaban, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);

@@ -24,6 +24,7 @@ public class Trainer {
 	private String role;
 	private String namaTrainer;
 	private String hp;
+	private String nik;
 
 	public String getNamaTrainer() {
 		return namaTrainer;
@@ -71,6 +72,14 @@ public class Trainer {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getNik() {
+		return nik;
+	}
+
+	public void setNik(String nik) {
+		this.nik = nik;
 	}
 
 }

@@ -57,6 +57,19 @@ public class TrainerController extends BaseController {
 		}
 	}
 	
+	@GetMapping("/search-keyword/{search}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getByKeyword(@PathVariable("search") String search){
+		List<Trainer> listTrainer = new ArrayList<>();
+		try {
+			listTrainer = trainerService.findByNamaAndEmail(search);
+			return new ResponseEntity<>(listTrainer, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(listTrainer, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@Valid @RequestBody SignupRequest signUpRequest){

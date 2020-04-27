@@ -1,7 +1,10 @@
 package com.lawencon.app.springbootproject.dao.impl.hibernate;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javax.persistence.Query;
@@ -126,11 +129,14 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 		Role userRole = roleDao.findRoleStudent();
 		Set<Role> roles = new HashSet<>();
 		roles.add(userRole);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+		Random random = new Random();
 		Student s = new Student();
 		s.setEmail(user.getEmail());
 		s.setNamaStudent(user.getNama());
 		s.setPassword(user.getPassword());
 		s.setRole(userRole.getName().toString());
+		s.setNpm("01"+formatter.format(LocalDate.now()).toString()+random.nextInt(900));
 		em.persist(s);
 		user.setRoles(roles);
 		loginDao.insertUser(user);

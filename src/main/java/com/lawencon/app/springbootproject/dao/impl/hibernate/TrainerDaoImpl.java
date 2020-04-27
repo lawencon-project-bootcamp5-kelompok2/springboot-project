@@ -1,7 +1,10 @@
 package com.lawencon.app.springbootproject.dao.impl.hibernate;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javax.persistence.Query;
@@ -88,12 +91,15 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 		Role modRole = roleDao.findRoleTrainer();
 		Set<Role> roles = new HashSet<>();
 		roles.add(modRole);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+		Random random = new Random();
 		Trainer trainer = new Trainer();
 		trainer.setEmail(user.getEmail());
 		trainer.setNamaTrainer(user.getNama());
 		trainer.setPassword(user.getPassword());
 		trainer.setHp(user.getHp());
 		trainer.setRole(modRole.getName().toString());
+		trainer.setNik("02"+formatter.format(LocalDate.now()).toString()+random.nextInt(900));
 		em.persist(trainer);
 		user.setRoles(roles);
 		loginDao.insertUser(user);
@@ -105,5 +111,13 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 		q.setParameter("emailParam", signUpRequest.getEmail());
 		q.setParameter("namaParam", signUpRequest.getNama());
 		return (Trainer) q.getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Trainer> findByNamaAndEmail(String search) throws Exception {
+		Query q = em.createQuery("select nik, namaTrainer, email, hp from Trainer where email like concat('%',:searchParam,'%') or namaTrainer like concat('%',:searchParam,'%') ");
+		q.setParameter("searchParam", search);
+		return q.getResultList();
 	}
 }

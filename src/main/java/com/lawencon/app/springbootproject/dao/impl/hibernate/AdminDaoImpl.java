@@ -1,6 +1,7 @@
 package com.lawencon.app.springbootproject.dao.impl.hibernate;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Query;
@@ -53,6 +54,13 @@ public class AdminDaoImpl extends BaseHibernate implements AdminDao {
 		em.persist(admin);
 		user.setRoles(roles);
 		loginDao.insertUser(user);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Admin> findAll() throws Exception {
+		Query q = em.createQuery(" FROM Admin");
+		return q.getResultList();
 	}
 
 	

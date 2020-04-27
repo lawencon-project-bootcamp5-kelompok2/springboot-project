@@ -12,6 +12,7 @@ import org.springframework.util.ResourceUtils;
 
 import com.lawencon.app.springbootproject.dao.TrainerDao;
 import com.lawencon.app.springbootproject.model.Trainer;
+import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 import com.lawencon.app.springbootproject.service.SubcourseService;
 import com.lawencon.app.springbootproject.service.TrainerService;
 
@@ -31,21 +32,6 @@ public class TrainerServiceImpl implements TrainerService {
 	
 	@Autowired
 	private SubcourseService subcourseService;
-
-	@Override
-	public String createTrainer(Trainer trainer) throws Exception{
-		try {
-			if(validTrainer(trainer)==true) {
-				return "Data Already Exist";
-			}
-			else {
-				trainerDao.createTrainer(trainer);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "Success";
-	}
 
 	@Override
 	public void updateTrainer(Trainer trainer) throws Exception{
@@ -86,10 +72,30 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public Boolean validTrainer(Trainer trainer) throws Exception {
+	public Trainer getNamaTrainer(String idTrainer) throws Exception {
+		return trainerDao.getNamaTrainer(idTrainer);
+	}
+
+	@Override
+	public String createTrainers(SignupRequest signUpRequest) throws Exception {
+		try {
+			if(validTrainers(signUpRequest)==true) {
+				return "Data Already Exist";
+			}
+			else {
+				trainerDao.createTrainers(signUpRequest);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "Success";
+	}
+
+	@Override
+	public Boolean validTrainers(SignupRequest signUpRequest) throws Exception {
 		Trainer t = null;
 		try {
-			t = trainerDao.validTrainer(trainer);
+			t = trainerDao.validTrainers(signUpRequest);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,10 +103,5 @@ public class TrainerServiceImpl implements TrainerService {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public Trainer getNamaTrainer(String idTrainer) throws Exception {
-		return trainerDao.getNamaTrainer(idTrainer);
 	}
 }

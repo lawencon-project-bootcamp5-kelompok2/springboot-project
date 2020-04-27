@@ -3,6 +3,8 @@ package com.lawencon.app.springbootproject.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Trainer;
+import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 import com.lawencon.app.springbootproject.service.TrainerService;
 
 @RestController
@@ -56,10 +59,9 @@ public class TrainerController extends BaseController {
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@RequestBody String content){
+	public ResponseEntity<?> getInsert(@Valid @RequestBody SignupRequest signUpRequest){
 		try {
-			Trainer trainer = readValue(content, Trainer.class);
-			return new ResponseEntity<>(trainerService.createTrainer(trainer), HttpStatus.OK);
+			return new ResponseEntity<>(trainerService.createTrainers(signUpRequest), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed insert", HttpStatus.BAD_REQUEST);

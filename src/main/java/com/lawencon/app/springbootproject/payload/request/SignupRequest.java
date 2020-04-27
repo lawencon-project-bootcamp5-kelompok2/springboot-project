@@ -18,6 +18,16 @@ public class SignupRequest {
 	@NotBlank
 	@Size(min = 6, max = 40)
 	private String password;
+	
+	private String hp;
+
+	public String getHp() {
+		return hp;
+	}
+
+	public void setHp(String hp) {
+		this.hp = hp;
+	}
 
 	public String getNama() {
 		return nama;

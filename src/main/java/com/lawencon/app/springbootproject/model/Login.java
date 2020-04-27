@@ -38,6 +38,8 @@ public class Login {
 	@Size(max = 120)
 	private String password;
 	
+	private String hp;
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
@@ -52,6 +54,13 @@ public class Login {
 		this.nama = nama;
 		this.email = email;
 		this.password = password;
+	}
+	
+	public Login(String nama, String email, String password, String hp) {
+		this.nama = nama;
+		this.email = email;
+		this.password = password;
+		this.hp = hp;
 	}
 
 	public String getIdLogin() {
@@ -93,7 +102,14 @@ public class Login {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
+	public String getHp() {
+		return hp;
+	}
 
+	public void setHp(String hp) {
+		this.hp = hp;
+	}
 	
 	
 }

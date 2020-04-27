@@ -3,6 +3,7 @@ package com.lawencon.app.springbootproject.dao;
 import java.util.List;
 
 import com.lawencon.app.springbootproject.model.Student;
+import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 
 public interface StudentDao {
 	
@@ -15,7 +16,7 @@ public interface StudentDao {
 	abstract Student validStudent(Student student)throws Exception;
 	abstract List<?> cetakReportStudent(String idStudent, String idCourse) throws Exception;
 	abstract String getNamaStudent(String idStudent) throws Exception;
-	
+	abstract void createStudents(SignupRequest signUpRequest)throws Exception;
 	Student findByEmail(String email);
 	Boolean existsByEmail(String email);
 }

@@ -12,6 +12,7 @@ import org.springframework.util.ResourceUtils;
 
 import com.lawencon.app.springbootproject.dao.StudentDao;
 import com.lawencon.app.springbootproject.model.Student;
+import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 import com.lawencon.app.springbootproject.service.CourseService;
 import com.lawencon.app.springbootproject.service.StudentService;
 
@@ -101,5 +102,10 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public boolean existsByEmail(String email) {
 		return studentDao.existsByEmail(email);
+	}
+
+	@Override
+	public void createStudents(SignupRequest signUpRequest) throws Exception {
+		studentDao.createStudents(signUpRequest);
 	}
 }

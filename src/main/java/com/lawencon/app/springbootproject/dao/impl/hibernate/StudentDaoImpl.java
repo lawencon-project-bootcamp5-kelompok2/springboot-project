@@ -1,17 +1,35 @@
 package com.lawencon.app.springbootproject.dao.impl.hibernate;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.lawencon.app.springbootproject.dao.LoginDao;
+import com.lawencon.app.springbootproject.dao.RoleDao;
 import com.lawencon.app.springbootproject.dao.StudentDao;
+import com.lawencon.app.springbootproject.model.Login;
+import com.lawencon.app.springbootproject.model.Role;
 import com.lawencon.app.springbootproject.model.Student;
+import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 
 @Repository
 public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 
+	@Autowired
+	private PasswordEncoder encoder;
+	
+	@Autowired
+	private RoleDao roleDao;
+	
+	@Autowired
+	private LoginDao loginDao;
+	
 	@Override
 	public void createStudent(Student student) throws Exception {
 		em.persist(student);
@@ -100,5 +118,21 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 			return true;
 		else
 			return false;
+	}
+
+	@Override
+	public void createStudents(SignupRequest signUpRequest) throws Exception {
+		Login user = new Login(signUpRequest.getNama(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+		Role userRole = roleDao.findRoleStudent();
+		Set<Role> roles = new HashSet<>();
+		roles.add(userRole);
+		Student s = new Student();
+		s.setEmail(user.getEmail());
+		s.setNamaStudent(user.getNama());
+		s.setPassword(user.getPassword());
+		s.setRole(userRole.getName().toString());
+		em.persist(s);
+		user.setRoles(roles);
+		loginDao.insertUser(user);
 	}
 }

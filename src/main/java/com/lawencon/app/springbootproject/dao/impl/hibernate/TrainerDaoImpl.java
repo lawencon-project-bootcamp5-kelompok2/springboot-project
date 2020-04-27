@@ -1,22 +1,35 @@
 package com.lawencon.app.springbootproject.dao.impl.hibernate;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.lawencon.app.springbootproject.dao.LoginDao;
+import com.lawencon.app.springbootproject.dao.RoleDao;
 import com.lawencon.app.springbootproject.dao.TrainerDao;
+import com.lawencon.app.springbootproject.model.Login;
+import com.lawencon.app.springbootproject.model.Role;
 import com.lawencon.app.springbootproject.model.Trainer;
+import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 
 @Repository
 public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 
-	@Override
-	public void createTrainer(Trainer trainer) throws Exception{
-		em.persist(trainer);
-	}
-
+	@Autowired
+	private PasswordEncoder encoder;
+	
+	@Autowired
+	private RoleDao roleDao;
+	
+	@Autowired
+	private LoginDao loginDao;
+	
 	@Override
 	public void updateTrainer(Trainer trainer) throws Exception{
 		Trainer t = findById(trainer.getIdTrainer());
@@ -45,14 +58,6 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 		q.setParameter("idParam", idTrainer);
 		return (Trainer) q.getSingleResult();
 	}
-
-	@Override
-	public Trainer validTrainer(Trainer trainer) throws Exception {
-		Query q = em.createQuery("from Trainer where email = :emailParam and namaTrainer = :namaParam");
-		q.setParameter("emailParam", trainer.getEmail());
-		q.setParameter("namaParam", trainer.getNamaTrainer());
-		return (Trainer) q.getSingleResult();
-	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -76,5 +81,29 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 		Query q = em.createNativeQuery("SELECT nama_trainer FROM trainer WHERE id_trainer = :idParam").setParameter("idParam", idTrainer);
 		return (Trainer) q.getSingleResult();
 	}
-	
+
+	@Override
+	public void createTrainers(SignupRequest signUpRequest) throws Exception {
+		Login user = new Login(signUpRequest.getNama(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), signUpRequest.getHp());
+		Role modRole = roleDao.findRoleTrainer();
+		Set<Role> roles = new HashSet<>();
+		roles.add(modRole);
+		Trainer trainer = new Trainer();
+		trainer.setEmail(user.getEmail());
+		trainer.setNamaTrainer(user.getNama());
+		trainer.setPassword(user.getPassword());
+		trainer.setHp(user.getHp());
+		trainer.setRole(modRole.getName().toString());
+		em.persist(trainer);
+		user.setRoles(roles);
+		loginDao.insertUser(user);
+	}
+
+	@Override
+	public Trainer validTrainers(SignupRequest signUpRequest) throws Exception {
+		Query q = em.createQuery("from Trainer where email = :emailParam and namaTrainer = :namaParam");
+		q.setParameter("emailParam", signUpRequest.getEmail());
+		q.setParameter("namaParam", signUpRequest.getNama());
+		return (Trainer) q.getSingleResult();
+	}
 }

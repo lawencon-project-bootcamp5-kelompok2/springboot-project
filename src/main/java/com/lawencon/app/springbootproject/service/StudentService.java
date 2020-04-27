@@ -3,6 +3,7 @@ package com.lawencon.app.springbootproject.service;
 import java.util.List;
 
 import com.lawencon.app.springbootproject.model.Student;
+import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 
 public interface StudentService {
 
@@ -13,6 +14,6 @@ public interface StudentService {
 	abstract Student findById (String idStudent)throws Exception;
 	abstract Boolean validStudent(Student student)throws Exception;
 	abstract String cetakReportStudent(String idStudent, String idCourse) throws Exception;
-	
+	abstract void createStudents(SignupRequest signUpRequest)throws Exception;
 	boolean existsByEmail(String email);
 }

@@ -27,7 +27,7 @@ public class FileJawaban {
     @Lob
     private byte[] data;
     
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIME)
     private Date uploadTime;
 
     public FileJawaban() {

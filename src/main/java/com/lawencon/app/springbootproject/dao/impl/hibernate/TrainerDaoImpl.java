@@ -38,7 +38,7 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 		Trainer t = findById(trainer.getIdTrainer());
 		t.setNamaTrainer(trainer.getNamaTrainer());
 		t.setEmail(trainer.getEmail());
-		t.setPassword(trainer.getPassword());
+		t.setPassword(encoder.encode(trainer.getPassword()));
 		t.setRole(trainer.getRole());
 		em.merge(t);
 	}

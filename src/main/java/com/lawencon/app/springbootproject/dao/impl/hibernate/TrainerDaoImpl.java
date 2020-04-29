@@ -114,10 +114,11 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 		return (Trainer) q.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Trainer findByNamaAndEmail(String search) throws Exception {
-		Query q = em.createQuery("select nik, namaTrainer, email, hp from Trainer where email like concat('%',:searchParam,'%') or namaTrainer like concat('%',:searchParam,'%') ");
+	public List<Trainer> findByNamaAndEmail(String search) throws Exception {
+		Query q = em.createQuery("from Trainer where email like concat('%',:searchParam,'%') or namaTrainer like concat('%',:searchParam,'%') ");
 		q.setParameter("searchParam", search);
-		return (Trainer) q.getResultList();
+		return q.getResultList();
 	}
 }

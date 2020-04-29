@@ -108,4 +108,9 @@ public class StudentServiceImpl implements StudentService {
 	public void createStudents(SignupRequest signUpRequest) throws Exception {
 		studentDao.createStudents(signUpRequest);
 	}
+
+	@Override
+	public Student findByEmail(String email) throws Exception {
+		return studentDao.findByEmail(email);
+	}
 }

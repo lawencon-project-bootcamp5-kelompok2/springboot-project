@@ -57,6 +57,18 @@ public class TrainerController extends BaseController {
 		}
 	}
 	
+	@GetMapping("/search/email/{email}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getListByEmail(@PathVariable("email") String email){
+		try {
+			Trainer trainer = trainerService.findByEmail(email);
+			return new ResponseEntity<>(trainer, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/search-keyword/{search}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getByKeyword(@PathVariable("search") String search){

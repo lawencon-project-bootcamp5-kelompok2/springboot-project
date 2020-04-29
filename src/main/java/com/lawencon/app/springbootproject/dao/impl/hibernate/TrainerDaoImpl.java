@@ -121,4 +121,11 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 		q.setParameter("searchParam", search);
 		return q.getResultList();
 	}
+
+	@Override
+	public Trainer findByEmail(String email) throws Exception {
+		Query q = em.createQuery(" from Trainer where email = :emailParam");
+		q.setParameter("emailParam", email);
+		return (Trainer) q.getSingleResult();
+	}
 }

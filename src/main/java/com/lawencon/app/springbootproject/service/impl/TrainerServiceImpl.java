@@ -113,4 +113,9 @@ public class TrainerServiceImpl implements TrainerService {
 	public List<Trainer> findByNamaAndEmail(String search) throws Exception {
 		return trainerDao.findByNamaAndEmail(search);
 	}
+
+	@Override
+	public Trainer findByEmail(String email) throws Exception {
+		return trainerDao.findByEmail(email);
+	}
 }

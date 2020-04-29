@@ -60,13 +60,12 @@ public class TrainerController extends BaseController {
 	@GetMapping("/search-keyword/{search}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getByKeyword(@PathVariable("search") String search){
-		List<Trainer> listTrainer = new ArrayList<>();
 		try {
-			listTrainer = trainerService.findByNamaAndEmail(search);
-			return new ResponseEntity<>(listTrainer, HttpStatus.OK);
+			Trainer trainer = trainerService.findByNamaAndEmail(search);
+			return new ResponseEntity<>(trainer, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(listTrainer, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	

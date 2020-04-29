@@ -106,7 +106,7 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public List<Trainer> findByNamaAndEmail(String search) throws Exception {
+	public Trainer findByNamaAndEmail(String search) throws Exception {
 		return trainerDao.findByNamaAndEmail(search);
 	}
 }

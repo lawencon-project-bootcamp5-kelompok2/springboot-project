@@ -55,7 +55,7 @@ public class TestController extends BaseController{
 		try {
 			Test test = readValue(content, Test.class);
 			testService.insert(test);
-			return new ResponseEntity<>("Success Insert", HttpStatus.OK);
+			return new ResponseEntity<>(test, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
@@ -67,7 +67,7 @@ public class TestController extends BaseController{
 		try {
 			Test test = readValue(content, Test.class);
 			testService.update(test);
-			return new ResponseEntity<>("Success Update", HttpStatus.OK);
+			return new ResponseEntity<>(test, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
@@ -78,10 +78,10 @@ public class TestController extends BaseController{
 	public ResponseEntity<?> getDelete(@PathVariable("idTest") String idTest){
 		try {
 			testService.delete(idTest);
-			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 }

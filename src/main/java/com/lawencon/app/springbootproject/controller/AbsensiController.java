@@ -45,7 +45,7 @@ public class AbsensiController extends BaseController{
 	public ResponseEntity<?> getListId(@PathVariable("idStudent") String idStudent){
 		try {
 			absensiService.findByStudent(idStudent);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
@@ -58,7 +58,7 @@ public class AbsensiController extends BaseController{
 		try {
 			Absensi absensi = readValue(content, Absensi.class);
 			absensiService.insert(absensi);
-			return new ResponseEntity<>("Success Insert", HttpStatus.OK);
+			return new ResponseEntity<>(absensi, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
@@ -71,7 +71,7 @@ public class AbsensiController extends BaseController{
 		try {
 			Absensi absensi = readValue(content, Absensi.class);
 			absensiService.update(absensi);
-			return new ResponseEntity<>("Success update", HttpStatus.OK);
+			return new ResponseEntity<>(absensi, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed update", HttpStatus.BAD_REQUEST);

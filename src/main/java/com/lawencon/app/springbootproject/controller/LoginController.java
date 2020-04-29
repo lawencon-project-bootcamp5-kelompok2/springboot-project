@@ -76,9 +76,9 @@ public class LoginController extends BaseController{
 			Login login = readValue(content, Login.class);
 			loginService.insertUser(login);
 		} catch (Exception e) {
-			return new ResponseEntity<>("Failed to Insert", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>("Success", HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PostMapping("/update/{id}/{user}/{pass}/{role}")
@@ -87,9 +87,9 @@ public class LoginController extends BaseController{
 		try {
 			loginService.update(id, user, pass, role);
 		} catch (Exception e) {
-			return new ResponseEntity<>("Failed to Update", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>("Success", HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PostMapping("/deleteId/{id}")
@@ -98,9 +98,9 @@ public class LoginController extends BaseController{
 		try {
 			loginService.deleteById(id);
 		} catch (Exception e) {
-			return new ResponseEntity<>("Failed to Deleted", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>("Success", HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PostMapping("/signup")

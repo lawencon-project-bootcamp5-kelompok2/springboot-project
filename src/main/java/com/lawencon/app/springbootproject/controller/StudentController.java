@@ -70,7 +70,7 @@ public class StudentController extends BaseController{
 		try {
 			Student student = readValue(content, Student.class);
 			studentService.updateStudent(student);
-			return new ResponseEntity<>("Success Update", HttpStatus.OK);
+			return new ResponseEntity<>(student, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
@@ -82,10 +82,10 @@ public class StudentController extends BaseController{
 	public ResponseEntity<?> getDelete(@PathVariable("idStudent") String idStudent){
 		try {
 			studentService.deleteStudent(idStudent);
-			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	

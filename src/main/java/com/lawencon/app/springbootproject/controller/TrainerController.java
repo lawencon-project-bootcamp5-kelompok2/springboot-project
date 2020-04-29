@@ -87,7 +87,7 @@ public class TrainerController extends BaseController {
 		try {
 			Trainer trainer = readValue(content, Trainer.class);
 			trainerService.updateTrainer(trainer);
-			return new ResponseEntity<>("Success update", HttpStatus.OK);
+			return new ResponseEntity<>(trainer, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed update", HttpStatus.BAD_REQUEST);
@@ -99,10 +99,10 @@ public class TrainerController extends BaseController {
 	public ResponseEntity<?> getDelete(@PathVariable("idTrainer") String idTrainer){
 		try {
 			trainerService.deleteTrainer(idTrainer);
-			return new ResponseEntity<>("Success delete", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed delete", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	

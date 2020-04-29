@@ -53,9 +53,9 @@ public class SoalController extends BaseController {
 	public ResponseEntity<?> getInsert(@RequestParam("file") MultipartFile file){
 		try {
 			soalService.upload(file);
-			return new ResponseEntity<>("Success Upload", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>("Failed Upload", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	

@@ -71,7 +71,7 @@ public class KelasController extends BaseController{
 		try {
 			Kelas kelas = readValue(content, Kelas.class);
 			kelasService.update(kelas);
-			return new ResponseEntity<>("Success Update", HttpStatus.OK);
+			return new ResponseEntity<>(kelas, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
@@ -83,7 +83,7 @@ public class KelasController extends BaseController{
 	public ResponseEntity<?> getDelete(@PathVariable("idKelas") String idKelas){
 		try {
 			kelasService.delete(idKelas);
-			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);

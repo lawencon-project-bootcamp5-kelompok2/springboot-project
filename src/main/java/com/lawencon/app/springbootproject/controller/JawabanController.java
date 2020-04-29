@@ -59,7 +59,7 @@ public class JawabanController extends BaseController {
 		try {
 			Jawaban jawaban = readValue(content, Jawaban.class);
 			jawabanService.insert(jawaban);
-			return new ResponseEntity<>("Success Insert", HttpStatus.OK);
+			return new ResponseEntity<>(jawaban, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
@@ -72,7 +72,7 @@ public class JawabanController extends BaseController {
 		try {
 			Jawaban jawaban = readValue(content, Jawaban.class);
 			jawabanService.update(jawaban);
-			return new ResponseEntity<>("Success Update", HttpStatus.OK);
+			return new ResponseEntity<>(jawaban, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
@@ -84,7 +84,7 @@ public class JawabanController extends BaseController {
 	public ResponseEntity<?> getDelete(@PathVariable("idJawaban") String idJawaban){
 		try {
 			jawabanService.delete(idJawaban);
-			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);

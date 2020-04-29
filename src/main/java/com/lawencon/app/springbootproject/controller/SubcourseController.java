@@ -72,7 +72,7 @@ public class SubcourseController extends BaseController{
 		try {
 			Subcourse subcourse = readValue(content, Subcourse.class);
 			subcourseService.insert(subcourse);
-			return new ResponseEntity<>("Success Insert", HttpStatus.OK);
+			return new ResponseEntity<>(subcourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
@@ -85,7 +85,7 @@ public class SubcourseController extends BaseController{
 		try {
 			Subcourse subcourse = readValue(content, Subcourse.class);
 			subcourseService.update(subcourse);
-			return new ResponseEntity<>("Success Update", HttpStatus.OK);
+			return new ResponseEntity<>(subcourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
@@ -97,7 +97,7 @@ public class SubcourseController extends BaseController{
 	public ResponseEntity<?> getDelete(@PathVariable("idSubcourse") String idSubcourse){
 		try {
 			subcourseService.delete(idSubcourse);
-			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);

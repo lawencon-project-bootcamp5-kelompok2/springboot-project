@@ -41,6 +41,19 @@ public class CourseController extends BaseController {
 		}
 	}
 	
+	@GetMapping("/rekap/{idCourse}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getRekap(@PathVariable("idCourse") String idCourse){
+		List<?> listCourse = new ArrayList<>();
+		try {
+			listCourse = courseService.getRekapJadwal(idCourse);
+			return new ResponseEntity<>(listCourse, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/search/{idCourse}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getId(@PathVariable("idCourse") String idCourse){

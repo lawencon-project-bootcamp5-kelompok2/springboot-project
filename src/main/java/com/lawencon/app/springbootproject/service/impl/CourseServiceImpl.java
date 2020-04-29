@@ -71,4 +71,9 @@ public class CourseServiceImpl implements CourseService{
 	public String getNamaCourse(String id) throws Exception {
 		return courseDao.getNamaCourse(id);
 	}
+
+	@Override
+	public List<?> getRekapJadwal(String id) throws Exception {
+		return courseDao.getRekapJadwal(id);
+	}
 }

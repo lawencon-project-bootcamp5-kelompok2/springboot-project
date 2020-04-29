@@ -13,4 +13,5 @@ public interface CourseDao {
 	abstract Course validCourse(Course course)throws Exception;
 	abstract String getIdCourse(String id) throws Exception;
 	abstract String getNamaCourse(String id) throws Exception;
+	abstract List<?> getRekapJadwal(String id) throws Exception;
 }

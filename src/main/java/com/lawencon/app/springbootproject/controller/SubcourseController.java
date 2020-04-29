@@ -62,7 +62,7 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(listCourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	

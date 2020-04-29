@@ -77,10 +77,10 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 	}
 
 	@Override
-	public Student validStudent(Student student) throws Exception {
-		Query q = em.createQuery("from Student where npm = :npmParam and namaStudent = :namaParam");
-		q.setParameter("npmParam", student.getNpm());
-		q.setParameter("namaParam", student.getNamaStudent());
+	public Student validStudent(SignupRequest signUpRequest) throws Exception {
+		Query q = em.createQuery("from Student where email = :emailParam and namaStudent = :namaParam");
+		q.setParameter("emailParam", signUpRequest.getEmail());
+		q.setParameter("namaParam", signUpRequest.getNama());
 		return (Student) q.getSingleResult();
 	}
 

@@ -7,6 +7,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -34,18 +36,12 @@ public class StudentServiceImpl implements StudentService {
 	private CourseService courseService;
 
 	@Override
-	public String createStudent(Student student) {
+	public void createStudent(Student student) {
 		try {
-			if(validStudent(student)==true) {
-				return "Data Already Exist";
-			}
-			else {
-				studentDao.createStudent(student);
-			}
+			studentDao.createStudent(student);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "Success";
 	}
 
 	@Override
@@ -86,10 +82,10 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Boolean validStudent(Student student) throws Exception {
+	public Boolean validStudent(SignupRequest signUpRequest) throws Exception {
 		Student s = null;
 		try {
-			s = studentDao.validStudent(student);
+			s = studentDao.validStudent(signUpRequest);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -105,8 +101,16 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void createStudents(SignupRequest signUpRequest) throws Exception {
-		studentDao.createStudents(signUpRequest);
+	public String createStudents(SignupRequest signUpRequest) throws Exception {
+		if(validStudent(signUpRequest)==true) {
+			new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return "Data Already Exists";
+		}
+		else {
+			new ResponseEntity<>(HttpStatus.OK);
+			studentDao.createStudents(signUpRequest);
+		}
+		return "Success";
 	}
 
 	@Override

@@ -7,14 +7,14 @@ import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 
 public interface StudentService {
 
-	abstract String createStudent (Student student)throws Exception;
+	abstract void createStudent (Student student)throws Exception;
 	abstract void updateStudent (Student student)throws Exception;
 	abstract void deleteStudent (String idStudent)throws Exception;
 	abstract List<Student> findAll()throws Exception;
 	abstract Student findById (String idStudent)throws Exception;
-	abstract Boolean validStudent(Student student)throws Exception;
+	abstract Boolean validStudent(SignupRequest signUpRequest)throws Exception;
 	abstract String cetakReportStudent(String idStudent, String idCourse) throws Exception;
-	abstract void createStudents(SignupRequest signUpRequest)throws Exception;
+	abstract String createStudents(SignupRequest signUpRequest)throws Exception;
 	abstract boolean existsByEmail(String email);
 	abstract Student findByEmail(String email) throws Exception;
 }

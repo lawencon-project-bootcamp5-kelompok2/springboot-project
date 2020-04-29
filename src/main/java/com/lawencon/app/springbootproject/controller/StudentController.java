@@ -3,6 +3,8 @@ package com.lawencon.app.springbootproject.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Student;
+import com.lawencon.app.springbootproject.payload.request.SignupRequest;
 import com.lawencon.app.springbootproject.service.StudentService;
 
 @RestController
@@ -66,10 +69,10 @@ public class StudentController extends BaseController{
 	}
 	
 	@PostMapping("/insert")
-	public ResponseEntity<?> getInsert(@RequestBody String content){
+	@PreAuthorize("hasRole('STUDENT')")
+	public ResponseEntity<?> getInsert(@Valid @RequestBody SignupRequest signUpRequest){
 		try {
-			Student student = readValue(content, Student.class);
-			return new ResponseEntity<>(studentService.createStudent(student), HttpStatus.OK);
+			return new ResponseEntity<>(studentService.createStudents(signUpRequest), HttpStatus.FOUND);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);

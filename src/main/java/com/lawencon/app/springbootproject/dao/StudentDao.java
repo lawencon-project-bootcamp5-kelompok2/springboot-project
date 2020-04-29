@@ -13,7 +13,7 @@ public interface StudentDao {
 	abstract List<Student> findAll()throws Exception;
 	abstract Student findById (String idStudent)throws Exception;
 	abstract List<?> cetakReportStudent(String id)throws Exception;
-	abstract Student validStudent(Student student)throws Exception;
+	abstract Student validStudent(SignupRequest signUpRequest)throws Exception;
 	abstract List<?> cetakReportStudent(String idStudent, String idCourse) throws Exception;
 	abstract String getNamaStudent(String idStudent) throws Exception;
 	abstract void createStudents(SignupRequest signUpRequest)throws Exception;

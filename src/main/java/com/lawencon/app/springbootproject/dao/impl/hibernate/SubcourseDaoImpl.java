@@ -32,13 +32,13 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 
 	@Override
 	public Subcourse update(Subcourse subcourse) throws Exception {
-//		Subcourse subCourse = findById(subcourse.getIdSubcourse());
-		subcourse.setNamaSubcourse(subcourse.getNamaSubcourse());
-		subcourse.setTanggalMulai(subcourse.getTanggalMulai());
-		subcourse.setTanggalSelesai(subcourse.getTanggalSelesai());
-		subcourse.setIdMateri(subcourse.getIdMateri());
-		em.merge(subcourse);
-		return subcourse;
+		Subcourse subCourse = findById(subcourse.getIdSubcourse());
+		subCourse.setNamaSubcourse(subcourse.getNamaSubcourse());
+		subCourse.setTanggalMulai(subcourse.getTanggalMulai());
+		subCourse.setTanggalSelesai(subcourse.getTanggalSelesai());
+		subCourse.setIdMateri(subcourse.getIdMateri());
+		em.merge(subCourse);
+		return subCourse;
 	}
 
 	@Override

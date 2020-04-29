@@ -74,7 +74,7 @@ public class TrainerController extends BaseController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@Valid @RequestBody SignupRequest signUpRequest){
 		try {
-			return new ResponseEntity<>(trainerService.createTrainers(signUpRequest), HttpStatus.OK);
+			return new ResponseEntity<>(trainerService.createTrainers(signUpRequest), HttpStatus.FOUND);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed insert", HttpStatus.BAD_REQUEST);

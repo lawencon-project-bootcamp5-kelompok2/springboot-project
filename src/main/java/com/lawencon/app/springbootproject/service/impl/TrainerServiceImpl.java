@@ -7,6 +7,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -80,9 +82,11 @@ public class TrainerServiceImpl implements TrainerService {
 	public String createTrainers(SignupRequest signUpRequest) throws Exception {
 		try {
 			if(validTrainers(signUpRequest)==true) {
+				new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 				return "Data Already Exist";
 			}
 			else {
+				new ResponseEntity<>(HttpStatus.OK);
 				trainerDao.createTrainers(signUpRequest);
 			}
 		} catch (Exception e) {

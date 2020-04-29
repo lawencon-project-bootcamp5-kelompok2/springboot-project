@@ -53,6 +53,18 @@ public class StudentController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/search/email/{email}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getListByEmail(@PathVariable("email") String email){
+		try {
+			Student student = studentService.findByEmail(email);
+			return new ResponseEntity<>(student, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/insert")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {

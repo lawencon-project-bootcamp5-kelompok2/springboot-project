@@ -8,7 +8,7 @@ public interface SubcourseService {
 
 	abstract List<?> findAll()throws Exception;
 	abstract Subcourse findById(String idSubcourse) throws Exception;
-	abstract List<?> findByCourse(String idCourse) throws Exception;
+	abstract List<?> findByCourse(String namaCourse) throws Exception;
 	abstract String insert(Subcourse subcourse)throws Exception;
 	abstract Subcourse update(Subcourse subcourse)throws Exception;
 	abstract void delete(String idSubcourse)throws Exception;

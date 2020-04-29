@@ -46,11 +46,16 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 		em.remove(findById(idSubcourse));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<?> findByCourse(String idCourse) throws Exception {
-		Query q = em.createQuery("from Subcourse where idCourse = :idParam").
-				setParameter("idParam", idCourse);
-		return q.getResultList();
+	public List<?> findByCourse(String namaCourse) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "s.nama_subcourse, s.tanggal_mulai, s.tanggal_selesai, s.id_course, s.id_materi, s.id_forum "
+				+ "from "
+				+ "subcourse s join course c on c.id_course = s.id_course "
+				+ "where c.nama_course = :namaParam").
+				setParameter("namaParam", namaCourse);
+		return bMapperHibernate(q.getResultList(), "namaSubcourse", "tanggalMmulai", "tanggalSelesai", "idCourse", "idMateri", "idForum");
 	}
 	
 	@Override

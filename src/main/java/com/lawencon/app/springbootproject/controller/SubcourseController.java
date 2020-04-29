@@ -53,16 +53,16 @@ public class SubcourseController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search/course/{idCourse}")
+	@GetMapping("/search/course/{namaCourse}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
-	public ResponseEntity<?> getListCourse(@PathVariable("idCourse") String idCourse){
+	public ResponseEntity<?> getListCourse(@PathVariable("namaCourse") String namaCourse){
 		List<?> listCourse = new ArrayList<>();
 		try {
-			listCourse = subcourseService.findByCourse(idCourse);
+			listCourse = subcourseService.findByCourse(namaCourse);
 			return new ResponseEntity<>(listCourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
 		}
 	}
 	

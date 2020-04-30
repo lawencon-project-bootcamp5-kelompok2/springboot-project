@@ -9,5 +9,5 @@ public interface AbsensiDao {
 	abstract Absensi update(Absensi absensi)throws Exception;
 	abstract List<Absensi> findAll()throws Exception;
 	abstract Absensi findByStudent(String idStudent)throws Exception;
-	abstract List<?> cetakAbsen(String idSubcourse, String idTrainer) throws Exception;
+	abstract List<?> cetakAbsen(String idKelas, String idTrainer, String idPertemuan) throws Exception;
 }

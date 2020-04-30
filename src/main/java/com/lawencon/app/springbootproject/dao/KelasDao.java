@@ -11,4 +11,6 @@ public interface KelasDao {
 	abstract void update(Kelas kelas)throws Exception;
 	abstract void delete(String idKelas)throws Exception;
 	abstract Kelas validKelas(Kelas kelas)throws Exception;
+	abstract String getNamaKelas(String id) throws Exception;
+	abstract List<?> cetakKelas() throws Exception;
 }

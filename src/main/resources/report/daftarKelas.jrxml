@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daftarKelas" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1561b5a3-963c-4a23-ba60-a69df0a2040d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	
+	<field name="kodeKelas" class="java.lang.String">
+	</field>
+	<field name="namaCourse" class="java.lang.String">
+	</field>
+	<field name="namaTrainer" class="java.lang.String">
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="160">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="180" backcolor="#00AAFF" uuid="93a88cbf-84b2-4d58-8476-568a0129d062"/>
+				<staticText>
+					<reportElement x="20" y="100" width="234" height="43" forecolor="#000000" uuid="14e0e70f-be74-486b-bdb9-49174903d5e8"/>
+					<textElement>
+						<font size="33" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Daftar Kelas]]></text>
+				</staticText>
+				<image>
+					<reportElement x="0" y="0" width="595" height="80" uuid="0400eeb9-5fcc-4235-abc2-db4a74420073"/>
+					<imageExpression><![CDATA["report/images/header.JPG"]]></imageExpression>
+				</image>
+				<line>
+					<reportElement x="20" y="80" width="555" height="1" uuid="c0f601c5-53f3-4a78-a799-e81b12f5b77c"/>
+				</line>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="62244168-ad99-47ab-9b3a-b86f1efe5f7b"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="8725441a-06d5-4cb6-87cc-2360fa6c931d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7fce3c9d-d06e-4404-bc08-3f7a45bd6c99"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kode Kelas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="185" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ef9ce4ec-b88d-4765-81ce-24dd3fb2467f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="10496bde-b1e1-4980-ad26-d46d24aff972"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Course]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="01ed0dd8-c665-4814-823a-499b777f55a5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e592dfe1-6fb6-4145-a858-28e58299cacd"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Trainer]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="281a3beb-1798-4b4d-b00c-7b4ce611d030"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="0" width="185" height="20" uuid="9ce7b6e2-d85b-4d63-8411-664d74346baa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7fce3c9d-d06e-4404-bc08-3f7a45bd6c99"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kodeKelas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="0" width="185" height="20" uuid="91a72045-0f21-4731-a6f7-0c614ead3b54">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="10496bde-b1e1-4980-ad26-d46d24aff972"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{namaCourse}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="185" height="20" uuid="30f70961-663c-4777-a780-cd9c8afa5f56">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e592dfe1-6fb6-4145-a858-28e58299cacd"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{namaTrainer}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="055cc164-d7c1-4168-b13c-606b40758eeb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="c57d7ae3-bbd4-4d4f-b0b0-84a58d1ec75d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="7ff6220c-41f0-44cd-9f83-8a2626a5bc93"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

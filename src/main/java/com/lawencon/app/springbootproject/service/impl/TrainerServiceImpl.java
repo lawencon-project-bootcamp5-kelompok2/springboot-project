@@ -74,7 +74,7 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public Trainer getNamaTrainer(String idTrainer) throws Exception {
+	public String getNamaTrainer(String idTrainer) throws Exception {
 		return trainerDao.getNamaTrainer(idTrainer);
 	}
 

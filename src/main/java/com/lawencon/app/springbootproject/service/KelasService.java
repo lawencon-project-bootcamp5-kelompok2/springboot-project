@@ -11,4 +11,6 @@ public interface KelasService {
 	abstract void update(Kelas kelas)throws Exception;
 	abstract void delete(String idKelas)throws Exception;
 	abstract Boolean validKelas(Kelas kelas)throws Exception;
+	abstract String getNamaKelas(String id) throws Exception;
+	abstract String cetakKelas() throws Exception;
 }

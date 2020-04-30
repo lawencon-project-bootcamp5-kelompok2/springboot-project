@@ -41,6 +41,18 @@ public class KelasController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/report")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<?> cetak(){
+		try {
+			kelasService.cetakKelas();
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/search/{idKelas}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idKelas") String idKelas){

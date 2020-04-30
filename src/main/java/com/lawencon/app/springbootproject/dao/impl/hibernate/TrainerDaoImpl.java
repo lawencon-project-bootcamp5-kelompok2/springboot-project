@@ -81,9 +81,9 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	}
 
 	@Override
-	public Trainer getNamaTrainer(String idTrainer) throws Exception {
+	public String getNamaTrainer(String idTrainer) throws Exception {
 		Query q = em.createNativeQuery("SELECT nama_trainer FROM trainer WHERE id_trainer = :idParam").setParameter("idParam", idTrainer);
-		return (Trainer) q.getSingleResult();
+		return (String) q.getSingleResult();
 	}
 
 	@Override

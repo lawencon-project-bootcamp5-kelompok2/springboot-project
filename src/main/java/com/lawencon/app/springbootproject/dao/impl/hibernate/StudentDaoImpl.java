@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.lawencon.app.springbootproject.dao.LoginDao;
 import com.lawencon.app.springbootproject.dao.RoleDao;
 import com.lawencon.app.springbootproject.dao.StudentDao;
+import com.lawencon.app.springbootproject.model.Kelas;
 import com.lawencon.app.springbootproject.model.Login;
 import com.lawencon.app.springbootproject.model.Role;
 import com.lawencon.app.springbootproject.model.Student;
@@ -41,8 +42,10 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 	@Override
 	public void updateStudent(Student student) throws Exception {
 		Student s = findById(student.getIdStudent());
+		List<Kelas> listKelas = s.getKelas();
+		listKelas.addAll(student.getKelas());
 		s.setNamaStudent(student.getNamaStudent());
-		s.setKelas(student.getKelas());
+		s.setKelas(listKelas);
 		em.merge(s);
 	}
 

@@ -29,6 +29,8 @@ public class FileJawaban {
     
     @Temporal(TemporalType.TIME)
     private Date uploadTime;
+    
+    private String status;
 
     public FileJawaban() {
 
@@ -79,5 +81,13 @@ public class FileJawaban {
 
 	public void setUploadTime(Date uploadTime) {
 		this.uploadTime = uploadTime;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

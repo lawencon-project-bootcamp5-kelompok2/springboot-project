@@ -52,18 +52,4 @@ public class FileJawabanDaoImpl extends BaseHibernate implements FileJawabanDao{
 		Query q = em.createQuery("from FileJawaban");
 		return q.getResultList();
 	}
-
-	@Override
-	public FileJawaban validTimer() throws Exception {
-		Query q = em.createNativeQuery("select "
-				+ "fj.upload_time, t.waktu_selesai, "
-				+ "case when fj.status is null then 'upload denied' "
-				+ "else null "
-				+ "end as warning "
-				+ "from "
-				+ "file_jawaban fj, test t "
-				+ "where "
-				+ "fj.upload_time >= t.waktu_selesai");
-		return (FileJawaban) q.getSingleResult();
-	}
 }

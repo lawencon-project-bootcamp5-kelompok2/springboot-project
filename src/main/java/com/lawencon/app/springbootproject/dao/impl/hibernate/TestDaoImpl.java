@@ -43,4 +43,16 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 	public void delete(String idTest) throws Exception {
 		em.remove(findById(idTest));
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findWaktuSelesai(String idTest) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "t.waktu_selesai "
+				+ "from "
+				+ "test t join subcourse s on s.id_subcourse = t.id_subcourse "
+				+ "where t.id_test = :idParam");
+		q.setParameter("idParam", idTest);
+		return bMapperHibernate(q.getResultList(), "waktuSelesai");
+	}
 }

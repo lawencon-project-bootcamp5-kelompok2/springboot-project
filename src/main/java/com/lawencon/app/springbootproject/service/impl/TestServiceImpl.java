@@ -41,4 +41,18 @@ public class TestServiceImpl implements TestService{
 	public void delete(String idTest) throws Exception {
 		testDao.delete(idTest);
 	}
+
+	@Override
+	public Boolean findWaktuSelesai(String idTest) throws Exception {
+		List<?> listWaktuSelesai = null;
+		try {
+			listWaktuSelesai = testDao.findWaktuSelesai(idTest);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		if(listWaktuSelesai != null) {
+			return true;
+		}
+		return false;
+	}
 }

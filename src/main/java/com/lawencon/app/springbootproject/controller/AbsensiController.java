@@ -78,11 +78,11 @@ public class AbsensiController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/report/{idSubcourse}/{idTrainer}")
+	@GetMapping("/report/{idKelas}/{idTrainer}/{idPertemuan}")
 	@PreAuthorize("hasRole('TRAINER')")
-	public ResponseEntity<?> getUpdate(@PathVariable String idSubcourse, @PathVariable String idTrainer){
+	public ResponseEntity<?> getUpdate(@PathVariable String idKelas, @PathVariable String idTrainer, @PathVariable String idPertemuan){
 		try {
-			absensiService.cetakAbsen(idSubcourse, idTrainer);
+			absensiService.cetakAbsen(idKelas, idTrainer, idPertemuan);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

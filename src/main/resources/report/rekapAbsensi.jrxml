@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rekapAbsensi" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab6680f6-459f-44c7-b660-50b1f4b48166">
-	
-	<field name="namaSubcourse" class="java.lang.String">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<field name="pertemuan" class="java.lang.String">
+	</field>
+	<field name="kodeKelas" class="java.lang.String">
 	</field>
 	<field name="namaStudent" class="java.lang.String">
 	</field>
-	<field name="tanggal" class="java.lang.String">
+	<field name="tanggalPertemuan" class="java.sql.Date">
 	</field>
 	<field name="status" class="java.lang.String">
 	</field>
 	<field name="namaTrainer" class="java.lang.String">
+	</field>
+	<field name="namaSubcourse" class="java.lang.String">
 	</field>
 	<background>
 		<band/>
@@ -29,7 +34,7 @@
 				<line>
 					<reportElement x="20" y="80" width="555" height="1" uuid="ec9ab4ae-35e9-4533-b4b1-236b92ad1953"/>
 				</line>
-				<textField >
+				<textField>
 					<reportElement x="20" y="150" width="180" height="20" uuid="a2ff189d-23ee-4f17-9947-9a9c85274769">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88b58075-5494-4687-8628-752e7900e214"/>
 					</reportElement>
@@ -38,7 +43,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{namaSubcourse}]]></textFieldExpression>
 				</textField>
-				<textField >
+				<textField>
 					<reportElement x="464" y="150" width="111" height="20" uuid="1187f69f-dbdf-4260-ba30-8cb64ae3e172">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d1ecfb3e-ea6f-4a45-8f2b-a303b2337fbe"/>
 					</reportElement>
@@ -51,6 +56,34 @@
 					<reportElement x="0" y="0" width="595" height="81" uuid="19ad7966-5107-432a-811f-5952e1338e41"/>
 					<imageExpression><![CDATA["report/header.JPG"]]></imageExpression>
 				</image>
+				<textField>
+					<reportElement x="20" y="153" width="100" height="27" uuid="fc6b6ada-42f0-4dd2-9c5e-c5a1a63cdbd6"/>
+					<textElement>
+						<font size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pertemuan}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="153" width="100" height="27" uuid="facb8d92-37e4-4ffd-9978-44e7bdae4d66"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tanggalPertemuan}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="520" y="116" width="55" height="30" uuid="5427b1ca-594d-47e9-a6cb-8a4426f0b5e3"/>
+					<textElement textAlignment="Right">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{kodeKelas}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="464" y="116" width="46" height="30" uuid="be9b322f-3c10-463a-a982-5f5d72483165"/>
+					<textElement textAlignment="Right">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{namaSubcourse}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>
@@ -63,7 +96,7 @@
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="9d085e47-2769-4309-9a0a-d600f0007886"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="180" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="269c109e-7a80-4ccf-98c8-137c22b0adff">
+				<reportElement mode="Opaque" x="0" y="0" width="280" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="269c109e-7a80-4ccf-98c8-137c22b0adff">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8268e6ad-cc84-4221-92c2-f183d8d2ecf9"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -72,16 +105,7 @@
 				<text><![CDATA[namaStudent]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="180" y="0" width="200" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="dc3d5a9d-8099-48d6-baee-3f289195171c">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4ab39e43-bbfc-4140-b4e1-a405592424ac"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[tanggal]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="380" y="0" width="175" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="85fe676f-8855-4b70-a9e1-042dbd4cbe99">
+				<reportElement mode="Opaque" x="280" y="0" width="275" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="85fe676f-8855-4b70-a9e1-042dbd4cbe99">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="67e06f31-2aef-4116-b873-826b2bc54d37"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -96,8 +120,8 @@
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="1293baab-1a1e-4941-af58-83a6a8d27cdd"/>
 			</line>
-			<textField >
-				<reportElement x="0" y="0" width="180" height="20" uuid="131879cf-0a94-4ee8-8313-b1f620ad1659">
+			<textField>
+				<reportElement x="0" y="0" width="280" height="20" uuid="131879cf-0a94-4ee8-8313-b1f620ad1659">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8268e6ad-cc84-4221-92c2-f183d8d2ecf9"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -105,17 +129,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{namaStudent}]]></textFieldExpression>
 			</textField>
-			<textField >
-				<reportElement x="180" y="0" width="200" height="20" uuid="c86b65de-18bd-43ad-9049-b4cddbcbe4b7">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4ab39e43-bbfc-4140-b4e1-a405592424ac"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
-			</textField>
-			<textField >
-				<reportElement x="380" y="0" width="175" height="20" uuid="2b71cd43-e152-4de5-9d2d-0970ddc8d479">
+			<textField>
+				<reportElement x="280" y="0" width="275" height="20" uuid="2b71cd43-e152-4de5-9d2d-0970ddc8d479">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="67e06f31-2aef-4116-b873-826b2bc54d37"/>
 				</reportElement>
 				<textElement textAlignment="Center">

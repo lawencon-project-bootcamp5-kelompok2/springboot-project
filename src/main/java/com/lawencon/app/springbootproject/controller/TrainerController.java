@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Trainer;
 import com.lawencon.app.springbootproject.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.payload.response.MessageResponse;
+import com.lawencon.app.springbootproject.service.LoginService;
 import com.lawencon.app.springbootproject.service.TrainerService;
 
 @RestController
@@ -31,6 +33,9 @@ public class TrainerController extends BaseController {
 
 	@Autowired
 	private TrainerService trainerService;
+	
+	@Autowired
+	private LoginService loginService;
 	
 	@GetMapping("/list")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
@@ -84,13 +89,14 @@ public class TrainerController extends BaseController {
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@Valid @RequestBody SignupRequest signUpRequest){
-		try {
-			return new ResponseEntity<>(trainerService.createTrainers(signUpRequest), HttpStatus.FOUND);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>("Failed insert", HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> getInsert(@Valid @RequestBody SignupRequest signUpRequest) throws Exception{
+		if (loginService.existsByEmail(signUpRequest.getEmail())) {
+			return ResponseEntity.badRequest()
+					.body(new MessageResponse("Error: Email is already in use!"));
 		}
+		// Create new user's account
+		loginService.signUp(signUpRequest);
+		return ResponseEntity.ok(new MessageResponse("Registered successfully!"));
 	}
 	
 	@PutMapping("/update")

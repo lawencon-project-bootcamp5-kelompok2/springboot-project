@@ -52,8 +52,8 @@ public class MateriController extends BaseController {
 	@PreAuthorize("hasRole('TRAINER')")
 	public ResponseEntity<?> getInsert(@RequestParam("file") MultipartFile file){
 		try {
-			materiService.upload(file);
-			return new ResponseEntity<>(HttpStatus.OK);
+			Materi materi = materiService.upload(file);
+			return new ResponseEntity<>(materi, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}

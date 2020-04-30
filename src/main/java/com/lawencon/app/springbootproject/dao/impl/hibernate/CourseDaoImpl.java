@@ -66,14 +66,18 @@ public class CourseDaoImpl extends BaseHibernate implements CourseDao{
 		return (String) q.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<?> getRekapJadwal(String id) throws Exception {
-		Query q = em.createNativeQuery("SELECT k.kode_kelas, t.nama_trainer, s.nama_subcourse, s.tanggal_mulai " + 
-				"FROM kelas k JOIN subcourse s ON k.id_course = s.id_course JOIN course c ON c.id_course = s.id_course "
+		Query q = em.createNativeQuery("SELECT "
+				+ "k.kode_kelas, t.nama_trainer, s.nama_subcourse, s.tanggal_mulai "
+				+ "FROM kelas k "
+				+ "JOIN subcourse s ON k.id_course = s.id_course "
+				+ "JOIN course c ON c.id_course = s.id_course "
 				+ "JOIN trainer t ON t.id_trainer = c.id_trainer " + 
 				"WHERE c.id_course =:idParam");
 		q.setParameter("idParam", id);
-		return q.getResultList();
+		return bMapperHibernate(q.getResultList(), "kodeKelas", "namaTrainer", "namaSubcourse", "tanggalMulai");
 	}
 
 }

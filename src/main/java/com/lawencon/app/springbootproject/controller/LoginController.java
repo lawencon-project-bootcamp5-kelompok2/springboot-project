@@ -109,7 +109,6 @@ public class LoginController extends BaseController{
 			return ResponseEntity.badRequest()
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
-		// Create new user's account
 		loginService.signUp(signUpRequest);
 		return ResponseEntity.ok(new MessageResponse("Registered successfully!"));
 	}

@@ -65,6 +65,18 @@ public class KelasController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/search/trainer/{idTrainer}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getListByEmail(@PathVariable("idTrainer") String idTrainer){
+		try {
+			List<?> listData = kelasService.getByTrainer(idTrainer);
+			return new ResponseEntity<>(listData, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){

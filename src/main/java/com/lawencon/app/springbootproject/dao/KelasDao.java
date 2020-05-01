@@ -13,4 +13,5 @@ public interface KelasDao {
 	abstract Kelas validKelas(Kelas kelas)throws Exception;
 	abstract String getNamaKelas(String id) throws Exception;
 	abstract List<?> cetakKelas() throws Exception;
+	abstract List<?> getByTrainer(String id) throws Exception;
 }

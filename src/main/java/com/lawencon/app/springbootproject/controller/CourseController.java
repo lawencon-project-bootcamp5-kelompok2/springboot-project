@@ -41,6 +41,19 @@ public class CourseController extends BaseController {
 		}
 	}
 	
+	@GetMapping("/list/trainer/{idTrainer}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getByTrainer(@PathVariable("idTrainer") String idTrainer){
+		List<?> listCourse = new ArrayList<>();
+		try {
+			listCourse = courseService.findByTrainer(idTrainer);
+			return new ResponseEntity<>(listCourse, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/rekap/{idCourse}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getRekap(@PathVariable("idCourse") String idCourse){

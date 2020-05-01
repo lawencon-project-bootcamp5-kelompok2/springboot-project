@@ -21,6 +21,11 @@ public class CourseServiceImpl implements CourseService{
 	public List<?> findAll() throws Exception {
 		return courseDao.findAll();
 	}
+	
+	@Override
+	public List<?> findByTrainer(String idTrainer) throws Exception {
+		return courseDao.findByTrainer(idTrainer);
+	}
 
 	@Override
 	public Course findById(String idCourse) throws Exception {

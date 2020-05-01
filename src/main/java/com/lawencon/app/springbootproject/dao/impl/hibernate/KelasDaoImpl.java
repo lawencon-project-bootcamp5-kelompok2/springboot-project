@@ -66,4 +66,13 @@ public class KelasDaoImpl extends BaseHibernate implements KelasDao {
 
 		return bMapperHibernate(q.getResultList(), "kodeKelas", "namaCourse", "namaTrainer");
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> getByTrainer(String id) throws Exception {
+		Query q = em.createNativeQuery("select k.kode_kelas , c.nama_course , k.open_kelas from kelas k join course c on k.id_course = c.id_course join trainer t on t.id_trainer = c.id_trainer " + 
+				"where t.id_trainer = :idParam");
+		q.setParameter("idParam", id);
+		return bMapperHibernate(q.getResultList(), "kodeKelas", "namaCourse", "openKelas");
+	}
 }

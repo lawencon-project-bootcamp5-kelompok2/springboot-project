@@ -82,4 +82,14 @@ public class LoginDaoImpl extends BaseHibernate implements LoginDao{
 			return false;
 	}
 
+	@Override
+	public String deleteByEmail(String email) throws Exception {
+		Query q = em.createQuery("from Login where email = :emailParam");
+		q.setParameter("emailParam", email);
+		Login log = new Login();
+		log = (Login) q.getSingleResult();
+		em.remove(findByEmail(log.getEmail()));
+		return "DELETED...";
+	}
+
 }

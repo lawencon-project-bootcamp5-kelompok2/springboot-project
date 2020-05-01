@@ -94,4 +94,9 @@ public class KelasServiceImpl implements KelasService{
 			return e.getMessage();			
 		}
 	}
+
+	@Override
+	public List<?> getByTrainer(String id) throws Exception {
+		return kelasDao.getByTrainer(id);
+	}
 }

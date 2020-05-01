@@ -7,6 +7,7 @@ import com.lawencon.app.springbootproject.model.Course;
 public interface CourseDao {
 	abstract List<?> findAll()throws Exception;
 	abstract Course findById(String idCourse)throws Exception;
+	abstract List<?> findByTrainer(String idTrainer)throws Exception;
 	abstract void insert(Course course)throws Exception;
 	abstract Course update(Course course)throws Exception;
 	abstract void delete(String idCourse)throws Exception;

@@ -24,6 +24,13 @@ public class CourseDaoImpl extends BaseHibernate implements CourseDao{
 		q.setParameter("idParam", idCourse);
 		return (Course) q.getSingleResult();
 	}
+	
+	@Override
+	public List<?> findByTrainer(String idTrainer) throws Exception {
+		Query q = em.createQuery("from Course where id_trainer = :idParam");
+		q.setParameter("idParam", idTrainer);
+		return q.getResultList();
+	}
 
 	@Override
 	public void insert(Course course) throws Exception {

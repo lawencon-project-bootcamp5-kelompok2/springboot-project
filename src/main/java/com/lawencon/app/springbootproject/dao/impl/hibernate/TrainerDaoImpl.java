@@ -35,13 +35,28 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	
 	@Override
 	public void updateTrainer(Trainer trainer) throws Exception{
-		Trainer t = findById(trainer.getIdTrainer());
+		Trainer t = findById(trainer.getIdTrainer());	// ambil data trainer yg lama
+		
+		Role role = roleDao.findRoleTrainer();
+		Set<Role> hash = new HashSet<>();
+		hash.add(role);
+		
+		Login temp = new Login();				// buat nyimpen hasil update
+		temp.setRoles(hash);					
+		temp.setNama(trainer.getNamaTrainer());
+		temp.setEmail(trainer.getEmail());
+		temp.setHp(trainer.getHp());
+		temp.setPassword(encoder.encode(trainer.getPassword()));
+		em.persist(temp);
+		
+		loginDao.deleteByEmail(t.getEmail());	// hapus data login yg lama
+		
 		t.setNamaTrainer(trainer.getNamaTrainer());
 		t.setEmail(trainer.getEmail());
 		t.setPassword(encoder.encode(trainer.getPassword()));
 		t.setHp(trainer.getHp());
-		t.setRole(trainer.getRole());
-		em.merge(t);
+		em.merge(t);				
+		
 	}
 
 	@Override

@@ -52,7 +52,7 @@
 				</staticText>
 				<image>
 					<reportElement x="0" y="0" width="595" height="81" uuid="19ad7966-5107-432a-811f-5952e1338e41"/>
-					<imageExpression><![CDATA["report/header.JPG"]]></imageExpression>
+					<imageExpression><![CDATA["report/images/header.JPG"]]></imageExpression>
 				</image>
 			</frame>
 		</band>

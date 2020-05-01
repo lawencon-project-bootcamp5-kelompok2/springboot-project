@@ -13,4 +13,5 @@ public interface KelasService {
 	abstract Boolean validKelas(Kelas kelas)throws Exception;
 	abstract String getNamaKelas(String id) throws Exception;
 	abstract String cetakKelas() throws Exception;
+	abstract List<?> getByTrainer(String id) throws Exception;
 }

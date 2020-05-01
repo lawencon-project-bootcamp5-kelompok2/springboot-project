@@ -66,9 +66,8 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String update(String id, String user, String pass, String role) throws Exception {
-		loginDao.update(id, user, pass, role);
-		return "Failed...";
+	public Login update(Login login) throws Exception {
+		return loginDao.update(login);
 	}
 
 	@Override

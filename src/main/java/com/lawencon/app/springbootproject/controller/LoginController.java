@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -81,11 +82,12 @@ public class LoginController extends BaseController{
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@PostMapping("/update/{id}/{user}/{pass}/{role}")
+	@PutMapping("/update")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> getUpdate(@PathVariable("id") String id, @PathVariable("user") String user, @PathVariable("pass") String pass, @PathVariable("role") String role){
+	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
-			loginService.update(id, user, pass, role);
+			Login login = readValue(content, Login.class);
+			loginService.update(login);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}

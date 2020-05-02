@@ -31,6 +31,10 @@ public class Pertemuan {
 	@JoinColumn(name = "idSubcourse")
 	private Subcourse idSubcourse;
 	
+	@OneToOne
+	@JoinColumn(name = "idMateri")
+	private Materi idMateri;
+	
 	public String getIdPertemuan() {
 		return idPertemuan;
 	}
@@ -54,6 +58,12 @@ public class Pertemuan {
 	}
 	public void setIdSubcourse(Subcourse idSubcourse) {
 		this.idSubcourse = idSubcourse;
+	}
+	public Materi getIdMateri() {
+		return idMateri;
+	}
+	public void setIdMateri(Materi idMateri) {
+		this.idMateri = idMateri;
 	}
 	
 }

@@ -19,8 +19,8 @@ public class Test {
 	private String idTest;
 
 	@OneToOne
-	@JoinColumn(name = "idSubcourse")
-	private Subcourse idSubcourse;
+	@JoinColumn(name = "idPertemuan")
+	private Pertemuan idPertemuan;
 
 	@OneToOne
 	@JoinColumn(name = "idSoal")
@@ -38,12 +38,12 @@ public class Test {
 		this.idTest = idTest;
 	}
 
-	public Subcourse getIdSubcourse() {
-		return idSubcourse;
+	public Pertemuan getIdPertemuan() {
+		return idPertemuan;
 	}
 
-	public void setIdSubcourse(Subcourse idSubcourse) {
-		this.idSubcourse = idSubcourse;
+	public void setIdPertemuan(Pertemuan idPertemuan) {
+		this.idPertemuan = idPertemuan;
 	}
 
 	public Soal getFileSoal() {

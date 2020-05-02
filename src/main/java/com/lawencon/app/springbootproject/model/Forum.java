@@ -21,8 +21,8 @@ public class Forum {
 	private String deskripsi;
 	
 	@OneToOne
-	@JoinColumn(name = "idSubcourse")
-	private Subcourse idSubcourse;
+	@JoinColumn(name = "idPertemuan")
+	private Pertemuan idPertemuan;
 
 	public String getIdForum() {
 		return idForum;
@@ -56,12 +56,12 @@ public class Forum {
 		this.deskripsi = deskripsi;
 	}
 
-	public Subcourse getIdSubcourse() {
-		return idSubcourse;
+	public Pertemuan getIdPertemuan() {
+		return idPertemuan;
 	}
 
-	public void setIdSubcourse(Subcourse idSubcourse) {
-		this.idSubcourse = idSubcourse;
+	public void setIdPertemuan(Pertemuan idPertemuan) {
+		this.idPertemuan = idPertemuan;
 	}
 
 }

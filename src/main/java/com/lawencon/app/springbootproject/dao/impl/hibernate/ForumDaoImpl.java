@@ -44,11 +44,15 @@ public class ForumDaoImpl extends BaseHibernate implements ForumDao{
 		em.remove(findById(idForum));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Forum findByIdSubcourse(String idSubcourse) throws Exception {
-		Query q = em.createQuery("from Forum where idSubcourse = :idParam");
-		q.setParameter("idParam", idSubcourse);
-		return (Forum) q.getSingleResult();
+	public List<?> findByIdPertemuan(String idPertemuan) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "f.id_forum, f.subjek, f.email_sender, f.deskripsi "
+				+ "from forum f join "
+				+ "pertemuan p on f.id_pertemuan = p.id_pertemuan where f.id_pertemuan = :idParam");
+		q.setParameter("idParam", idPertemuan);
+		return bMapperHibernate(q.getResultList(), "idForum", "subjek", "emailSender", "deskripsi");
 	}
 
 }

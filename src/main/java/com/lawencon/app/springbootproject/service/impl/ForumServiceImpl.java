@@ -43,7 +43,7 @@ public class ForumServiceImpl implements ForumService{
 	}
 
 	@Override
-	public Forum findByIdSubcourse(String idSubcourse) throws Exception {
-		return forumDao.findByIdSubcourse(idSubcourse);
+	public List<?> findByIdPertemuan(String idPertemuan) throws Exception {
+		return forumDao.findByIdPertemuan(idPertemuan);
 	}
 }

@@ -36,7 +36,6 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 		subCourse.setNamaSubcourse(subcourse.getNamaSubcourse());
 		subCourse.setTanggalMulai(subcourse.getTanggalMulai());
 		subCourse.setTanggalSelesai(subcourse.getTanggalSelesai());
-		subCourse.setIdMateri(subcourse.getIdMateri());
 		em.merge(subCourse);
 		return subCourse;
 	}
@@ -55,7 +54,7 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 				+ "subcourse s join course c on c.id_course = s.id_course "
 				+ "where c.nama_course = :namaParam").
 				setParameter("namaParam", namaCourse);
-		return bMapperHibernate(q.getResultList(), "idSubcourse", "namaSubcourse", "tanggalMmulai", "tanggalSelesai", "idCourse", "idMateri", "idForum");
+		return bMapperHibernate(q.getResultList(), "idSubcourse", "namaSubcourse", "tanggalMulai", "tanggalSelesai", "idCourse", "idMateri", "idForum");
 	}
 	
 	@Override

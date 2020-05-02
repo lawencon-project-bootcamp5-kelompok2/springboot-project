@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -33,21 +33,9 @@ public class Subcourse {
 	@Temporal(TemporalType.DATE)
 	private Date tanggalSelesai;
 
-	@OneToOne
-	@JoinColumn(name = "idForum")
-	private Forum idForum;
-	
-	@OneToOne
-	@JoinColumn(name = "idMateri")
-	private Materi idMateri;
-
-	public Materi getIdMateri() {
-		return idMateri;
-	}
-
-	public void setIdMateri(Materi idMateri) {
-		this.idMateri = idMateri;
-	}
+//	@OneToOne
+//	@JoinColumn(name = "idForum")
+//	private Forum idForum;
 
 	public String getIdSubcourse() {
 		return idSubcourse;
@@ -89,12 +77,12 @@ public class Subcourse {
 		this.tanggalSelesai = tanggalSelesai;
 	}
 
-	public Forum getIdForum() {
-		return idForum;
-	}
-
-	public void setIdForum(Forum idForum) {
-		this.idForum = idForum;
-	}
+//	public Forum getIdForum() {
+//		return idForum;
+//	}
+//
+//	public void setIdForum(Forum idForum) {
+//		this.idForum = idForum;
+//	}
 
 }

@@ -53,15 +53,16 @@ public class ForumController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search/subcourse/{idSubcourse}")
+	@GetMapping("/search/pertemuan/{idPertemuan}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
-	public ResponseEntity<?> getForumByIdSubcourse(@PathVariable("idSubcourse") String idSubcourse){
+	public ResponseEntity<?> getForumByIdSubcourse(@PathVariable("idPertemuan") String idPertemuan){
+		List<?> listPertemuan = new ArrayList<>();
 		try {
-			forumService.findByIdSubcourse(idSubcourse);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			listPertemuan = forumService.findByIdPertemuan(idPertemuan);
+			return new ResponseEntity<>(listPertemuan, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listPertemuan, HttpStatus.BAD_REQUEST);
 		}
 	}
 	

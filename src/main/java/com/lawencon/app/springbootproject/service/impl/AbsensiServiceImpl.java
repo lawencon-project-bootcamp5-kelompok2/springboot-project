@@ -47,7 +47,7 @@ public class AbsensiServiceImpl implements AbsensiService {
 	}
 
 	@Override
-	public Absensi findByStudent(String idStudent) throws Exception{
+	public List<?> findByStudent(String idStudent) throws Exception{
 		return absensiDao.findByStudent(idStudent);
 	}
 

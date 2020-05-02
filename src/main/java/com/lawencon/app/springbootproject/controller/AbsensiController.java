@@ -43,9 +43,10 @@ public class AbsensiController extends BaseController{
 	@GetMapping("/search/{idStudent}")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idStudent") String idStudent){
+		List<?> listAbsenStudent = new ArrayList<>();
 		try {
-			absensiService.findByStudent(idStudent);
-			return new ResponseEntity<>(HttpStatus.OK);
+			listAbsenStudent = absensiService.findByStudent(idStudent);
+			return new ResponseEntity<>(listAbsenStudent, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);

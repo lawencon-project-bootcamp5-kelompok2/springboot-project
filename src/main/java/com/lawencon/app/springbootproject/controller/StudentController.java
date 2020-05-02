@@ -92,6 +92,19 @@ public class StudentController extends BaseController{
 		}
 	}
 	
+	@PutMapping("/update/profil")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('ADMIN')")
+	public ResponseEntity<?> getUpdateProfil(@RequestBody String content){
+		try {
+			Student student = readValue(content, Student.class);
+			studentService.updateProfil(student);
+			return new ResponseEntity<>(student, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@DeleteMapping("/delete/{idStudent}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('ADMIN')")
 	public ResponseEntity<?> getDelete(@PathVariable("idStudent") String idStudent){

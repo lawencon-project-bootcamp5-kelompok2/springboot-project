@@ -48,6 +48,11 @@ public class StudentServiceImpl implements StudentService {
 	public void updateStudent(Student student) throws Exception{
 		studentDao.updateStudent(student);
 	}
+	
+	@Override
+	public void updateProfil(Student student) throws Exception {
+		studentDao.updateProfil(student);
+	}
 
 	@Override
 	public void deleteStudent(String idStudent) throws Exception{

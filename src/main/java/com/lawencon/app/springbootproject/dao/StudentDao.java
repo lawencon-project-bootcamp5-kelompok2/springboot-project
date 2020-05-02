@@ -9,6 +9,7 @@ public interface StudentDao {
 	
 	abstract void createStudent (Student student)throws Exception;
 	abstract void updateStudent (Student student)throws Exception;
+	abstract void updateProfil (Student student)throws Exception;
 	abstract void deleteStudent (String idStudent)throws Exception;
 	abstract List<Student> findAll()throws Exception;
 	abstract Student findById (String idStudent)throws Exception;

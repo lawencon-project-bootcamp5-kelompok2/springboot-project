@@ -6,6 +6,7 @@ import com.lawencon.app.springbootproject.model.Kelas;
 
 public interface KelasDao {
 	abstract List<?> findAll()throws Exception;
+	abstract List<?> findAvailableClass(String idStudent) throws Exception;
 	abstract Kelas findById(String idKelas)throws Exception;
 	abstract void insert(Kelas kelas)throws Exception;
 	abstract void update(Kelas kelas)throws Exception;

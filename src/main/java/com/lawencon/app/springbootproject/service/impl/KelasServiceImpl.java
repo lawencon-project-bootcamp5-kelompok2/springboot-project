@@ -32,6 +32,11 @@ public class KelasServiceImpl implements KelasService{
 	public List<?> findAll() throws Exception {
 		return kelasDao.findAll();
 	}
+	
+	@Override
+	public List<?> findAvailableClass(String idStudent) throws Exception {
+		return kelasDao.findAvailableClass(idStudent);
+	}
 
 	@Override
 	public Kelas findById(String idKelas) throws Exception {

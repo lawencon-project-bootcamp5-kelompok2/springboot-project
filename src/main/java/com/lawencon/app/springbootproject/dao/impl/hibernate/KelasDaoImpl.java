@@ -17,6 +17,18 @@ public class KelasDaoImpl extends BaseHibernate implements KelasDao {
 		Query q = em.createQuery("from Kelas");
 		return q.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findAvailableClass(String idStudent) throws Exception {
+		Query q = em.createNativeQuery("select k.id_kelas, k.kode_kelas, c.nama_course, t.nama_trainer, k.open_kelas " +
+				" from kelas k join course c on k.id_course = c.id_course join trainer t on t.id_trainer = c.id_trainer" + 
+				" where k.id_kelas not in " + 
+				"	(select kelas_id_kelas from student_kelas " + 
+				"		where student_id_student = :idParam)");
+		q.setParameter("idParam", idStudent);
+		return bMapperHibernate(q.getResultList(), "idKelas", "kodeKelas", "namaCourse", "namaTrainer", "openKelas");
+	}
 
 	@Override
 	public Kelas findById(String idKelas) throws Exception {

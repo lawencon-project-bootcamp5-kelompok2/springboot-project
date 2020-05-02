@@ -41,6 +41,19 @@ public class KelasController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/search/available/{idStudent}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getAvailableKelas(@PathVariable("idStudent") String idStudent){
+		List<?> listKelas = new ArrayList<>();
+		try {
+			listKelas = kelasService.findAvailableClass(idStudent);
+			return new ResponseEntity<>(listKelas, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/report")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> cetak(){
@@ -67,7 +80,7 @@ public class KelasController extends BaseController{
 	
 	@GetMapping("/search/trainer/{idTrainer}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
-	public ResponseEntity<?> getListByEmail(@PathVariable("idTrainer") String idTrainer){
+	public ResponseEntity<?> getListByTrainer(@PathVariable("idTrainer") String idTrainer){
 		try {
 			List<?> listData = kelasService.getByTrainer(idTrainer);
 			return new ResponseEntity<>(listData, HttpStatus.OK);

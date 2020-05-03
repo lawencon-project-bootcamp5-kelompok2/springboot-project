@@ -54,7 +54,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@GetMapping("/search/result/student/{idTest}/{idStudent}")
-	@PreAuthorize("hasRole('TRAINER')")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('STUDENT')")
 	public ResponseEntity<?> getResultStudentFromSubcourse(@PathVariable("idTest") String idTest, @PathVariable("idStudent") String idStudent){
 		List<?> listResult = new ArrayList<>();
 		try {
@@ -67,7 +67,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@GetMapping("/search/average/student/{idTest}")
-	@PreAuthorize("hasRole('TRAINER')")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('STUDENT')")
 	public ResponseEntity<?> getResultAverageStudentFromSubcourse(@PathVariable("idTest") String idTest){
 		List<?> listResult = new ArrayList<>();
 		try {
@@ -80,7 +80,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@GetMapping("/search/result/all/{idStudent}")
-	@PreAuthorize("hasRole('TRAINER')")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('STUDENT')")
 	public ResponseEntity<?> getResultStudentFromAllSubcourse(@PathVariable("idStudent") String idStudent){
 		List<?> listResult = new ArrayList<>();
 		try {
@@ -93,7 +93,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@GetMapping("/search/average/all/{idStudent}")
-	@PreAuthorize("hasRole('TRAINER')")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('STUDENT')")
 	public ResponseEntity<?> getResultAverageStudentFromAllSubcourse(@PathVariable("idStudent") String idStudent){
 		List<?> listResult = new ArrayList<>();
 		try {

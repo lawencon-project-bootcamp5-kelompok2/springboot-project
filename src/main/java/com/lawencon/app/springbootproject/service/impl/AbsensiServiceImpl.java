@@ -72,4 +72,9 @@ public class AbsensiServiceImpl implements AbsensiService {
 			return e.getMessage();			
 		}
 	}
+
+	@Override
+	public List<?> findBySubcourseAndKelas(String idSubcourse, String idKelas) throws Exception {
+		return absensiDao.findBySubcourseAndKelas(idSubcourse, idKelas);
+	}
 }

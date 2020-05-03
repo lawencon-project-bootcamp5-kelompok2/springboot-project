@@ -26,6 +26,21 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 		Query q = em.createQuery(" from Absensi");
 		return q.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findBySubcourseAndKelas(String idSubcourse, String idKelas) throws Exception {
+		Query q = em.createNativeQuery("select distinct s.nama_subcourse , p.pertemuan , st.nama_student from " + 
+				"	absensi a join subcourse s on a.id_subcourse = s.id_subcourse " + 
+				"	join course c on c.id_course = s.id_course " + 
+				"	join kelas k on k.id_course = c.id_course " + 
+				"	join student st on st.id_student = a.id_student " + 
+				"	join student_kelas sk on sk.kelas_id_kelas = k.id_kelas " + 
+				"	join pertemuan p on p.id_pertemuan = a.id_pertemuan " + 
+				"where s.id_subcourse = :subParam and k.id_kelas = :kelasParam");
+		q.setParameter("subParam", idSubcourse).setParameter("kelasParam", idKelas);
+		return bMapperHibernate(q.getResultList(), "namaSubcourse", "pertemuan", "namaStudent");
+	}	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -72,5 +87,6 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 				.setParameter("kelasParam", idKelas).setParameter("trainerParam", idTrainer).setParameter("pertemuanParam", idPertemuan);
 
 		return bMapperHibernate(q.getResultList(), "pertemuan", "kodeKelas", "namaStudent", "tanggalPertemuan", "status", "namaTrainer", "namaSubcourse");
-	}	
+	}
+
 }

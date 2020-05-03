@@ -76,5 +76,25 @@ public class SubcourseServiceImpl implements SubcourseService{
 	public String getNamaSubcourse(String subcourse) throws Exception {
 		return subcourseDao.getNamaSubcourse(subcourse);
 	}
+
+	@Override
+	public List<?> tampilanLihatNilai(String idSubcourse, String idKelas) throws Exception {
+		return subcourseDao.tampilanLihatNilai(idSubcourse, idKelas);
+	}
+
+	@Override
+	public List<?> findByKelas(String idKelas) throws Exception {
+		return subcourseDao.findByKelas(idKelas);
+	}
+
+	@Override
+	public List<?> tampilanInputNilai(String idSubcourse, String idKelas) throws Exception {
+		return subcourseDao.tampilanInputNilai(idSubcourse, idKelas);
+	}
+
+	@Override
+	public List<?> getNilai(String idSubcourse, String idKelas) throws Exception {
+		return subcourseDao.getNilai(idSubcourse, idKelas);
+	}
 	
 }

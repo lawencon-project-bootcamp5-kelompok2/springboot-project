@@ -66,6 +66,57 @@ public class SubcourseController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/search/kelas/{idKelas}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getByKelas(@PathVariable("idKelas") String idKelas){
+		List<?> listData = new ArrayList<>();
+		try {
+			listData = subcourseService.findByKelas(idKelas);
+			return new ResponseEntity<>(listData, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/nilai/{idSubcourse}/{idKelas}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getNilai(@PathVariable("idSubcourse") String idSubcourse, @PathVariable("idKelas") String idKelas){
+		List<?> listCourse = new ArrayList<>();
+		try {
+			listCourse = subcourseService.tampilanLihatNilai(idSubcourse, idKelas);
+			return new ResponseEntity<>(listCourse, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/inputnilai/{idSubcourse}/{idKelas}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getInputNilai(@PathVariable("idSubcourse") String idSubcourse, @PathVariable("idKelas") String idKelas){
+		List<?> listCourse = new ArrayList<>();
+		try {
+			listCourse = subcourseService.tampilanInputNilai(idSubcourse, idKelas);
+			return new ResponseEntity<>(listCourse, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	@GetMapping("/nilaisiswa/{idSubcourse}/{idKelas}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getNilaiSiswa(@PathVariable("idSubcourse") String idSubcourse, @PathVariable("idKelas") String idKelas){
+		List<?> listCourse = new ArrayList<>();
+		try {
+			listCourse = subcourseService.getNilai(idSubcourse, idKelas);
+			return new ResponseEntity<>(listCourse, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){

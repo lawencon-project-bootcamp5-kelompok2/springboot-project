@@ -40,6 +40,19 @@ public class AbsensiController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/detail/{idSubcourse}/{idKelas}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getDetailAbsen(@PathVariable("idSubcourse") String idSubcourse, @PathVariable("idKelas") String idKelas){
+		List<?> listAbsenStudent = new ArrayList<>();
+		try {
+			listAbsenStudent = absensiService.findBySubcourseAndKelas(idSubcourse, idKelas);
+			return new ResponseEntity<>(listAbsenStudent, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/search/{idStudent}")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idStudent") String idStudent){

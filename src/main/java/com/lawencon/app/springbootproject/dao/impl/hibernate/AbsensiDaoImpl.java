@@ -17,7 +17,19 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 
 	@Override
 	public void insert(Absensi absensi) throws Exception{
-		em.persist(absensi);
+		Absensi absen = new Absensi();
+		absen.setIdStudent(absensi.getIdStudent());
+		absen.setIdSubcourse(absensi.getIdSubcourse());
+		absen.setPertemuan(absensi.getPertemuan());
+		absen.setStatus("pending");
+		em.persist(absen);
+	}
+	
+	@Override
+	public Absensi cekAbsen(Absensi absensi) throws Exception {
+		Query q = em.createQuery("from Absensi where idStudent = :idParam");
+		q.setParameter("idParam", absensi.getIdStudent());
+		return (Absensi) q.getSingleResult();
 	}
 
 	@SuppressWarnings("unchecked")

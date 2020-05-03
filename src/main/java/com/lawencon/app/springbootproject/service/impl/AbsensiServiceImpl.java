@@ -77,4 +77,18 @@ public class AbsensiServiceImpl implements AbsensiService {
 	public List<?> findBySubcourseAndKelas(String idSubcourse, String idKelas) throws Exception {
 		return absensiDao.findBySubcourseAndKelas(idSubcourse, idKelas);
 	}
+
+	@Override
+	public Boolean cekAbsen(Absensi absensi) throws Exception {
+		Absensi absen = null;
+		try {
+			absen = absensiDao.cekAbsen(absensi);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		if(absen != null) {
+			return true;
+		}
+		return false;
+	}
 }

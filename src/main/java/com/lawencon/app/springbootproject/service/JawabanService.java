@@ -10,5 +10,8 @@ public interface JawabanService {
 	abstract void insert(Jawaban jawaban)throws Exception;
 	abstract Jawaban update(Jawaban jawaban)throws Exception;
 	abstract void delete(String idJawaban)throws Exception;
-
+	abstract List<?> findResultStudentFromSubcourse(String idTest, String idStudent) throws Exception;
+	abstract List<Integer> findAverageStudentFromSubcourse(String idTest)throws Exception;
+	abstract List<?> findResultStudentFromAllSubcourse(String idStudent)throws Exception;
+	abstract List<Integer> findAverageStudentFromAllSubcourse(String idStudent)throws Exception;
 }

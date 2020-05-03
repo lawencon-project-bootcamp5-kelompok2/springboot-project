@@ -53,6 +53,58 @@ public class JawabanController extends BaseController {
 		}
 	}
 	
+	@GetMapping("/search/result/student/{idTest}/{idStudent}")
+	@PreAuthorize("hasRole('TRAINER')")
+	public ResponseEntity<?> getResultStudentFromSubcourse(@PathVariable("idTest") String idTest, @PathVariable("idStudent") String idStudent){
+		List<?> listResult = new ArrayList<>();
+		try {
+			listResult = jawabanService.findResultStudentFromSubcourse(idTest, idStudent);
+			return new ResponseEntity<>(listResult, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search/average/student/{idTest}")
+	@PreAuthorize("hasRole('TRAINER')")
+	public ResponseEntity<?> getResultAverageStudentFromSubcourse(@PathVariable("idTest") String idTest){
+		List<?> listResult = new ArrayList<>();
+		try {
+			listResult = jawabanService.findAverageStudentFromSubcourse(idTest);
+			return new ResponseEntity<>(listResult, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search/result/all/{idStudent}")
+	@PreAuthorize("hasRole('TRAINER')")
+	public ResponseEntity<?> getResultStudentFromAllSubcourse(@PathVariable("idStudent") String idStudent){
+		List<?> listResult = new ArrayList<>();
+		try {
+			listResult = jawabanService.findResultStudentFromAllSubcourse(idStudent);
+			return new ResponseEntity<>(listResult, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search/average/all/{idStudent}")
+	@PreAuthorize("hasRole('TRAINER')")
+	public ResponseEntity<?> getResultAverageStudentFromAllSubcourse(@PathVariable("idStudent") String idStudent){
+		List<?> listResult = new ArrayList<>();
+		try {
+			listResult = jawabanService.findAverageStudentFromAllSubcourse(idStudent);
+			return new ResponseEntity<>(listResult, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('STUDENT')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){

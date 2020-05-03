@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Absensi;
+import com.lawencon.app.springbootproject.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.AbsensiService;
 
 @RestController
@@ -71,6 +72,10 @@ public class AbsensiController extends BaseController{
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Absensi absensi = readValue(content, Absensi.class);
+			if(absensiService.cekAbsen(absensi)==true) {
+				return ResponseEntity.badRequest()
+						.body(new MessageResponse("please wait the confirmation by trainer!"));
+			}
 			absensiService.insert(absensi);
 			return new ResponseEntity<>(absensi, HttpStatus.OK);
 		} catch (Exception e) {

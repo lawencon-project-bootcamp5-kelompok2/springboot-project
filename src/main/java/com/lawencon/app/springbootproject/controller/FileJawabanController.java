@@ -52,6 +52,7 @@ public class FileJawabanController extends BaseController {
 		try {
 			return new ResponseEntity<>(fileJawabanService.upload(file), HttpStatus.OK);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>("Failed Upload", HttpStatus.BAD_REQUEST);
 		}
 	}

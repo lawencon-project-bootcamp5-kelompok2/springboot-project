@@ -1,6 +1,7 @@
 package com.lawencon.app.springbootproject.dao.impl.hibernate;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Query;
 
@@ -43,5 +44,61 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 		em.remove(findById(idJawaban));
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findResultStudentFromSubcourse(String idTest, String idStudent) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "s.nama_student, j.nilai, s2.nama_subcourse "
+				+ "from "
+				+ "jawaban j join student s on s.id_student = j.id_student "
+				+ "join test t on t.id_test = j.id_test "
+				+ "join subcourse s2 on s2.id_subcourse = t.id_subcourse "
+				+ "where j.id_test = :idTest and j.id_student = :idStudent");
+		q.setParameter("idTest", idTest).setParameter("idStudent", idStudent);
+		return bMapperHibernate(q.getResultList(), "namaStudent", "nilai", "namaSubcourse");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> findAverageStudentFromSubcourse(String idTest) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "sum(nilai)/(select count(id_test = :idParam)) as mean "
+				+ "from jawaban");
+		q.setParameter("idParam", idTest);
+		List<Map<String, Object>> listResult = bMapperHibernate(q.getResultList(), "Mean");
+		if(!listResult.isEmpty()) {
+			return listResult;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findResultStudentFromAllSubcourse(String idStudent) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "s2.nama_student, j.nilai, s.nama_subcourse "
+				+ "from "
+				+ "jawaban j join student s2 on j.id_student = s2.id_student "
+				+ "join test t on t.id_test = j.id_test "
+				+ "join subcourse s on s.id_subcourse = t.id_subcourse "
+				+ "where j.id_student = :idParam");
+		q.setParameter("idParam", idStudent);
+		return bMapperHibernate(q.getResultList(), "namaStudent", "nilai", "namaSubcourse");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> findAverageStudentFromAllSubcourse(String idStudent) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "sum(j.nilai)/(select count(t.id_test)) as mean "
+				+ "from "
+				+ "jawaban j join test t on t.id_test = j.id_test "
+				+ "where j.id_student = :idParam");
+		q.setParameter("idParam", idStudent);
+		List<Map<String, Object>> listResult = bMapperHibernate(q.getResultList(), "Mean");
+		if(!listResult.isEmpty()) {
+			return listResult;
+		}
+		return null;
+	}	
 }

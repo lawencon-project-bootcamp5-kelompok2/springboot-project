@@ -6,6 +6,7 @@ import com.lawencon.app.springbootproject.model.Absensi;
 
 public interface AbsensiDao {
 	abstract void insert(Absensi absensi)throws Exception;
+	abstract Absensi cekAbsen(Absensi absensi)throws Exception;
 	abstract Absensi update(Absensi absensi)throws Exception;
 	abstract List<Absensi> findAll()throws Exception;
 	abstract List<?> findByStudent(String idStudent)throws Exception;

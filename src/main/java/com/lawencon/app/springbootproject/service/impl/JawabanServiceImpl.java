@@ -1,6 +1,8 @@
 package com.lawencon.app.springbootproject.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,4 +44,33 @@ public class JawabanServiceImpl implements JawabanService{
 		jawabanDao.delete(idJawaban);
 	}
 
+	@Override
+	public List<?> findResultStudentFromSubcourse(String idTest, String idStudent) throws Exception {
+		return jawabanDao.findResultStudentFromSubcourse(idTest, idStudent);
+	}
+
+	@Override
+	public List<Integer> findAverageStudentFromSubcourse(String idTest) throws Exception {
+		List<Map<String, Object>> listMeanFromSubcourse = jawabanDao.findAverageStudentFromSubcourse(idTest);
+		List<Integer> listValue = new ArrayList<>();
+		if(!listMeanFromSubcourse.isEmpty()) {
+			listValue.add(Integer.valueOf(listMeanFromSubcourse.get(0).get("Mean").toString()));
+		}
+		return listValue;
+	}
+
+	@Override
+	public List<?> findResultStudentFromAllSubcourse(String idStudent) throws Exception {
+		return jawabanDao.findResultStudentFromAllSubcourse(idStudent);
+	}
+
+	@Override
+	public List<Integer> findAverageStudentFromAllSubcourse(String idStudent) throws Exception {
+		List<Map<String, Object>> listMeanFromAllSubcourse = jawabanDao.findAverageStudentFromAllSubcourse(idStudent);
+		List<Integer> listValue = new ArrayList<>();
+		if(!listMeanFromAllSubcourse.isEmpty()) {
+			listValue.add(Integer.valueOf(listMeanFromAllSubcourse.get(0).get("Mean").toString()));
+		}
+		return listValue;
+	}
 }

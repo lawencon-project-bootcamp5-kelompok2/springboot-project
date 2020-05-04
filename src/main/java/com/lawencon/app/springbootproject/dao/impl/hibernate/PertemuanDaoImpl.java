@@ -36,6 +36,7 @@ public class PertemuanDaoImpl extends BaseHibernate implements PertemuanDao{
 		p.setIdSubcourse(pertemuan.getIdSubcourse());
 		p.setPertemuan(pertemuan.getPertemuan());
 		p.setTanggalPertemuan(pertemuan.getTanggalPertemuan());
+		p.setIdMateri(pertemuan.getIdMateri());
 		em.merge(p);
 		return p;
 	}

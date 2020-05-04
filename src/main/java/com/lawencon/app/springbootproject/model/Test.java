@@ -17,6 +17,10 @@ public class Test {
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "uuid2")
 	private String idTest;
+	
+	@OneToOne
+	@JoinColumn(name = "idSubcourse")
+	private Subcourse idSubcourse;
 
 	@OneToOne
 	@JoinColumn(name = "idPertemuan")
@@ -36,6 +40,14 @@ public class Test {
 
 	public void setIdTest(String idTest) {
 		this.idTest = idTest;
+	}
+
+	public Subcourse getIdSubcourse() {
+		return idSubcourse;
+	}
+
+	public void setIdSubcourse(Subcourse idSubcourse) {
+		this.idSubcourse = idSubcourse;
 	}
 
 	public Pertemuan getIdPertemuan() {

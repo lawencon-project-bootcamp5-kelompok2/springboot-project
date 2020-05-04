@@ -44,14 +44,8 @@ public class KelasServiceImpl implements KelasService{
 	}
 
 	@Override
-	public String insert(Kelas kelas) throws Exception {
-		if(validKelas(kelas)==true) {
-			return "Class already exist on that schedule";
-		}
-		else {
-			kelasDao.insert(kelas);
-		}
-		return "Success";
+	public void insert(Kelas kelas) throws Exception {
+		kelasDao.insert(kelas);
 	}
 
 	@Override

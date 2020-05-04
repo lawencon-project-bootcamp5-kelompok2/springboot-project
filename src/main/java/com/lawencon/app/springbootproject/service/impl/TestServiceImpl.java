@@ -55,4 +55,18 @@ public class TestServiceImpl implements TestService{
 		}
 		return false;
 	}
+
+	@Override
+	public Boolean cekTest(Test test) throws Exception {
+		Test t = null;
+		try {
+			t = testDao.cekTest(test);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		if(t!=null) {
+			return true;
+		}
+		return false;
+	}
 }

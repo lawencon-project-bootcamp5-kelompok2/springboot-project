@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Kelas;
+import com.lawencon.app.springbootproject.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.KelasService;
 
 @RestController
@@ -95,7 +96,12 @@ public class KelasController extends BaseController{
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Kelas kelas = readValue(content, Kelas.class);
-			return new ResponseEntity<>(kelasService.insert(kelas), HttpStatus.OK);
+			if(kelasService.validKelas(kelas)==true) {
+				return ResponseEntity.badRequest()
+						.body(new MessageResponse("Waktu kelas sudah dipakai"));
+			}
+			kelasService.insert(kelas);
+			return new ResponseEntity<>(kelas, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);

@@ -11,5 +11,6 @@ public interface TestDao {
 	abstract void insert(Test test)throws Exception;
 	abstract Test update(Test test)throws Exception;
 	abstract void delete(String idTest)throws Exception;
+	abstract Test cekTest(Test test)throws Exception;
 	abstract List<?> findWaktuSelesai(String idTest)throws Exception;
 }

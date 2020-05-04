@@ -55,4 +55,11 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 		q.setParameter("idParam", idTest);
 		return bMapperHibernate(q.getResultList(), "waktuSelesai");
 	}
+
+	@Override
+	public Test cekTest(Test test) throws Exception {
+		Query q = em.createQuery("from Test where idSubcourse = :idParam").
+				setParameter("idParam", test.getIdSubcourse());
+		return (Test) q.getSingleResult();
+	}
 }

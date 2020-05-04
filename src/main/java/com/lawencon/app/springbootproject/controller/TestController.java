@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Test;
+import com.lawencon.app.springbootproject.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.TestService;
 
 @RestController
@@ -54,6 +55,10 @@ public class TestController extends BaseController{
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Test test = readValue(content, Test.class);
+			if(testService.cekTest(test)==true) {
+				return ResponseEntity.badRequest()
+						.body(new MessageResponse("Test Has Been Set on This Subcourse !"));
+			}
 			testService.insert(test);
 			return new ResponseEntity<>(test, HttpStatus.OK);
 		} catch (Exception e) {

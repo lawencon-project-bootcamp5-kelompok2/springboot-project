@@ -54,21 +54,22 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public String cetakReportTrainer(String idTrainer, String idSubcourse) throws Exception {
+	public byte[] cetakReportTrainer(String idTrainer, String idSubcourse) throws Exception {
 		String idTest = subcourseService.getIdTestBySubcourse(idSubcourse);
 		List<?> data = new ArrayList<>();
 		data = trainerDao.cetakReportTrainer(idTrainer, idTest, idSubcourse);
+		byte[] pdfReport = null;
 		try {
 			File file = ResourceUtils.getFile("classpath:report/reportTrainer.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-"+trainerDao.getNamaTrainer(idTrainer)+"-"+subcourseService.getNamaSubcourse(idSubcourse)+".pdf");
-			return "File berhasil diunduh di Local Disk D";
+			pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
+			
 		} catch (Exception e) {
-			e.printStackTrace();
-			return e.getMessage();			
+			e.printStackTrace();		
 		}
+		return pdfReport;
 	}
 
 	@Override

@@ -6,7 +6,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -125,13 +127,16 @@ public class TrainerController extends BaseController {
 	
 	@GetMapping("/report/{idTrainer}/{idSubcourse}")
 	@PreAuthorize("hasRole('TRAINER')")
-	public ResponseEntity<?> getList(@PathVariable String idTrainer, @PathVariable String idSubcourse){
+	public ResponseEntity<byte[]> getList(@PathVariable String idTrainer, @PathVariable String idSubcourse){
 		try {
+			HttpHeaders responseHeaders = new HttpHeaders();
+			responseHeaders.setContentType(MediaType.APPLICATION_PDF);
+			responseHeaders.add("content-disposition", "inline;filename='report'");
 			trainerService.cetakReportTrainer(idTrainer, idSubcourse);
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(trainerService.cetakReportTrainer(idTrainer, idSubcourse), responseHeaders, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 }

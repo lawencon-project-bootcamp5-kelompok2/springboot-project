@@ -103,14 +103,14 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<?> findByIdPertemuan(String idPertemuan) throws Exception {
+	public List<?> findByIdPertemuanAndStudent(String idPertemuan, String idStudent) throws Exception {
 		Query q = em.createNativeQuery("select "
 				+ "a.id_absensi, a.id_student, a.id_subcourse, "
 				+ "a.id_pertemuan, a.status, a.tanggal "
 				+ "from "
 				+ "absensi a join pertemuan p on a.id_pertemuan = p.id_pertemuan"
-				+ "where a.id_pertemuan = :idParam");
-		q.setParameter("idParam", idPertemuan);
+				+ "where a.id_pertemuan = :idPertemuan and a.id_student = :idStudent");
+		q.setParameter("idPertemuan", idPertemuan).setParameter("idStudent", idStudent);
 		return bMapperHibernate(q.getResultList(), "idAbsensi", "idStudent", "idSubcourse", "idPertemuan", "status", "tanggal");
 	}
 }

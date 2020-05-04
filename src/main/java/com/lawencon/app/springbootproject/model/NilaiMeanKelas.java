@@ -13,7 +13,7 @@ public class NilaiMeanKelas {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idNilaiMean;
-	
+	private String idCourse;
 	private String idTest;
 	
 	private float nilaiMean;
@@ -24,6 +24,14 @@ public class NilaiMeanKelas {
 
 	public void setIdNilaiMean(int idNilaiMean) {
 		this.idNilaiMean = idNilaiMean;
+	}
+
+	public String getIdCourse() {
+		return idCourse;
+	}
+
+	public void setIdCourse(String idCourse) {
+		this.idCourse = idCourse;
 	}
 
 	public String getIdTest() {

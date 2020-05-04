@@ -84,11 +84,16 @@ public class AbsensiServiceImpl implements AbsensiService {
 		try {
 			absen = absensiDao.cekAbsen(absensi);
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		if(absen != null) {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<?> findByIdPertemuan(String idPertemuan) throws Exception {
+		return absensiDao.findByIdPertemuan(idPertemuan);
 	}
 }

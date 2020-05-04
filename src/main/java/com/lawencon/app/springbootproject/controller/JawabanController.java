@@ -49,7 +49,7 @@ public class JawabanController extends BaseController {
 			return new ResponseEntity<>(jawaban, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class JawabanController extends BaseController {
 			return new ResponseEntity<>(listResult, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listResult, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class JawabanController extends BaseController {
 			return new ResponseEntity<>(listResult, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listResult, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -88,7 +88,7 @@ public class JawabanController extends BaseController {
 			return new ResponseEntity<>(listResult, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listResult, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class JawabanController extends BaseController {
 			return new ResponseEntity<>(listResult, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listResult, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -114,7 +114,7 @@ public class JawabanController extends BaseController {
 			return new ResponseEntity<>(jawaban, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -127,7 +127,7 @@ public class JawabanController extends BaseController {
 			return new ResponseEntity<>(jawaban, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -139,7 +139,7 @@ public class JawabanController extends BaseController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

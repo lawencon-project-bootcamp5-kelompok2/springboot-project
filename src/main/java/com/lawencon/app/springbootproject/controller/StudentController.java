@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Student;
 import com.lawencon.app.springbootproject.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.StudentService;
 
 @RestController
@@ -52,7 +53,7 @@ public class StudentController extends BaseController{
 			return new ResponseEntity<>(student, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -64,7 +65,7 @@ public class StudentController extends BaseController{
 			return new ResponseEntity<>(student, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -72,10 +73,14 @@ public class StudentController extends BaseController{
 	@PreAuthorize("hasRole('STUDENT')")
 	public ResponseEntity<?> getInsert(@Valid @RequestBody SignupRequest signUpRequest){
 		try {
-			return new ResponseEntity<>(studentService.createStudents(signUpRequest), HttpStatus.FOUND);
+			if(studentService.validStudent(signUpRequest)==true) {
+				return ResponseEntity.badRequest()
+						.body(new MessageResponse("Error: Data Already Exist"));
+			}
+			return new ResponseEntity<>(studentService.createStudents(signUpRequest), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -88,7 +93,7 @@ public class StudentController extends BaseController{
 			return new ResponseEntity<>(student, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -101,7 +106,7 @@ public class StudentController extends BaseController{
 			return new ResponseEntity<>(student, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -113,7 +118,7 @@ public class StudentController extends BaseController{
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -125,7 +130,7 @@ public class StudentController extends BaseController{
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

@@ -101,4 +101,16 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 		return bMapperHibernate(q.getResultList(), "pertemuan", "kodeKelas", "namaStudent", "tanggalPertemuan", "status", "namaTrainer", "namaSubcourse");
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findByIdPertemuan(String idPertemuan) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "a.id_absensi, a.id_student, a.id_subcourse, "
+				+ "a.id_pertemuan, a.status, a.tanggal "
+				+ "from "
+				+ "absensi a join pertemuan p on a.id_pertemuan = p.id_pertemuan"
+				+ "where a.id_pertemuan = :idParam");
+		q.setParameter("idParam", idPertemuan);
+		return bMapperHibernate(q.getResultList(), "idAbsensi", "idStudent", "idSubcourse", "idPertemuan", "status", "tanggal");
+	}
 }

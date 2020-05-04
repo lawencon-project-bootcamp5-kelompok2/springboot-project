@@ -47,24 +47,18 @@ public class TestController extends BaseController{
 			return new ResponseEntity<>(test, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@PostMapping("/insert")
-	public ResponseEntity<?> getInsert(@RequestBody String content){
-		try {
-			Test test = readValue(content, Test.class);
-			if(testService.cekTest(test)==true) {
-				return ResponseEntity.badRequest()
-						.body(new MessageResponse("Test Has Been Set on This Subcourse !"));
-			}
-			testService.insert(test);
-			return new ResponseEntity<>(test, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> getInsert(@RequestBody String content) throws Exception {
+		Test test = readValue(content, Test.class);
+		if (testService.cekTest(test) == true) {
+			return ResponseEntity.badRequest().body(new MessageResponse("Test Has Been Set on This Subcourse !"));
 		}
+		testService.insert(test);
+		return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
 	}
 	
 	@PutMapping("/update")
@@ -75,7 +69,7 @@ public class TestController extends BaseController{
 			return new ResponseEntity<>(test, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -86,7 +80,7 @@ public class TestController extends BaseController{
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

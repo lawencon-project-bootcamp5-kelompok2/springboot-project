@@ -50,7 +50,7 @@ public class AbsensiController extends BaseController{
 			return new ResponseEntity<>(listAbsenStudent, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listAbsenStudent, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -63,25 +63,32 @@ public class AbsensiController extends BaseController{
 			return new ResponseEntity<>(listAbsenStudent, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listAbsenStudent, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search/pertemuan/{idPertemuan}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getListIdPertemuan(@PathVariable("idPertemuan") String idPertemuan){
+		List<?> listAbsenStudent = new ArrayList<>();
+		try {
+			listAbsenStudent = absensiService.findByIdPertemuan(idPertemuan);
+			return new ResponseEntity<>(listAbsenStudent, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(listAbsenStudent, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@RequestBody String content){
-		try {
-			Absensi absensi = readValue(content, Absensi.class);
-			if(absensiService.cekAbsen(absensi)==true) {
-				return ResponseEntity.badRequest()
-						.body(new MessageResponse("please wait the confirmation by trainer!"));
-			}
-			absensiService.insert(absensi);
-			return new ResponseEntity<>(absensi, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> getInsert(@RequestBody String content) throws Exception {
+		Absensi absensi = readValue(content, Absensi.class);
+		if (absensiService.cekAbsen(absensi) == true) {
+			return ResponseEntity.badRequest().body(new MessageResponse("please wait the confirmation by trainer!"));
 		}
+		absensiService.insert(absensi);
+		return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
 	}
 	
 	@PutMapping("/update")
@@ -93,7 +100,7 @@ public class AbsensiController extends BaseController{
 			return new ResponseEntity<>(absensi, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed update", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -101,11 +108,10 @@ public class AbsensiController extends BaseController{
 	@PreAuthorize("hasRole('TRAINER')")
 	public ResponseEntity<?> getUpdate(@PathVariable String idKelas, @PathVariable String idTrainer, @PathVariable String idPertemuan){
 		try {
-			absensiService.cetakAbsen(idKelas, idTrainer, idPertemuan);
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(absensiService.cetakAbsen(idKelas, idTrainer, idPertemuan), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

@@ -100,5 +100,18 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 			return listResult;
 		}
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> createResultAverageStudentFromSubcourse(Jawaban jawaban) throws Exception {
+		Query q = em.createNativeQuery("insert into "
+				+ "nilai_mean_kelas (id_test, nilai_mean) "
+				+ "select distinct "
+				+ "id_test, (select sum(nilai)/(select count(id_test)) as mean from jawaban) "
+				+ "from jawaban "
+				+ "where id_test = :idParam");
+		q.setParameter("idParam", jawaban.getIdTest());
+		return bMapperHibernate(q.getResultList(), "idTest", "nilaiMean");
 	}	
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Pertemuan;
+import com.lawencon.app.springbootproject.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.PertemuanService;
 
 @RestController
@@ -49,7 +50,7 @@ public class PertemuanController extends BaseController {
 			return new ResponseEntity<>(pertemuan, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -62,20 +63,20 @@ public class PertemuanController extends BaseController {
 			return new ResponseEntity<>(listSubcourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@RequestBody String content){
-		try {
+	public ResponseEntity<?> getInsert(@RequestBody String content)throws Exception{
 			Pertemuan pertemuan = readValue(content, Pertemuan.class);
-			return new ResponseEntity<>(pertemuanService.insert(pertemuan), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
-		}
+			if(pertemuanService.validPertemuan(pertemuan)==true) {
+				return ResponseEntity.badRequest()
+						.body(new MessageResponse("Error: Data Already Exist"));
+			}
+			pertemuanService.insert(pertemuan);
+			return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
 	}
 	
 	@PutMapping("/update")
@@ -87,7 +88,7 @@ public class PertemuanController extends BaseController {
 			return new ResponseEntity<>(pertemuan, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -99,7 +100,7 @@ public class PertemuanController extends BaseController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

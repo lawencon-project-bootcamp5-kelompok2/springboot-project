@@ -49,7 +49,7 @@ public class ForumAnswerController extends BaseController{
 			return new ResponseEntity<>(forumAnswer, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -59,10 +59,10 @@ public class ForumAnswerController extends BaseController{
 		try {
 			ForumAnswer forumAnswer = readValue(content, ForumAnswer.class);
 			forumAnswerService.createForumAnswer(forumAnswer);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			return new ResponseEntity<>(forumAnswer, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -72,22 +72,22 @@ public class ForumAnswerController extends BaseController{
 		try {
 			ForumAnswer forumAnswer = readValue(content, ForumAnswer.class);
 			forumAnswerService.update(forumAnswer);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			return new ResponseEntity<>(forumAnswer, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/delete/{idAnswer}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getDelete(@PathVariable("idAnswer") String idAnswer){
 		try {
 			forumAnswerService.delete(idAnswer);
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

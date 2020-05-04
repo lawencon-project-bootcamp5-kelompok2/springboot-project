@@ -34,12 +34,7 @@ public class CourseServiceImpl implements CourseService{
 
 	@Override
 	public String insert(Course course) throws Exception {
-		if(validCourse(course)==true) {
-			return "Data Already Exist";
-		}
-		else {
-			courseDao.insert(course);
-		}
+		courseDao.insert(course);
 		return "Success";
 	}
 

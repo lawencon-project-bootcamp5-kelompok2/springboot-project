@@ -51,7 +51,7 @@ public class KelasController extends BaseController{
 			return new ResponseEntity<>(listKelas, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -63,7 +63,7 @@ public class KelasController extends BaseController{
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -75,37 +75,32 @@ public class KelasController extends BaseController{
 			return new ResponseEntity<>(kelas, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@GetMapping("/search/trainer/{idTrainer}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListByTrainer(@PathVariable("idTrainer") String idTrainer){
+		List<?> listData = new ArrayList<>();
 		try {
-			List<?> listData = kelasService.getByTrainer(idTrainer);
+			listData = kelasService.getByTrainer(idTrainer);
 			return new ResponseEntity<>(listData, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listData, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@RequestBody String content){
-		try {
-			Kelas kelas = readValue(content, Kelas.class);
-			if(kelasService.validKelas(kelas)==true) {
-				return ResponseEntity.badRequest()
-						.body(new MessageResponse("Waktu kelas sudah dipakai"));
-			}
-			kelasService.insert(kelas);
-			return new ResponseEntity<>(kelas, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> getInsert(@RequestBody String content) throws Exception {
+		Kelas kelas = readValue(content, Kelas.class);
+		if (kelasService.validKelas(kelas) == true) {
+			return ResponseEntity.badRequest().body(new MessageResponse("Waktu kelas sudah dipakai"));
 		}
+		kelasService.insert(kelas);
+		return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
 	}
 	
 	@PutMapping("/update")
@@ -117,7 +112,7 @@ public class KelasController extends BaseController{
 			return new ResponseEntity<>(kelas, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -129,7 +124,7 @@ public class KelasController extends BaseController{
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

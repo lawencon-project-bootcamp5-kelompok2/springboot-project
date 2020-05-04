@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Subcourse;
+import com.lawencon.app.springbootproject.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.SubcourseService;
 
 @RestController
@@ -49,7 +50,7 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(subcourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -62,7 +63,7 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(listCourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -75,7 +76,7 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(listData, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -88,7 +89,7 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(listCourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -101,7 +102,7 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(listCourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
 		}
 	}
 	@GetMapping("/nilaisiswa/{idSubcourse}/{idKelas}")
@@ -113,21 +114,20 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(listCourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@RequestBody String content){
-		try {
-			Subcourse subcourse = readValue(content, Subcourse.class);
-			subcourseService.insert(subcourse);
-			return new ResponseEntity<>(subcourse, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> getInsert(@RequestBody String content) throws Exception {
+		Subcourse subcourse = readValue(content, Subcourse.class);
+		if(subcourseService.validTime(subcourse)==true) {
+			return ResponseEntity.badRequest().
+					body(new MessageResponse("Schedule had been Book with another trainer, choose another Time"));
 		}
+		subcourseService.insert(subcourse);
+		return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
 	}
 	
 	@PutMapping("/update")
@@ -139,7 +139,7 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(subcourse, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -151,7 +151,7 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

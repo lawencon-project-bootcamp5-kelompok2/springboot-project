@@ -29,12 +29,7 @@ public class SubcourseServiceImpl implements SubcourseService{
 
 	@Override
 	public String insert(Subcourse subcourse) throws Exception {
-		if(validTime(subcourse)==true) {
-			return "Schedule had been Book with another trainer, choose another Time";
-		}
-		else {
-			subcourseDao.insert(subcourse);
-		}
+		subcourseDao.insert(subcourse);
 		return "Success Insert";
 	}
 

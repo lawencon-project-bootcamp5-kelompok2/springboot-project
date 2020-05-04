@@ -50,12 +50,12 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 	@Override
 	public List<?> findByCourse(String namaCourse) throws Exception {
 		Query q = em.createNativeQuery("select "
-				+ "s.id_subcourse, s.nama_subcourse, s.tanggal_mulai, s.tanggal_selesai, s.id_course, s.id_materi, s.id_forum "
+				+ "s.id_subcourse, s.nama_subcourse, s.tanggal_mulai, s.tanggal_selesai, s.id_course "
 				+ "from "
 				+ "subcourse s join course c on c.id_course = s.id_course "
 				+ "where c.nama_course = :namaParam").
 				setParameter("namaParam", namaCourse);
-		return bMapperHibernate(q.getResultList(), "idSubcourse", "namaSubcourse", "tanggalMulai", "tanggalSelesai", "idCourse", "idMateri", "idForum");
+		return bMapperHibernate(q.getResultList(), "idSubcourse", "namaSubcourse", "tanggalMulai", "tanggalSelesai", "idCourse");
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -49,7 +49,7 @@ public class ForumController extends BaseController{
 			return new ResponseEntity<>(forum, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -72,10 +72,10 @@ public class ForumController extends BaseController{
 		try {
 			Forum forum = readValue(content, Forum.class);
 			forumService.createForum(forum);
-			return new ResponseEntity<>("Success Insert", HttpStatus.OK);
+			return new ResponseEntity<>(forum, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Insert", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -85,10 +85,10 @@ public class ForumController extends BaseController{
 		try {
 			Forum forum = readValue(content, Forum.class);
 			forumService.update(forum);
-			return new ResponseEntity<>("Success Update", HttpStatus.OK);
+			return new ResponseEntity<>(forum, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Update", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class ForumController extends BaseController{
 			return new ResponseEntity<>("Success Delete", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed Delete", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

@@ -76,10 +76,10 @@ public class LoginController extends BaseController{
 		try {
 			Login login = readValue(content, Login.class);
 			loginService.insertUser(login);
+			return new ResponseEntity<>(login, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PutMapping("/update")
@@ -88,10 +88,10 @@ public class LoginController extends BaseController{
 		try {
 			Login login = readValue(content, Login.class);
 			loginService.update(login);
+			return new ResponseEntity<>(login, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PostMapping("/deleteId/{id}")
@@ -100,9 +100,9 @@ public class LoginController extends BaseController{
 		try {
 			loginService.deleteById(id);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>("deleted...",HttpStatus.OK);
 	}
 	
 	@PostMapping("/signup")

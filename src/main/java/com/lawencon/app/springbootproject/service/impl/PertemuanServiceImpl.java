@@ -30,12 +30,7 @@ public class PertemuanServiceImpl implements PertemuanService{
 
 	@Override
 	public String insert(Pertemuan pertemuan) throws Exception {
-		if(validPertemuan(pertemuan)==true) {
-			return "Data Already Exist";
-		}
-		else {
-			pertemuanDao.insert(pertemuan);
-		}
+		pertemuanDao.insert(pertemuan);
 		return "Success Insert";
 	}
 

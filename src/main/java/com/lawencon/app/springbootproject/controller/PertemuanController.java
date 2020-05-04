@@ -53,6 +53,19 @@ public class PertemuanController extends BaseController {
 		}
 	}
 	
+	@GetMapping("/search/pertemuan/{idSubcourse}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getListSubcourse(@PathVariable("idSubcourse") String idSubcourse){
+		List<?> listSubcourse = new ArrayList<>();
+		try {
+			listSubcourse = pertemuanService.findBySubcourse(idSubcourse);
+			return new ResponseEntity<>(listSubcourse, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){

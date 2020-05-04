@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-//import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -32,10 +31,8 @@ public class Subcourse {
 
 	@Temporal(TemporalType.DATE)
 	private Date tanggalSelesai;
-
-//	@OneToOne
-//	@JoinColumn(name = "idForum")
-//	private Forum idForum;
+	
+	private String deskripsi;
 
 	public String getIdSubcourse() {
 		return idSubcourse;
@@ -77,12 +74,12 @@ public class Subcourse {
 		this.tanggalSelesai = tanggalSelesai;
 	}
 
-//	public Forum getIdForum() {
-//		return idForum;
-//	}
-//
-//	public void setIdForum(Forum idForum) {
-//		this.idForum = idForum;
-//	}
+	public String getDeskripsi() {
+		return deskripsi;
+	}
+
+	public void setDeskripsi(String deskripsi) {
+		this.deskripsi = deskripsi;
+	}
 
 }

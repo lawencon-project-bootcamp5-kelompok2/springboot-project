@@ -9,12 +9,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "nilai_mean_kelas")
 public class NilaiMeanKelas {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idNilaiMean;
-	
-	private String idJawaban;
 	
 	private String idTest;
 	
@@ -26,14 +24,6 @@ public class NilaiMeanKelas {
 
 	public void setIdNilaiMean(int idNilaiMean) {
 		this.idNilaiMean = idNilaiMean;
-	}
-
-	public String getIdJawaban() {
-		return idJawaban;
-	}
-
-	public void setIdJawaban(String idJawaban) {
-		this.idJawaban = idJawaban;
 	}
 
 	public String getIdTest() {

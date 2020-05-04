@@ -62,5 +62,10 @@ public class PertemuanServiceImpl implements PertemuanService{
 		}
 		return false;
 	}
+
+	@Override
+	public List<?> findBySubcourse(String idSubcourse) throws Exception {
+		return pertemuanDao.findBySubcourse(idSubcourse);
+	}
 	
 }

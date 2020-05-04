@@ -36,6 +36,7 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 		subCourse.setNamaSubcourse(subcourse.getNamaSubcourse());
 		subCourse.setTanggalMulai(subcourse.getTanggalMulai());
 		subCourse.setTanggalSelesai(subcourse.getTanggalSelesai());
+		subCourse.setDeskripsi(subcourse.getDeskripsi());
 		em.merge(subCourse);
 		return subCourse;
 	}

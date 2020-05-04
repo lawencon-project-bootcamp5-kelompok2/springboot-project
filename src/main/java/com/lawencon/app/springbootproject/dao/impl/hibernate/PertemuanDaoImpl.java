@@ -53,4 +53,15 @@ public class PertemuanDaoImpl extends BaseHibernate implements PertemuanDao{
 		return (Pertemuan) q.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findBySubcourse(String idSubcourse) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "p.id_pertemuan, p.pertemuan, "
+				+ "p.tanggal_pertemuan, p.id_subcourse, p.id_materi "
+				+ "from pertemuan p where p.id_subcourse = :idParam");
+		q.setParameter("idParam", idSubcourse);
+		return bMapperHibernate(q.getResultList(), "idPertemuan", "pertemuan", "tanggalPertemuan", "idSubcourse", "idMateri");
+	}
+
 }

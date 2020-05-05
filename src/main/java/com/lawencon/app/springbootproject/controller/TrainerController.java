@@ -125,15 +125,15 @@ public class TrainerController extends BaseController {
 		}
 	}
 	
-	@GetMapping("/report/{idTrainer}/{idSubcourse}")
+	@GetMapping("/report/{idTrainer}/{idKelas}")
 	@PreAuthorize("hasRole('TRAINER')")
-	public ResponseEntity<byte[]> getList(@PathVariable String idTrainer, @PathVariable String idSubcourse){
+	public ResponseEntity<byte[]> getList(@PathVariable String idTrainer, @PathVariable String idKelas){
 		try {
 			HttpHeaders responseHeaders = new HttpHeaders();
 			responseHeaders.setContentType(MediaType.APPLICATION_PDF);
 			responseHeaders.add("content-disposition", "inline;filename='report'");
-			trainerService.cetakReportTrainer(idTrainer, idSubcourse);
-			return new ResponseEntity<>(trainerService.cetakReportTrainer(idTrainer, idSubcourse), responseHeaders, HttpStatus.OK);
+			trainerService.cetakReportTrainer(idTrainer, idKelas);
+			return new ResponseEntity<>(trainerService.cetakReportTrainer(idTrainer, idKelas), responseHeaders, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

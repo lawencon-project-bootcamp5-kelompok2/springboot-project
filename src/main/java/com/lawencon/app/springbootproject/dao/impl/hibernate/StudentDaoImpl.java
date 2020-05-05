@@ -89,17 +89,6 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 		return (Student) q.getSingleResult();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<?> cetakReportStudent(String id) throws Exception {
-		Query q = em.createNativeQuery("select \r\n" + "	sc.nama_subcourse , j.nilai , s.nama_student \r\n"
-				+ "from \r\n" + "	student s \r\n" + "	join jawaban j on j.id_student = s.id_student \r\n"
-				+ "	join course c on c.id_course = s.id_course \r\n"
-				+ "	join subcourse sc on sc.id_course = c.id_course \r\n" + "where \r\n"
-				+ "	s.id_student = :idParam").setParameter("idParam", id);
-		return bMapperHibernate(q.getResultList(), "namaSubcourse", "nilai", "namaStudent");
-	}
-
 	@Override
 	public Student validStudent(SignupRequest signUpRequest) throws Exception {
 		Query q = em.createQuery("from Student where email = :emailParam and namaStudent = :namaParam");
@@ -110,16 +99,18 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<?> cetakReportStudent(String idStudent, String idCourse) throws Exception {
+	public List<?> cetakReportStudent(String idStudent, String idKelas) throws Exception {
 		Query q = em
-				.createNativeQuery("select distinct " + "	s.nama_student , j.nilai, sc.nama_subcourse, c.nama_course "
-						+ "	from " + "	student s " + "	join jawaban j on j.id_student = s.id_student "
+				.createNativeQuery("select distinct s.nama_student , j.nilai, sc.nama_subcourse, c.nama_course, k.kode_kelas "
+						+ "	from student s join jawaban j on j.id_student = s.id_student "
 						+ "	join test t on t.id_test = j.id_test "
 						+ "	join subcourse sc on sc.id_subcourse = t.id_subcourse "
 						+ "	join course c on c.id_course = sc.id_course "
-						+ "	where s.id_student = :studentParam and c.id_course = :courseParam")
-				.setParameter("studentParam", idStudent).setParameter("courseParam", idCourse);
-		return bMapperHibernate(q.getResultList(), "namaStudent", "nilai", "namaSubcourse", "namaCourse");
+						+ " join student_kelas sk on sk.student_id_student = s.id_student " 
+						+ "	join kelas k on k.id_kelas = sk.kelas_id_kelas "
+						+ "	where s.id_student = :studentParam and sk.kelas_id_kelas = :kelasParam")
+				.setParameter("studentParam", idStudent).setParameter("kelasParam", idKelas);
+		return bMapperHibernate(q.getResultList(), "namaStudent", "nilai", "namaSubcourse", "namaCourse", "kodeKelas");
 	}
 
 	@Override

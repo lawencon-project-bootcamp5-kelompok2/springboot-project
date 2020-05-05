@@ -62,4 +62,17 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 				setParameter("idParam", test.getIdSubcourse());
 		return (Test) q.getSingleResult();
 	}
+
+	@Override
+	public String getIdTestByKelas(String idKelas) throws Exception {
+		Query q = em.createNativeQuery("select distinct t.id_test " + 
+				"   from test t join subcourse sc on t.id_subcourse = sc.id_subcourse " + 
+				"	join course c on c.id_course = sc.id_course " + 
+				"	join kelas k on k.id_course = c.id_course " + 
+				"	join student_kelas sk on sk.kelas_id_kelas = k.id_kelas " + 
+				"	join student s on s.id_student = sk.student_id_student " + 
+				"   where k.id_kelas = :kelasParam");
+		q.setParameter("kelasParam", idKelas);
+		return (String) q.getSingleResult();
+	}
 }

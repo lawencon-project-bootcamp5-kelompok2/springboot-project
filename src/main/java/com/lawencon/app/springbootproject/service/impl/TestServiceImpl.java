@@ -69,4 +69,9 @@ public class TestServiceImpl implements TestService{
 		}
 		return false;
 	}
+
+	@Override
+	public String getIdTestByKelas(String idKelas) throws Exception {
+		return testDao.getIdTestByKelas(idKelas);
+	}
 }

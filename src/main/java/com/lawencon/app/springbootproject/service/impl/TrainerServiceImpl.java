@@ -13,7 +13,7 @@ import org.springframework.util.ResourceUtils;
 import com.lawencon.app.springbootproject.dao.TrainerDao;
 import com.lawencon.app.springbootproject.model.Trainer;
 import com.lawencon.app.springbootproject.payload.request.SignupRequest;
-import com.lawencon.app.springbootproject.service.SubcourseService;
+import com.lawencon.app.springbootproject.service.TestService;
 import com.lawencon.app.springbootproject.service.TrainerService;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -31,7 +31,7 @@ public class TrainerServiceImpl implements TrainerService {
 	private TrainerDao trainerDao;
 	
 	@Autowired
-	private SubcourseService subcourseService;
+	private TestService testService;
 
 	@Override
 	public void updateTrainer(Trainer trainer) throws Exception{
@@ -54,10 +54,10 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public byte[] cetakReportTrainer(String idTrainer, String idSubcourse) throws Exception {
-		String idTest = subcourseService.getIdTestBySubcourse(idSubcourse);
+	public byte[] cetakReportTrainer(String idTrainer, String idKelas) throws Exception {
+		String idTest = testService.getIdTestByKelas(idKelas);
 		List<?> data = new ArrayList<>();
-		data = trainerDao.cetakReportTrainer(idTrainer, idTest, idSubcourse);
+		data = trainerDao.cetakReportTrainer(idTrainer, idTest, idKelas);
 		byte[] pdfReport = null;
 		try {
 			File file = ResourceUtils.getFile("classpath:report/reportTrainer.jrxml");

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,7 +48,7 @@ public class AbsensiController extends BaseController{
 	public ResponseEntity<?> getDetailAbsen(@PathVariable("idSubcourse") String idSubcourse, @PathVariable("idKelas") String idKelas){
 		List<?> listAbsenStudent = new ArrayList<>();
 		try {
-			listAbsenStudent = absensiService.findBySubcourseAndKelas(idSubcourse, idKelas);
+			listAbsenStudent = absensiService.findPending(idSubcourse, idKelas);
 			return new ResponseEntity<>(listAbsenStudent, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,14 +106,19 @@ public class AbsensiController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/report/{idKelas}/{idTrainer}/{idPertemuan}")
+	@GetMapping("/report/{idKelas}/{idPertemuan}")
 	@PreAuthorize("hasRole('TRAINER')")
-	public ResponseEntity<?> getUpdate(@PathVariable String idKelas, @PathVariable String idTrainer, @PathVariable String idPertemuan){
+	public ResponseEntity<byte[]> getReport(@PathVariable String idKelas, @PathVariable String idPertemuan){
 		try {
-			return new ResponseEntity<>(absensiService.cetakAbsen(idKelas, idTrainer, idPertemuan), HttpStatus.OK);
+			HttpHeaders responseHeaders = new HttpHeaders();
+			responseHeaders.setContentType(MediaType.APPLICATION_PDF);
+			responseHeaders.add("content-disposition", "inline;filename='report'");
+			absensiService.cetakAbsen(idKelas, idPertemuan);
+			return new ResponseEntity<>(absensiService.cetakAbsen(idKelas, idPertemuan), responseHeaders, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
 }

@@ -14,7 +14,7 @@ public interface StudentService {
 	abstract List<Student> findAll()throws Exception;
 	abstract Student findById (String idStudent)throws Exception;
 	abstract Boolean validStudent(SignupRequest signUpRequest)throws Exception;
-	abstract String cetakReportStudent(String idStudent, String idCourse) throws Exception;
+	abstract byte[] cetakReportStudent(String idStudent, String idKelas) throws Exception;
 	abstract String createStudents(SignupRequest signUpRequest)throws Exception;
 	abstract boolean existsByEmail(String email);
 	abstract Student findByEmail(String email) throws Exception;

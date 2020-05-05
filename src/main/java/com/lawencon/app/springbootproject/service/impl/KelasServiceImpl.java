@@ -78,20 +78,20 @@ public class KelasServiceImpl implements KelasService{
 	}
 
 	@Override
-	public String cetakKelas() throws Exception {
+	public byte[] cetakKelas() throws Exception {
 		List<?> data = new ArrayList<>();
 		data = kelasDao.cetakKelas();
+		byte[] pdfReport = null;
 		try {
 			File file = ResourceUtils.getFile("classpath:report/daftarKelas.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\daftar-kelas.pdf");
-			return "File berhasil diunduh di Local Disk D";
+			pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);		
 		} catch (Exception e) {
-			e.printStackTrace();
-			return e.getMessage();			
+			e.printStackTrace();		
 		}
+		return pdfReport;
 	}
 
 	@Override

@@ -13,6 +13,6 @@ public interface KelasService {
 	abstract void delete(String idKelas)throws Exception;
 	abstract Boolean validKelas(Kelas kelas)throws Exception;
 	abstract String getNamaKelas(String id) throws Exception;
-	abstract String cetakKelas() throws Exception;
+	abstract byte[] cetakKelas() throws Exception;
 	abstract List<?> getByTrainer(String id) throws Exception;
 }

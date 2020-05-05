@@ -13,7 +13,6 @@ import org.springframework.util.ResourceUtils;
 import com.lawencon.app.springbootproject.dao.StudentDao;
 import com.lawencon.app.springbootproject.model.Student;
 import com.lawencon.app.springbootproject.payload.request.SignupRequest;
-import com.lawencon.app.springbootproject.service.CourseService;
 import com.lawencon.app.springbootproject.service.StudentService;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -29,9 +28,6 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	private StudentDao studentDao;
-	
-	@Autowired
-	private CourseService courseService;
 
 	@Override
 	public void createStudent(Student student) {
@@ -68,20 +64,20 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public String cetakReportStudent(String idStudent, String idCourse) throws Exception {
+	public byte[] cetakReportStudent(String idStudent, String idKelas) throws Exception {
 		List<?> data = new ArrayList<>();
-		data = studentDao.cetakReportStudent(idStudent, idCourse);
+		data = studentDao.cetakReportStudent(idStudent, idKelas);
+		byte[] pdfReport = null;
 		try {
 			File file = ResourceUtils.getFile("classpath:report/reportStudent.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:\\report-"+studentDao.getNamaStudent(idStudent)+"-"+courseService.getNamaCourse(idCourse)+".pdf");
-			return "File berhasil diunduh di Local Disk D";
+			pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return e.getMessage();			
+			e.printStackTrace();		
 		}
+		return pdfReport;
 	}
 
 	@Override

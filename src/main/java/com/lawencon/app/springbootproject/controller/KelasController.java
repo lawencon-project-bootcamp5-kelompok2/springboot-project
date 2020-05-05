@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,13 +59,16 @@ public class KelasController extends BaseController{
 	
 	@GetMapping("/report")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> cetak(){
+	public ResponseEntity<byte[]> getReport(){
 		try {
+			HttpHeaders responseHeaders = new HttpHeaders();
+			responseHeaders.setContentType(MediaType.APPLICATION_PDF);
+			responseHeaders.add("content-disposition", "inline;filename='report'");
 			kelasService.cetakKelas();
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(kelasService.cetakKelas(), responseHeaders, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	

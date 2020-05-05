@@ -27,8 +27,10 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 	
 	@Override
 	public Absensi cekAbsen(Absensi absensi) throws Exception {
-		Query q = em.createQuery("from Absensi where idStudent = :idParam");
-		q.setParameter("idParam", absensi.getIdStudent());
+		Query q = em.createQuery("from Absensi where idStudent = :idParam and idSubcourse = :idSub and pertemuan = :idPert");
+		q.setParameter("idParam", absensi.getIdStudent()).
+		setParameter("idSub", absensi.getIdSubcourse()).
+		setParameter("idPert", absensi.getPertemuan());
 		return (Absensi) q.getSingleResult();
 	}
 

@@ -12,7 +12,7 @@ import org.springframework.util.ResourceUtils;
 
 import com.lawencon.app.springbootproject.dao.StudentDao;
 import com.lawencon.app.springbootproject.model.Student;
-import com.lawencon.app.springbootproject.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.model.payload.request.SignupRequest;
 import com.lawencon.app.springbootproject.service.StudentService;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -28,15 +28,6 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	private StudentDao studentDao;
-
-	@Override
-	public void createStudent(Student student) {
-		try {
-			studentDao.createStudent(student);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void updateStudent(Student student) throws Exception{
@@ -95,7 +86,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public boolean existsByEmail(String email) {
+	public Boolean existsByEmail(String email) {
 		return studentDao.existsByEmail(email);
 	}
 

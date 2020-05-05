@@ -6,15 +6,24 @@ import java.util.Map;
 import com.lawencon.app.springbootproject.model.Jawaban;
 
 public interface JawabanDao {
+	
+	List<?> findAll() throws Exception;
 
-	abstract List<?> findAll()throws Exception;
-	abstract Jawaban findById(String idJawaban)throws Exception;
-	abstract void insert(Jawaban jawaban)throws Exception;
-	abstract List<?> createResultAverageStudentFromSubcourse(Jawaban jawaban)throws Exception;
-	abstract Jawaban update(Jawaban jawaban)throws Exception;
-	abstract void delete(String idJawaban)throws Exception;
-	abstract List<?> findResultStudentFromSubcourse(String idTest, String idStudent) throws Exception;
-	abstract List<Map<String, Object>> findAverageStudentFromSubcourse(String idTest)throws Exception;
-	abstract List<?> findResultStudentFromAllSubcourse(String idStudent)throws Exception;
-	abstract List<Map<String, Object>> findAverageStudentFromAllSubcourse(String idStudent)throws Exception;
+	List<?> createResultAverageStudentFromSubcourse(Jawaban jawaban) throws Exception;
+
+	List<?> findResultStudentFromSubcourse(String idTest, String idStudent) throws Exception;
+
+	List<Map<String, Object>> findAverageStudentFromSubcourse(String idTest) throws Exception;
+
+	List<?> findResultStudentFromAllSubcourse(String idStudent) throws Exception;
+
+	List<Map<String, Object>> findAverageStudentFromAllSubcourse(String idStudent) throws Exception;
+
+	Jawaban findById(String idJawaban) throws Exception;
+
+	Jawaban update(Jawaban jawaban) throws Exception;
+
+	void delete(String idJawaban) throws Exception;
+
+	void insert(Jawaban jawaban) throws Exception;
 }

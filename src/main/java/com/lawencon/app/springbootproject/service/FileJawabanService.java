@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lawencon.app.springbootproject.model.FileJawaban;
 
 public interface FileJawabanService {
-	abstract FileJawaban upload(MultipartFile fileJawaban) throws Exception;
-	abstract FileJawaban getFile(String fileId) throws Exception;
-	abstract List<?> findAll() throws Exception;
+	FileJawaban upload(MultipartFile fileJawaban) throws Exception;
+	FileJawaban getFile(String fileId) throws Exception;
+	List<?> findAll() throws Exception;
 }

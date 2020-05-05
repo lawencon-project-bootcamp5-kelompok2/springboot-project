@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.lawencon.app.springbootproject.dao.AdminDao;
 import com.lawencon.app.springbootproject.model.Admin;
-import com.lawencon.app.springbootproject.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.model.payload.request.SignupRequest;
 import com.lawencon.app.springbootproject.service.AdminService;
 
 @Service

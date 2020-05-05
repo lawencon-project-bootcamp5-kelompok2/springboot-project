@@ -20,7 +20,7 @@ import com.lawencon.app.springbootproject.model.Kelas;
 import com.lawencon.app.springbootproject.model.Login;
 import com.lawencon.app.springbootproject.model.Role;
 import com.lawencon.app.springbootproject.model.Student;
-import com.lawencon.app.springbootproject.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.model.payload.request.SignupRequest;
 
 @Repository
 public class StudentDaoImpl extends BaseHibernate implements StudentDao {
@@ -33,11 +33,6 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 	
 	@Autowired
 	private LoginDao loginDao;
-	
-	@Override
-	public void createStudent(Student student) throws Exception {
-		em.persist(student);
-	}
 
 	@Override
 	public void updateStudent(Student student) throws Exception {

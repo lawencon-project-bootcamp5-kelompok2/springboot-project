@@ -1,4 +1,4 @@
-package com.lawencon.app.springbootproject.payload.request;
+package com.lawencon.app.springbootproject.model.payload.request;
 
 import javax.validation.constraints.NotBlank;
 

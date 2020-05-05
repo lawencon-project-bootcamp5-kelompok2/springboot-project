@@ -5,12 +5,20 @@ import java.util.List;
 import com.lawencon.app.springbootproject.model.Test;
 
 public interface TestService {
-	abstract List<?> findAll()throws Exception;
-	abstract Test findById(String idTest)throws Exception;
-	abstract void insert(Test test)throws Exception;
-	abstract Test update(Test test)throws Exception;
-	abstract void delete(String idTest)throws Exception;
-	abstract Boolean findWaktuSelesai(String idTest)throws Exception;
-	abstract Boolean cekTest(Test test)throws Exception;
+	
+	List<?> findAll() throws Exception;
+
+	Test findById(String idTest) throws Exception;
+
+	Test update(Test test) throws Exception;
+
+	Boolean findWaktuSelesai(String idTest) throws Exception;
+
+	Boolean cekTest(Test test) throws Exception;
+
 	String getIdTestByKelas(String idKelas) throws Exception;
+
+	void insert(Test test) throws Exception;
+
+	void delete(String idTest) throws Exception;
 }

@@ -6,17 +6,29 @@ import com.lawencon.app.springbootproject.model.Subcourse;
 
 public interface SubcourseService {
 
-	abstract List<?> findAll()throws Exception;
-	abstract Subcourse findById(String idSubcourse) throws Exception;
-	abstract List<?> findByCourse(String namaCourse) throws Exception;
-	abstract List<?> findByKelas(String idKelas) throws Exception;
-	abstract List<?> tampilanLihatNilai(String idSubcourse, String idKelas) throws Exception;
-	abstract List<?> tampilanInputNilai(String idSubcourse, String idKelas) throws Exception;
-	abstract List<?> getNilai(String idSubcourse, String idKelas) throws Exception;
-	abstract String insert(Subcourse subcourse)throws Exception;
-	abstract Subcourse update(Subcourse subcourse)throws Exception;
-	abstract void delete(String idSubcourse)throws Exception;
-	abstract String getIdTestBySubcourse(String subcourse) throws Exception;
-	abstract String getNamaSubcourse(String subcourse) throws Exception;
-	abstract Boolean validTime(Subcourse subcourse)throws Exception;
+	List<?> findAll() throws Exception;
+
+	List<?> findByCourse(String namaCourse) throws Exception;
+
+	List<?> findByKelas(String idKelas) throws Exception;
+
+	List<?> tampilanLihatNilai(String idSubcourse, String idKelas) throws Exception;
+
+	List<?> tampilanInputNilai(String idSubcourse, String idKelas) throws Exception;
+
+	List<?> getNilai(String idSubcourse, String idKelas) throws Exception;
+
+	Subcourse update(Subcourse subcourse) throws Exception;
+
+	Subcourse findById(String idSubcourse) throws Exception;
+
+	String insert(Subcourse subcourse) throws Exception;
+
+	String getIdTestBySubcourse(String subcourse) throws Exception;
+
+	String getNamaSubcourse(String subcourse) throws Exception;
+
+	Boolean validTime(Subcourse subcourse) throws Exception;
+
+	void delete(String idSubcourse) throws Exception;
 }

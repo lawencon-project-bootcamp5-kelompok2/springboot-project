@@ -5,13 +5,20 @@ import java.util.List;
 import com.lawencon.app.springbootproject.model.Test;
 
 public interface TestDao {
+	
+	List<?> findAll() throws Exception;
 
-	abstract List<?> findAll() throws Exception;
-	abstract Test findById(String idTest) throws Exception;
-	abstract void insert(Test test) throws Exception;
-	abstract Test update(Test test) throws Exception;
-	abstract void delete(String idTest) throws Exception;
-	abstract Test cekTest(Test test) throws Exception;
-	abstract List<?> findWaktuSelesai(String idTest) throws Exception;
-	abstract String getIdTestByKelas(String idKelas) throws Exception;
+	List<?> findWaktuSelesai(String idTest) throws Exception;
+
+	Test findById(String idTest) throws Exception;
+
+	Test update(Test test) throws Exception;
+
+	Test cekTest(Test test) throws Exception;
+
+	String getIdTestByKelas(String idKelas) throws Exception;
+
+	void insert(Test test) throws Exception;
+
+	void delete(String idTest) throws Exception;
 }

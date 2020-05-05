@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Trainer;
-import com.lawencon.app.springbootproject.payload.request.SignupRequest;
-import com.lawencon.app.springbootproject.payload.response.MessageResponse;
+import com.lawencon.app.springbootproject.model.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.model.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.LoginService;
 import com.lawencon.app.springbootproject.service.TrainerService;
 

@@ -5,14 +5,24 @@ import java.util.List;
 import com.lawencon.app.springbootproject.model.Kelas;
 
 public interface KelasDao {
-	abstract List<?> findAll()throws Exception;
-	abstract List<?> findAvailableClass(String idStudent) throws Exception;
-	abstract Kelas findById(String idKelas)throws Exception;
-	abstract void insert(Kelas kelas)throws Exception;
-	abstract void update(Kelas kelas)throws Exception;
-	abstract void delete(String idKelas)throws Exception;
-	abstract Kelas validKelas(Kelas kelas)throws Exception;
-	abstract String getNamaKelas(String id) throws Exception;
-	abstract List<?> cetakKelas() throws Exception;
-	abstract List<?> getByTrainer(String id) throws Exception;
+	
+	List<?> findAll() throws Exception;
+
+	List<?> findAvailableClass(String idStudent) throws Exception;
+
+	List<?> cetakKelas() throws Exception;
+
+	List<?> getByTrainer(String id) throws Exception;
+
+	Kelas findById(String idKelas) throws Exception;
+
+	Kelas validKelas(Kelas kelas) throws Exception;
+
+	String getNamaKelas(String id) throws Exception;
+
+	void insert(Kelas kelas) throws Exception;
+
+	void update(Kelas kelas) throws Exception;
+
+	void delete(String idKelas) throws Exception;
 }

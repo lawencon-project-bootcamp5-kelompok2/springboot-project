@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Pertemuan;
-import com.lawencon.app.springbootproject.payload.response.MessageResponse;
+import com.lawencon.app.springbootproject.model.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.PertemuanService;
 
 @RestController

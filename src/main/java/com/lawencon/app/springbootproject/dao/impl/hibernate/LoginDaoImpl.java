@@ -13,14 +13,6 @@ import com.lawencon.app.springbootproject.model.Login;
 public class LoginDaoImpl extends BaseHibernate implements LoginDao{
 
 	@Override
-	public Login validUser(String user, String pass) throws Exception {
-		Query q = em.createQuery("from Login where username = : userParam and password = :passParam")
-		.setParameter("userParam", user)
-		.setParameter("passParam", pass);
-		return (Login) q.getSingleResult();
-	}
-
-	@Override
 	public String insertUser(Login login) throws Exception {
 		em.persist(login);
 		return "Succsess to insert";

@@ -31,29 +31,13 @@ public class FileJawabanController extends BaseController {
 	@Autowired
 	private FileJawabanService fileJawabanService;
 	
-//	@PostMapping("/insert")
-//	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-//		try {
-//			FileJawaban fileJawaban = fileJawabanService.upload(file);
-//			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-//	                .path("/file/downloadFile/")
-//	                .path(fileJawaban.getIdFileJawaban())
-//	                .toUriString();
-//			return new UploadFileResponse(fileJawaban.getFileName(), fileDownloadUri,
-//	                file.getContentType(), file.getSize());
-//		} catch (Exception e) {
-//			return null;
-//		}
-//	}
-	
 	@PostMapping("/uploadFile")
 	@PreAuthorize("hasRole('STUDENT')")
 	public ResponseEntity<?> getInsert(@RequestParam("file") MultipartFile file){
 		try {
 			return new ResponseEntity<>(fileJawabanService.upload(file), HttpStatus.OK);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>("Failed Upload", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	

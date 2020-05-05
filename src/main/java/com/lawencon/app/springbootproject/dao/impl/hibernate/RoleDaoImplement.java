@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.lawencon.app.springbootproject.dao.RoleDao;
+import com.lawencon.app.springbootproject.dao.repository.RoleRepository;
 import com.lawencon.app.springbootproject.model.ERole;
 import com.lawencon.app.springbootproject.model.Role;
-import com.lawencon.app.springbootproject.repository.RoleRepository;
 
 @Repository
 public class RoleDaoImplement implements RoleDao{

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lawencon.app.springbootproject.dao.LoginDao;
 import com.lawencon.app.springbootproject.model.Login;
 import com.lawencon.app.springbootproject.model.Role;
-import com.lawencon.app.springbootproject.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.model.payload.request.SignupRequest;
 import com.lawencon.app.springbootproject.service.AdminService;
 import com.lawencon.app.springbootproject.service.LoginService;
 import com.lawencon.app.springbootproject.service.RoleService;
@@ -42,22 +42,6 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public List<Login> findAll() throws Exception {
 		return loginDao.findAll();
-	}
-
-	@Override
-	public Boolean validUser(String user, String pass) throws Exception {
-		Login log = null;
-		try {
-			log = loginDao.validUser(user, pass);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if(log != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	@Override

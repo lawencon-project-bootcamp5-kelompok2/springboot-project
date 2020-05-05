@@ -12,7 +12,7 @@ import org.springframework.util.ResourceUtils;
 
 import com.lawencon.app.springbootproject.dao.TrainerDao;
 import com.lawencon.app.springbootproject.model.Trainer;
-import com.lawencon.app.springbootproject.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.model.payload.request.SignupRequest;
 import com.lawencon.app.springbootproject.service.TestService;
 import com.lawencon.app.springbootproject.service.TrainerService;
 

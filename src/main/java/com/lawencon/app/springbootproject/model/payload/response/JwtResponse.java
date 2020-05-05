@@ -1,4 +1,4 @@
-package com.lawencon.app.springbootproject.payload.response;
+package com.lawencon.app.springbootproject.model.payload.response;
 
 import java.util.List;
 

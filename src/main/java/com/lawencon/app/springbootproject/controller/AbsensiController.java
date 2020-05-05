@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Absensi;
-import com.lawencon.app.springbootproject.payload.response.MessageResponse;
+import com.lawencon.app.springbootproject.model.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.AbsensiService;
 
 @RestController
@@ -70,7 +70,7 @@ public class AbsensiController extends BaseController{
 	}
 	
 	@GetMapping("/search/pertemuan/{idPertemuan}/{emailStudent}")
-	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListIdPertemuan(@PathVariable("idPertemuan") String idPertemuan, @PathVariable("emailStudent")String emailStudent){
 		List<?> listAbsenStudent = new ArrayList<>();
 		try {

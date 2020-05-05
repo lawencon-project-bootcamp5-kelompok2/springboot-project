@@ -5,14 +5,24 @@ import java.util.List;
 import com.lawencon.app.springbootproject.model.Course;
 
 public interface CourseDao {
-	abstract List<?> findAll()throws Exception;
-	abstract Course findById(String idCourse)throws Exception;
-	abstract List<?> findByTrainer(String idTrainer)throws Exception;
-	abstract void insert(Course course)throws Exception;
-	abstract Course update(Course course)throws Exception;
-	abstract void delete(String idCourse)throws Exception;
-	abstract Course validCourse(Course course)throws Exception;
-	abstract String getIdCourse(String id) throws Exception;
-	abstract String getNamaCourse(String id) throws Exception;
-	abstract List<?> getRekapJadwal(String id) throws Exception;
+	
+	List<?> findAll() throws Exception;
+
+	List<?> getRekapJadwal(String id) throws Exception;
+
+	List<?> findByTrainer(String idTrainer) throws Exception;
+
+	Course findById(String idCourse) throws Exception;
+
+	Course update(Course course) throws Exception;
+
+	Course validCourse(Course course) throws Exception;
+
+	String getIdCourse(String id) throws Exception;
+
+	String getNamaCourse(String id) throws Exception;
+
+	void insert(Course course) throws Exception;
+
+	void delete(String idCourse) throws Exception;
 }

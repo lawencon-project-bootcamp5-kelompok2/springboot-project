@@ -31,31 +31,14 @@ public class SoalController extends BaseController {
 	@Autowired
 	private SoalService soalService;
 	
-	@PostMapping("/insert")
-	@PreAuthorize("hasRole('TRAINER')")
-	public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
-		try {
-			Soal soal = soalService.upload(file);
-//			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-//	                .path("/file/downloadFile/")
-//	                .path(soal.getIdSoal())
-//	                .toUriString();
-//			return new UploadFileResponse(soal.getFileName(), fileDownloadUri,
-//	                file.getContentType(), file.getSize());
-			return new ResponseEntity<>(soal, HttpStatus.OK);
-		} catch (Exception e) {
-			return null;
-		}
-	}
-	
 	@PostMapping("/uploadFile")
 	@PreAuthorize("hasRole('TRAINER')")
 	public ResponseEntity<?> getInsert(@RequestParam("file") MultipartFile file){
 		try {
-			soalService.upload(file);
-			return new ResponseEntity<>(HttpStatus.OK);
+			Soal soal = soalService.upload(file);
+			return new ResponseEntity<>(soal, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	

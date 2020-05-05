@@ -5,12 +5,20 @@ import java.util.List;
 import com.lawencon.app.springbootproject.model.Absensi;
 
 public interface AbsensiDao {
-	abstract void insert(Absensi absensi)throws Exception;
-	abstract Absensi cekAbsen(Absensi absensi)throws Exception;
-	abstract Absensi update(Absensi absensi)throws Exception;
-	abstract List<Absensi> findAll()throws Exception;
-	List<?> findByIdPertemuanAndStudent(String idPertemuan, String emailStudent)throws Exception;
-	abstract List<?> findByStudent(String idStudent)throws Exception;
-	abstract List<?> findPending(String idSubcourse, String idKelas) throws Exception;
-	abstract List<?> cetakAbsen(String idKelas, String idPertemuan) throws Exception;
+
+	List<Absensi> findAll() throws Exception;
+
+	List<?> findByIdPertemuanAndStudent(String idPertemuan, String emailStudent) throws Exception;
+
+	List<?> findByStudent(String idStudent) throws Exception;
+
+	List<?> findPending(String idSubcourse, String idKelas) throws Exception;
+
+	List<?> cetakAbsen(String idKelas, String idPertemuan) throws Exception;
+
+	Absensi cekAbsen(Absensi absensi) throws Exception;
+
+	Absensi update(Absensi absensi) throws Exception;
+
+	void insert(Absensi absensi) throws Exception;
 }

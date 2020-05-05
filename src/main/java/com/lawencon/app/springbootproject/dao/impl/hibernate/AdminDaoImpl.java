@@ -16,7 +16,7 @@ import com.lawencon.app.springbootproject.dao.RoleDao;
 import com.lawencon.app.springbootproject.model.Admin;
 import com.lawencon.app.springbootproject.model.Login;
 import com.lawencon.app.springbootproject.model.Role;
-import com.lawencon.app.springbootproject.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.model.payload.request.SignupRequest;
 
 @Repository
 public class AdminDaoImpl extends BaseHibernate implements AdminDao {

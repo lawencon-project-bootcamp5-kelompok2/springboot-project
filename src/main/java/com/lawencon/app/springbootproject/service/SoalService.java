@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lawencon.app.springbootproject.model.Soal;
 
 public interface SoalService {
-	abstract Soal upload(MultipartFile soal) throws Exception;
-	abstract Soal getFile(String fileId) throws Exception;
-	abstract List<?> findAll() throws Exception;
+	Soal upload(MultipartFile soal) throws Exception;
+	Soal getFile(String fileId) throws Exception;
+	List<?> findAll() throws Exception;
 }

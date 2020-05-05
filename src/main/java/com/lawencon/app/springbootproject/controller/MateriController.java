@@ -31,22 +31,23 @@ public class MateriController extends BaseController {
 	@Autowired
 	private MateriService materiService;
 	
-	@PostMapping("/insert")
-	@PreAuthorize("hasRole('TRAINER')")
-	public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
-		try {
-			Materi materi = materiService.upload(file);
+//	### First Version ###
+//	@PostMapping("/insert")
+//	@PreAuthorize("hasRole('TRAINER')")
+//	public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+//		try {
+//			Materi materi = materiService.upload(file);
 //			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 //	                .path("/file/downloadFile/")
 //	                .path(materi.getIdMateri())
 //	                .toUriString();
 //			return new UploadFileResponse(materi.getFileName(), fileDownloadUri,
 //	                file.getContentType(), file.getSize());
-			return new ResponseEntity<>(materi, HttpStatus.OK);
-		} catch (Exception e) {
-			return null;
-		}
-	}
+//			return new ResponseEntity<>(materi, HttpStatus.OK);
+//		} catch (Exception e) {
+//			return null;
+//		}
+//	}
 	
 	@PostMapping("/uploadFile")
 	@PreAuthorize("hasRole('TRAINER')")
@@ -55,7 +56,7 @@ public class MateriController extends BaseController {
 			Materi materi = materiService.upload(file);
 			return new ResponseEntity<>(materi, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	

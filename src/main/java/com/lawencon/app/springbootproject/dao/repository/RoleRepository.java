@@ -1,4 +1,4 @@
-package com.lawencon.app.springbootproject.repository;
+package com.lawencon.app.springbootproject.dao.repository;
 
 import java.util.Optional;
 

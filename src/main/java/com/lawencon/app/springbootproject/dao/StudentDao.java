@@ -3,20 +3,29 @@ package com.lawencon.app.springbootproject.dao;
 import java.util.List;
 
 import com.lawencon.app.springbootproject.model.Student;
-import com.lawencon.app.springbootproject.payload.request.SignupRequest;
+import com.lawencon.app.springbootproject.model.payload.request.SignupRequest;
 
 public interface StudentDao {
-	
-	abstract void createStudent (Student student)throws Exception;
-	abstract void updateStudent (Student student)throws Exception;
-	abstract void updateProfil (Student student)throws Exception;
-	abstract void deleteStudent (String idStudent)throws Exception;
-	abstract List<Student> findAll()throws Exception;
-	abstract Student findById (String idStudent)throws Exception;
-	abstract Student validStudent(SignupRequest signUpRequest)throws Exception;
-	abstract List<?> cetakReportStudent(String idStudent, String idKelas) throws Exception;
-	abstract String getNamaStudent(String idStudent) throws Exception;
-	abstract void createStudents(SignupRequest signUpRequest)throws Exception;
+
+	List<Student> findAll() throws Exception;
+
+	List<?> cetakReportStudent(String idStudent, String idKelas) throws Exception;
+
+	Student findById(String idStudent) throws Exception;
+
+	Student validStudent(SignupRequest signUpRequest) throws Exception;
+
 	Student findByEmail(String email);
+
+	String getNamaStudent(String idStudent) throws Exception;
+
 	Boolean existsByEmail(String email);
+
+	void updateStudent(Student student) throws Exception;
+
+	void updateProfil(Student student) throws Exception;
+
+	void deleteStudent(String idStudent) throws Exception;
+
+	void createStudents(SignupRequest signUpRequest) throws Exception;
 }

@@ -7,6 +7,8 @@ import com.lawencon.app.springbootproject.model.Absensi;
 public interface AbsensiDao {
 
 	List<Absensi> findAll() throws Exception;
+	
+	List<?> findByIdPertemuan(String idPertemuan) throws Exception;
 
 	List<?> findByIdPertemuanAndStudent(String idPertemuan, String emailStudent) throws Exception;
 
@@ -19,6 +21,8 @@ public interface AbsensiDao {
 	Absensi cekAbsen(Absensi absensi) throws Exception;
 
 	Absensi update(Absensi absensi) throws Exception;
+	
+	Absensi findById(String idAbsensi) throws Exception;
 
 	void insert(Absensi absensi) throws Exception;
 }

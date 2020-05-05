@@ -105,13 +105,36 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 	@Override
 	public List<?> findByIdPertemuanAndStudent(String idPertemuan, String emailStudent) throws Exception {
 		Query q = em.createNativeQuery("select "
-				+ "a.id_absensi, s.nama_student, s2.nama_subcourse, p.pertemuan, a.status, a.tanggal "
+				+ "a.id_absensi, s.nama_student, s2.nama_subcourse, "
+				+ "p.pertemuan, a.status, a.tanggal "
 				+ "from absensi a "
 				+ "join pertemuan p on p.id_pertemuan = a.id_pertemuan "
 				+ "join student s on s.id_student = a.id_student "
 				+ "join subcourse s2 on s2.id_subcourse = a.id_subcourse "
 				+ "where a.id_pertemuan = :idParam and s.email = :emailParam");
 		q.setParameter("idParam", idPertemuan).setParameter("emailParam", emailStudent);
+		return bMapperHibernate(q.getResultList(), "idAbsensi", "namaStudent", "namaSubcourse", "pertemuan", "status", "tanggal");
+	}
+
+	@Override
+	public Absensi findById(String idAbsensi) throws Exception {
+		Query q = em.createQuery("from Absensi where idAbsensi = :idParam").
+				setParameter("idParam", idAbsensi);
+		return (Absensi) q.getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findByIdPertemuan(String idPertemuan) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "a.id_absensi, s.nama_student, s2.nama_subcourse, "
+				+ "p.pertemuan, a.status, a.tanggal "
+				+ "from absensi a "
+				+ "join pertemuan p on p.id_pertemuan = a.id_pertemuan "
+				+ "join student s on s.id_student = a.id_student "
+				+ "join subcourse s2 on s2.id_subcourse = a.id_subcourse "
+				+ "where a.id_pertemuan = :idParam");
+		q.setParameter("idParam", idPertemuan);
 		return bMapperHibernate(q.getResultList(), "idAbsensi", "namaStudent", "namaSubcourse", "pertemuan", "status", "tanggal");
 	}
 }

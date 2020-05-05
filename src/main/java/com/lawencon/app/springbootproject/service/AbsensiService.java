@@ -7,6 +7,8 @@ import com.lawencon.app.springbootproject.model.Absensi;
 public interface AbsensiService {
 	List<Absensi> findAll() throws Exception;
 
+	List<?> findByIdPertemuan(String idPertemuan) throws Exception;
+	
 	List<?> findByIdPertemuanAndStudent(String idPertemuan, String emailStudent) throws Exception;
 
 	List<?> findByStudent(String idStudent) throws Exception;
@@ -16,6 +18,8 @@ public interface AbsensiService {
 	byte[] cetakAbsen(String idKelas, String idPertemuan) throws Exception;
 
 	Absensi update(Absensi absensi) throws Exception;
+	
+	Absensi findById(String idAbsensi) throws Exception;
 
 	Boolean cekAbsen(Absensi absensi) throws Exception;
 

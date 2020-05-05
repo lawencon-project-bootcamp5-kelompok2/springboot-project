@@ -5,9 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,10 +29,6 @@ public class FileJawaban {
     
     @Temporal(TemporalType.TIME)
     private Date uploadTime;
-    
-    @OneToOne
-    @JoinColumn(name = "idTest")
-    private Test idTest;
 
     public FileJawaban() {
 
@@ -85,13 +79,5 @@ public class FileJawaban {
 
 	public void setUploadTime(Date uploadTime) {
 		this.uploadTime = uploadTime;
-	}
-
-	public Test getIdTest() {
-		return idTest;
-	}
-
-	public void setIdTest(Test idTest) {
-		this.idTest = idTest;
 	}
 }

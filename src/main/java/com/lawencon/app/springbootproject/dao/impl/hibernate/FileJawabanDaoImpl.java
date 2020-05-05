@@ -27,11 +27,6 @@ public class FileJawabanDaoImpl extends BaseHibernate implements FileJawabanDao{
 				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
 			}
 			FileJawaban file = new FileJawaban(fileName, fileJawaban.getContentType(), fileJawaban.getBytes(), date);
-//			FileJawaban files = new FileJawaban();
-//			files.setFileName(fileName);
-//			files.setFileType(fileJawaban.getContentType());
-//			files.setUploadTime(date);
-//			files.setIdTest(files.getIdTest());
 			em.persist(file);
 			return file;
 			

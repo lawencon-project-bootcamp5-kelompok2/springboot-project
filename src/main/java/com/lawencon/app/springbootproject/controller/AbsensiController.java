@@ -56,7 +56,19 @@ public class AbsensiController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search/{idStudent}")
+	@GetMapping("/search/{idAbsensi}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getAbsensi(@PathVariable("idAbsensi") String idAbsensi){
+		try {
+			Absensi absen = absensiService.findById(idAbsensi);
+			return new ResponseEntity<>(absen, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search/student/{idStudent}")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListId(@PathVariable("idStudent") String idStudent){
 		List<?> listAbsenStudent = new ArrayList<>();
@@ -66,6 +78,19 @@ public class AbsensiController extends BaseController{
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(listAbsenStudent, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search/pertemuan/{idPertemuan}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getListIdPertemuan(@PathVariable("idPertemuan") String idPertemuan){
+		List<?> listAbsenStudent = new ArrayList<>();
+		try {
+			listAbsenStudent = absensiService.findByIdPertemuan(idPertemuan);
+			return new ResponseEntity<>(listAbsenStudent, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	

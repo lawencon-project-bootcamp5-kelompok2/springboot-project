@@ -61,7 +61,10 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 
 	@Override
 	public void deleteTrainer(String idTrainer) throws Exception{
-		em.remove(findById(idTrainer));
+		Trainer t = findById(idTrainer);
+		Login l = loginDao.findByEmail(t.getEmail());
+		em.remove(l);
+		em.remove(t);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -131,7 +134,7 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Trainer> findByNamaAndEmail(String search) throws Exception {
-		Query q = em.createQuery("from Trainer where email like concat('%',:searchParam,'%') or namaTrainer like concat('%',:searchParam,'%') ");
+		Query q = em.createQuery("from Trainer where upper(email) like upper(concat('%',:searchParam,'%')) or upper(namaTrainer) like upper(concat('%',:searchParam,'%')) ");
 		q.setParameter("searchParam", search);
 		return q.getResultList();
 	}

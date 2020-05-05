@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ public class NilaiMeanKelasController {
 	private NilaiMeanKelasService nilaiMeanService;
 	
 	@GetMapping("/list/{idCourse}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListMean(@PathVariable("idCourse") String idCourse){
 		List<?> listValue = new ArrayList<>();
 		try {
@@ -33,6 +35,7 @@ public class NilaiMeanKelasController {
 	}
 	
 	@GetMapping("/result/mean/{idCourse}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getResultMean(@PathVariable("idCourse") String idCourse){
 		List<?> listValue = new ArrayList<>();
 		try {

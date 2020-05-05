@@ -67,7 +67,10 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 
 	@Override
 	public void deleteStudent(String idStudent) throws Exception {
-		em.remove(findById(idStudent));
+		Student s = findById(idStudent);
+		Login l = loginDao.findByEmail(s.getEmail());
+		em.remove(l);
+		em.remove(s);
 	}
 
 	@SuppressWarnings("unchecked")

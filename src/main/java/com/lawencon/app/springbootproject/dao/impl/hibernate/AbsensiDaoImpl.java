@@ -103,14 +103,15 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<?> findByIdPertemuanAndStudent(String idPertemuan, String idStudent) throws Exception {
+	public List<?> findByIdPertemuanAndStudent(String idPertemuan, String emailStudent) throws Exception {
 		Query q = em.createNativeQuery("select "
-				+ "a.id_absensi, a.id_student, a.id_subcourse, "
-				+ "a.id_pertemuan, a.status, a.tanggal "
-				+ "from "
-				+ "absensi a join pertemuan p on a.id_pertemuan = p.id_pertemuan"
-				+ "where a.id_pertemuan = :idPertemuan and a.id_student = :idStudent");
-		q.setParameter("idPertemuan", idPertemuan).setParameter("idStudent", idStudent);
-		return bMapperHibernate(q.getResultList(), "idAbsensi", "idStudent", "idSubcourse", "idPertemuan", "status", "tanggal");
+				+ "a.id_absensi, s.nama_student, s2.nama_subcourse, p.pertemuan, a.status, a.tanggal "
+				+ "from absensi a "
+				+ "join pertemuan p on p.id_pertemuan = a.id_pertemuan "
+				+ "join student s on s.id_student = a.id_student "
+				+ "join subcourse s2 on s2.id_subcourse = a.id_subcourse "
+				+ "where a.id_pertemuan = :idParam and s.email = :emailParam");
+		q.setParameter("idParam", idPertemuan).setParameter("emailParam", emailStudent);
+		return bMapperHibernate(q.getResultList(), "idAbsensi", "namaStudent", "namaSubcourse", "pertemuan", "status", "tanggal");
 	}
 }

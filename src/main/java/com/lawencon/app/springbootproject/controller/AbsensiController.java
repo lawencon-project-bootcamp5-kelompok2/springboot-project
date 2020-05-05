@@ -67,12 +67,12 @@ public class AbsensiController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/search/pertemuan/{idPertemuan}/{idStudent}")
+	@GetMapping("/search/pertemuan/{idPertemuan}/{emailStudent}")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
-	public ResponseEntity<?> getListIdPertemuan(@PathVariable("idPertemuan") String idPertemuan, @PathVariable("idStudent")String idStudent){
+	public ResponseEntity<?> getListIdPertemuan(@PathVariable("idPertemuan") String idPertemuan, @PathVariable("emailStudent")String emailStudent){
 		List<?> listAbsenStudent = new ArrayList<>();
 		try {
-			listAbsenStudent = absensiService.findByIdPertemuanAndStudent(idPertemuan, idStudent);
+			listAbsenStudent = absensiService.findByIdPertemuanAndStudent(idPertemuan, emailStudent);
 			return new ResponseEntity<>(listAbsenStudent, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

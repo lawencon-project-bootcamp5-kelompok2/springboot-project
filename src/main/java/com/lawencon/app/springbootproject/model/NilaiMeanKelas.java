@@ -15,6 +15,7 @@ public class NilaiMeanKelas {
 	private int idNilaiMean;
 	private String idCourse;
 	private String idTest;
+	private String namaSubcourse;
 	
 	private float nilaiMean;
 
@@ -40,6 +41,14 @@ public class NilaiMeanKelas {
 
 	public void setIdTest(String idTest) {
 		this.idTest = idTest;
+	}
+
+	public String getNamaSubcourse() {
+		return namaSubcourse;
+	}
+
+	public void setNamaSubcourse(String namaSubcourse) {
+		this.namaSubcourse = namaSubcourse;
 	}
 
 	public float getNilaiMean() {

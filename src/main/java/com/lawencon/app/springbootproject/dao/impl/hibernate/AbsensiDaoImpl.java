@@ -89,13 +89,15 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<?> cetakAbsen(String idKelas, String idPertemuan) throws Exception {
-		Query q = em.createNativeQuery("select distinct p.pertemuan, k.kode_kelas, s.nama_student, p.tanggal_pertemuan, a.status, t.nama_trainer, sc.nama_subcourse " + 
-				"from student s join absensi a on s.id_student = a.id_student " + 
-				"join subcourse sc on sc.id_subcourse = a.id_subcourse " + 
-				"join course c on c.id_course = sc.id_course " + 
-				"join trainer t on t.id_trainer = c.id_trainer " + 
-				"join pertemuan p on p.id_subcourse = sc.id_subcourse " + 
-				"join kelas k on k.id_course = c.id_course " +
+		Query q = em.createNativeQuery("select distinct p.pertemuan, k.kode_kelas, st.nama_student, p.tanggal_pertemuan, "
+				+ "a.status, t.nama_trainer, s.nama_subcourse " + 
+				"   from absensi a join subcourse s on a.id_subcourse = s.id_subcourse " + 
+				"	join course c on c.id_course = s.id_course " + 
+				"	join kelas k on k.id_course = c.id_course " + 
+				"	join student st on st.id_student = a.id_student " + 
+				"	join student_kelas sk on sk.kelas_id_kelas = k.id_kelas " + 
+				"	join pertemuan p on p.id_pertemuan = a.id_pertemuan " + 
+				"	join trainer t on t.id_trainer = c.id_trainer " + 
 				"where k.id_kelas = :kelasParam and p.id_pertemuan = :pertemuanParam")
 				.setParameter("kelasParam", idKelas).setParameter("pertemuanParam", idPertemuan);
 		return bMapperHibernate(q.getResultList(), "pertemuan", "kodeKelas", "namaStudent", "tanggalPertemuan", "status", "namaTrainer", "namaSubcourse");

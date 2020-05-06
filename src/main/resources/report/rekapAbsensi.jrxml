@@ -3,20 +3,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rekapAbsensi" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab6680f6-459f-44c7-b660-50b1f4b48166">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<field name="pertemuan" class="java.lang.String">
-	</field>
-	<field name="kodeKelas" class="java.lang.String">
-	</field>
-	<field name="namaStudent" class="java.lang.String">
-	</field>
-	<field name="tanggalPertemuan" class="java.sql.Date">
-	</field>
-	<field name="status" class="java.lang.String">
-	</field>
-	<field name="namaTrainer" class="java.lang.String">
-	</field>
-	<field name="namaSubcourse" class="java.lang.String">
-	</field>
+	<field name="pertemuan" class="java.lang.String"/>
+	<field name="kodeKelas" class="java.lang.String"/>
+	<field name="namaStudent" class="java.lang.String"/>
+	<field name="tanggalPertemuan" class="java.sql.Date"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="namaTrainer" class="java.lang.String"/>
+	<field name="namaSubcourse" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
@@ -25,7 +18,7 @@
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="180" backcolor="#00AAFF" uuid="5e1d037e-cb3c-4fc2-b71e-566fd3441fcf"/>
 				<staticText>
-					<reportElement x="20" y="110" width="234" height="43" forecolor="#000000" uuid="0b8d9a6e-41cb-4797-885f-b14bb9003e78"/>
+					<reportElement x="20" y="110" width="160" height="43" forecolor="#000000" uuid="0b8d9a6e-41cb-4797-885f-b14bb9003e78"/>
 					<textElement>
 						<font size="22" isBold="true"/>
 					</textElement>
@@ -57,16 +50,16 @@
 					<imageExpression><![CDATA["report/images/header.JPG"]]></imageExpression>
 				</image>
 				<textField>
-					<reportElement x="20" y="153" width="100" height="27" uuid="fc6b6ada-42f0-4dd2-9c5e-c5a1a63cdbd6"/>
+					<reportElement x="100" y="151" width="50" height="27" uuid="fc6b6ada-42f0-4dd2-9c5e-c5a1a63cdbd6"/>
 					<textElement>
-						<font size="13"/>
+						<font size="15"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{pertemuan}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="120" y="153" width="100" height="27" uuid="facb8d92-37e4-4ffd-9978-44e7bdae4d66"/>
+					<reportElement x="150" y="151" width="150" height="27" uuid="facb8d92-37e4-4ffd-9978-44e7bdae4d66"/>
 					<textElement>
-						<font size="14"/>
+						<font size="15"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{tanggalPertemuan}]]></textFieldExpression>
 				</textField>
@@ -78,9 +71,23 @@
 					<textFieldExpression><![CDATA[$F{kodeKelas}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="464" y="116" width="46" height="30" uuid="be9b322f-3c10-463a-a982-5f5d72483165"/>
+					<reportElement x="464" y="116" width="56" height="30" uuid="be9b322f-3c10-463a-a982-5f5d72483165"/>
 					<textElement textAlignment="Right">
 						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{namaSubcourse}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="20" y="151" width="80" height="30" uuid="8dc5d2cb-5819-4ecc-bb5c-4040811b25f1"/>
+					<textElement>
+						<font size="15"/>
+					</textElement>
+					<text><![CDATA[Pertemuan]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="180" y="110" width="170" height="43" uuid="02c42d2f-f4aa-445c-804e-0e4d5e144ceb"/>
+					<textElement>
+						<font size="22"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{namaSubcourse}]]></textFieldExpression>
 				</textField>

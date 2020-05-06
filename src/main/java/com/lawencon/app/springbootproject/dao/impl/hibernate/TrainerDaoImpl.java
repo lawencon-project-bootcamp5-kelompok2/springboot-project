@@ -84,15 +84,17 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<?> cetakReportTrainer(String idTrainer, String idTest, String idKelas) throws Exception {
-		Query q = em.createNativeQuery("select distinct s.nama_student, a.status, j.nilai, sc.nama_subcourse, t.nama_trainer, k.kode_kelas" + 
-				"   from student s join absensi a on s.id_student = a.id_student " + 
-				"	join subcourse sc on sc.id_subcourse = a.id_subcourse " +	
+		Query q = em.createNativeQuery("select distinct s.nama_student, a.status, j.nilai, sc.nama_subcourse, tr.nama_trainer, k.kode_kelas" + 
+				"   from subcourse sc join absensi a on sc.id_subcourse = a.id_subcourse " + 
+				"	join student s on s.id_student = a.id_student " + 
 				"	join jawaban j on j.id_student = s.id_student " + 
 				"	join course c on c.id_course = sc.id_course " + 
-				"	join trainer t on t.id_trainer = c.id_trainer " + 
-				"   join student_kelas sk on sk.student_id_student = s.id_student " + 
-				"	join kelas k on k.id_kelas = sk.kelas_id_kelas " +
-				"	where t.id_trainer = :idTrainer and j.id_test = :idTest and k.id_kelas = :idKelas ")
+				"	join kelas k on k.id_course = c.id_course " + 
+				"	join student_kelas sk on sk.kelas_id_kelas = k.id_kelas " + 
+				"	join pertemuan p on p.id_pertemuan = a.id_pertemuan " + 
+				"	join test t on t.id_pertemuan = p.id_pertemuan " + 
+				"	join trainer tr on tr.id_trainer = c.id_trainer " +
+				"	where tr.id_trainer = :idTrainer and j.id_test = :idTest and k.id_kelas = :idKelas ")
 				.setParameter("idTrainer", idTrainer).setParameter("idTest", idTest).setParameter("idKelas", idKelas);
 		return bMapperHibernate(q.getResultList(), "namaStudent", "status", "nilai", "namaSubcourse", "namaTrainer", "kodeKelas");
 	}

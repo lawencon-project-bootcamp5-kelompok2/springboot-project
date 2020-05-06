@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportTrainer" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d595544b-f395-44e5-aa74-66ad62016a9c">
-
-	<field name="namaStudent" class="java.lang.String">
-	</field>
-	<field name="status" class="java.lang.String">
-	</field>
-	<field name="nilai" class="java.lang.Float">
-	</field>
-	<field name="namaSubcourse" class="java.lang.String">
-	</field>
-	<field name="namaTrainer" class="java.lang.String">
-	</field>
+	<field name="namaStudent" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="nilai" class="java.lang.Float"/>
+	<field name="namaSubcourse" class="java.lang.String"/>
+	<field name="namaTrainer" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
@@ -27,8 +21,8 @@
 					<text><![CDATA[Rekap Proses Pembelajaran]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="90" y="150" width="155" height="30" forecolor="#000000" uuid="a6c23a43-0215-42ca-9c79-9b09d713ac9f"/>
-					<textElement textAlignment="Right">
+					<reportElement x="80" y="150" width="155" height="30" forecolor="#000000" uuid="a6c23a43-0215-42ca-9c79-9b09d713ac9f"/>
+					<textElement textAlignment="Left">
 						<font size="16"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{namaSubcourse}]]></textFieldExpression>
@@ -37,7 +31,7 @@
 					<reportElement x="20" y="80" width="555" height="1" uuid="a83961a7-b8fe-4483-bea0-3a0d113e8508"/>
 				</line>
 				<staticText>
-					<reportElement x="20" y="150" width="70" height="30" uuid="ac1040bb-b523-418f-8ee1-00fbe7c78c68"/>
+					<reportElement x="20" y="150" width="60" height="30" uuid="ac1040bb-b523-418f-8ee1-00fbe7c78c68"/>
 					<textElement>
 						<font size="16"/>
 					</textElement>

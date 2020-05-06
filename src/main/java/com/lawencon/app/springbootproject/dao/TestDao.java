@@ -9,6 +9,8 @@ public interface TestDao {
 	List<?> findAll() throws Exception;
 
 	List<?> findWaktuSelesai(String idTest) throws Exception;
+	
+	List<?> findTestBySubcourse(String idSubcourse) throws Exception;
 
 	Test findById(String idTest) throws Exception;
 

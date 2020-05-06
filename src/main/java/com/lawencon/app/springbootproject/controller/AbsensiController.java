@@ -107,6 +107,19 @@ public class AbsensiController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/search/pertemuan/{idPertemuan}/{idSubcourse}/{idKelas}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getListIdPertemuan(@PathVariable("idPertemuan") String idPertemuan, @PathVariable("idSubcourse") String idSubcourse, @PathVariable("idKelas") String idKelas){
+		List<?> listAbsenStudent = new ArrayList<>();
+		try {
+			listAbsenStudent = absensiService.findByIdPertemuanAndKelas(idPertemuan, idSubcourse, idKelas);
+			return new ResponseEntity<>(listAbsenStudent, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@RequestBody String content) throws Exception {

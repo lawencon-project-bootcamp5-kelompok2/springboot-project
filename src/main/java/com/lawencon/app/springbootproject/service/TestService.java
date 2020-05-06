@@ -7,6 +7,8 @@ import com.lawencon.app.springbootproject.model.Test;
 public interface TestService {
 	
 	List<?> findAll() throws Exception;
+	
+	List<?> findTestBySubcourse(String idSubcourse) throws Exception;
 
 	Test findById(String idTest) throws Exception;
 

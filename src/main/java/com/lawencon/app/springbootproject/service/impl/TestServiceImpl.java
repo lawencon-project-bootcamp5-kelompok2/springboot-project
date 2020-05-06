@@ -74,4 +74,9 @@ public class TestServiceImpl implements TestService{
 	public String getIdTestByKelas(String idKelas) throws Exception {
 		return testDao.getIdTestByKelas(idKelas);
 	}
+
+	@Override
+	public List<?> findTestBySubcourse(String idSubcourse) throws Exception {
+		return testDao.findTestBySubcourse(idSubcourse);
+	}
 }

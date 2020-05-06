@@ -10,6 +10,8 @@ public interface AbsensiService {
 	List<?> findByIdPertemuan(String idPertemuan) throws Exception;
 	
 	List<?> findByIdPertemuanAndStudent(String idPertemuan, String emailStudent) throws Exception;
+	
+	List<?> findByIdPertemuanAndKelas(String idPertemuan, String idSubcourse, String idKelas) throws Exception;
 
 	List<?> findByStudent(String idStudent) throws Exception;
 

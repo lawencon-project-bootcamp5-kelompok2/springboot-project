@@ -98,4 +98,9 @@ public class AbsensiServiceImpl implements AbsensiService {
 	public List<?> findByIdPertemuan(String idPertemuan) throws Exception {
 		return absensiDao.findByIdPertemuan(idPertemuan);
 	}
+
+	@Override
+	public List<?> findByIdPertemuanAndKelas(String idPertemuan, String idSubcourse, String idKelas) throws Exception {
+		return absensiDao.findByIdPertemuanAndKelas(idPertemuan, idSubcourse, idKelas);
+	}
 }

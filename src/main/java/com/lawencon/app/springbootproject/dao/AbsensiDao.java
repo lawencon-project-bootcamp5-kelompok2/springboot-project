@@ -9,6 +9,8 @@ public interface AbsensiDao {
 	List<Absensi> findAll() throws Exception;
 	
 	List<?> findByIdPertemuan(String idPertemuan) throws Exception;
+	
+	List<?> findByIdPertemuanAndKelas(String idPertemuan, String idSubcourse, String idKelas) throws Exception;
 
 	List<?> findByIdPertemuanAndStudent(String idPertemuan, String emailStudent) throws Exception;
 

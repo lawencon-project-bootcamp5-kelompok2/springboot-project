@@ -20,7 +20,7 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 
 	@Override
 	public Test findById(String idTest) throws Exception {
-		Query q = em.createQuery("form Test where idTest = :idParam");
+		Query q = em.createQuery("from Test where idTest = :idParam");
 		q.setParameter("idParam", idTest);
 		return (Test) q.getSingleResult();
 	}
@@ -74,5 +74,17 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 				"   where k.id_kelas = :kelasParam");
 		q.setParameter("kelasParam", idKelas);
 		return (String) q.getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findTestBySubcourse(String idSubcourse) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "t.id_test, t.waktu_mulai, t.waktu_selesai, t.id_soal, "
+				+ "s.nama_subcourse "
+				+ "from test t "
+				+ "join subcourse s on s.id_subcourse = t.id_subcourse "
+				+ "where t.id_subcourse = :idParam").setParameter("idParam", idSubcourse);
+		return bMapperHibernate(q.getResultList(), "idTest", "waktuMulai", "waktuSelesai", "idSoal", "namaSubcourse");
 	}
 }

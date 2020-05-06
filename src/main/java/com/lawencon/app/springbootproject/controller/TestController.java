@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class TestController extends BaseController{
 	private TestService testService;
 	
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER')")
 	public ResponseEntity<?> getList(){
 		List<?> listTest = new ArrayList<>();
 		try {
@@ -41,6 +43,7 @@ public class TestController extends BaseController{
 	}
 	
 	@GetMapping("/search/{idTest}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER') or hasRole('STUDENT')")
 	public ResponseEntity<?> getListId(@PathVariable("idTest") String idTest){
 		try {
 			Test test = testService.findById(idTest);
@@ -51,7 +54,21 @@ public class TestController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/search/Test/{idSubcourse}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER') or hasRole('STUDENT')")
+	public ResponseEntity<?> getTest(@PathVariable("idSubcourse") String idSubcourse){
+		List<?> listTest = new ArrayList<>();
+		try {
+			listTest = testService.findTestBySubcourse(idSubcourse);
+			return new ResponseEntity<>(listTest, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/insert")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER')")
 	public ResponseEntity<?> getInsert(@RequestBody String content) throws Exception {
 		Test test = readValue(content, Test.class);
 		if (testService.cekTest(test) == true) {
@@ -62,6 +79,7 @@ public class TestController extends BaseController{
 	}
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Test test = readValue(content, Test.class);
@@ -74,6 +92,7 @@ public class TestController extends BaseController{
 	}
 	
 	@DeleteMapping("/delete/{idTest}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER')")
 	public ResponseEntity<?> getDelete(@PathVariable("idTest") String idTest){
 		try {
 			testService.delete(idTest);

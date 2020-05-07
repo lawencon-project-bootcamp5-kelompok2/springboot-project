@@ -98,9 +98,9 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 				+ "join course c on c.id_course = s.id_course "
 				+ "join kelas k on k.id_course = c.id_course "
 				+ "join pertemuan p on p.id_pertemuan = t.id_pertemuan "
-				+ "where t.id_subcourse = :idSubcourse and k.id_kelas = :idKelas").
-				setParameter("idSubcourse", idSubcourse).
-				setParameter("idKelas", idKelas);
+				+ "where t.id_subcourse = :idSubcourse and k.id_kelas = :idKelas");
+		q.setParameter("idSubcourse", idSubcourse).
+		setParameter("idKelas", idKelas);
 		return bMapperHibernate(q.getResultList(), "idTest", "namaSubcourse", "pertemuan", "waktuMulai", "waktuSelesai", "idSoal");
 	}
 }

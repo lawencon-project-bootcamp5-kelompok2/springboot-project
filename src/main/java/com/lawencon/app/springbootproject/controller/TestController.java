@@ -56,7 +56,7 @@ public class TestController extends BaseController{
 	
 	@GetMapping("/search/{idSubcourse}/{idKelas}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER') or hasRole('STUDENT')")
-	public ResponseEntity<?> getListId(@PathVariable("idTest") String idSubcourse, String idKelas){
+	public ResponseEntity<?> getListId(@PathVariable("idSubcourse") String idSubcourse, String idKelas){
 		try {
 			List<?> test = testService.findTestByIdSubcourseAndKelas(idSubcourse, idKelas);
 			return new ResponseEntity<>(test, HttpStatus.OK);

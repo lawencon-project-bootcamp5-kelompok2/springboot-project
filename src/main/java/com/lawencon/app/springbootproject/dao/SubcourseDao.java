@@ -11,6 +11,8 @@ public interface SubcourseDao {
 	List<?> findByCourse(String namaCourse) throws Exception;
 
 	List<?> findByKelas(String idKelas) throws Exception;
+	
+	List<?> findTanggalSelesai(String idSubcourse) throws Exception;
 
 	List<?> tampilanLihatNilai(String idSubcourse, String idKelas) throws Exception;
 

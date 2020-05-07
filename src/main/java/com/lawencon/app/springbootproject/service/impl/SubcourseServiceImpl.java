@@ -91,5 +91,10 @@ public class SubcourseServiceImpl implements SubcourseService{
 	public List<?> getNilai(String idSubcourse, String idKelas) throws Exception {
 		return subcourseDao.getNilai(idSubcourse, idKelas);
 	}
+
+	@Override
+	public List<?> findTanggalSelesai(String idSubcourse) throws Exception {
+		return subcourseDao.findTanggalSelesai(idSubcourse);
+	}
 	
 }

@@ -9,6 +9,8 @@ public interface TestService {
 	List<?> findAll() throws Exception;
 	
 	List<?> findTestBySubcourse(String idSubcourse) throws Exception;
+	
+	List<?> findTestByIdSubcourseAndKelas(String idSubcourse, String idKelas) throws Exception;
 
 	Test findById(String idTest) throws Exception;
 

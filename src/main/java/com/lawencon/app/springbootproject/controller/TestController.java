@@ -54,6 +54,18 @@ public class TestController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/search/{idSubcourse}/{idKelas}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER') or hasRole('STUDENT')")
+	public ResponseEntity<?> getListId(@PathVariable("idTest") String idSubcourse, String idKelas){
+		try {
+			List<?> test = testService.findTestByIdSubcourseAndKelas(idSubcourse, idKelas);
+			return new ResponseEntity<>(test, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/search/Test/{idSubcourse}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER') or hasRole('STUDENT')")
 	public ResponseEntity<?> getTest(@PathVariable("idSubcourse") String idSubcourse){

@@ -87,4 +87,20 @@ public class TestDaoImpl extends BaseHibernate implements TestDao{
 				+ "where t.id_subcourse = :idParam").setParameter("idParam", idSubcourse);
 		return bMapperHibernate(q.getResultList(), "idTest", "waktuMulai", "waktuSelesai", "idSoal", "namaSubcourse");
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findTestByIdSubcourseAndKelas(String idSubcourse, String idKelas) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "t.id_test, s.nama_subcourse, p.pertemuan, t.waktu_mulai, t.waktu_selesai, t.id_soal "
+				+ "from test t "
+				+ "join subcourse s on s.id_subcourse = t.id_subcourse "
+				+ "join course c on c.id_course = s.id_course "
+				+ "join kelas k on k.id_course = c.id_course "
+				+ "join pertemuan p on p.id_pertemuan = t.id_pertemuan "
+				+ "where t.id_subcourse = :idSubcourse and k.id_kelas = :idKelas").
+				setParameter("idSubcourse", idSubcourse).
+				setParameter("idKelas", idKelas);
+		return bMapperHibernate(q.getResultList(), "idTest", "namaSubcourse", "pertemuan", "waktuMulai", "waktuSelesai", "idSoal");
+	}
 }

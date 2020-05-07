@@ -51,7 +51,7 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 				"	join student st on st.id_student = a.id_student " + 
 				"	join student_kelas sk on sk.kelas_id_kelas = k.id_kelas " + 
 				"	join pertemuan p on p.id_pertemuan = a.id_pertemuan " + 
-				"where s.id_subcourse = :subParam and k.id_kelas = :kelasParam and a.status = 'pending'");
+				"where s.id_subcourse = :subParam and k.id_kelas = :kelasParam and a.status = 'Pending'");
 		q.setParameter("subParam", idSubcourse).setParameter("kelasParam", idKelas);
 		return bMapperHibernate(q.getResultList(), "namaSubcourse", "pertemuan", "namaStudent");
 	}	

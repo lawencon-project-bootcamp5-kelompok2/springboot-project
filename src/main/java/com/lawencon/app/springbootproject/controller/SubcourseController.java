@@ -54,6 +54,18 @@ public class SubcourseController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/search/tanggalSelesai/{idSubcourse}")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
+	public ResponseEntity<?> getTanggal(@PathVariable("idSubcourse") String idSubcourse){
+		try {
+			List<?> subcourse = subcourseService.findTanggalSelesai(idSubcourse);
+			return new ResponseEntity<>(subcourse, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/search/course/{namaCourse}")
 	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
 	public ResponseEntity<?> getListCourse(@PathVariable("namaCourse") String namaCourse){

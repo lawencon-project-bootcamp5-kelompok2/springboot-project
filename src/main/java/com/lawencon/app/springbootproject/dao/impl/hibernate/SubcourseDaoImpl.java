@@ -134,4 +134,12 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 		return bMapperHibernate(q.getResultList(), "nilai", "npm");
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findTanggalSelesai(String idSubcourse) throws Exception {
+		Query q = em.createNativeQuery("select s.tanggal_selesai "
+				+ "from subcourse s where s.id_subcourse = :idParam");
+		return bMapperHibernate(q.getResultList(), "tanggalSelesai");
+	}
+
 }

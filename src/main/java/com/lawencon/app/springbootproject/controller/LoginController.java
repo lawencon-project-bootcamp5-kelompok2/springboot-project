@@ -95,13 +95,14 @@ public class LoginController extends BaseController{
 	}
 	
 	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) throws Exception {
-		if (loginService.existsByEmail(signUpRequest.getEmail())) {
-			return ResponseEntity.badRequest()
-					.body(new MessageResponse("Error: Email is already in use!"));
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		try {
+			loginService.signUp(signUpRequest);
+			return ResponseEntity.ok(new MessageResponse("Registered successfully!"));
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		loginService.signUp(signUpRequest);
-		return ResponseEntity.ok(new MessageResponse("Registered successfully!"));
+		
 	}
 	
 	@PostMapping("/signin")

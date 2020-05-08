@@ -69,14 +69,15 @@ public class PertemuanController extends BaseController {
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@RequestBody String content)throws Exception{
+	public ResponseEntity<?> getInsert(@RequestBody String content){
+		try {
 			Pertemuan pertemuan = readValue(content, Pertemuan.class);
-			if(pertemuanService.validPertemuan(pertemuan)==true) {
-				return ResponseEntity.badRequest()
-						.body(new MessageResponse("Error: Data Already Exist"));
-			}
 			pertemuanService.insert(pertemuan);
-			return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
+			return new ResponseEntity<>(pertemuan, HttpStatus.OK);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+		}
+			
 	}
 	
 	@PutMapping("/update")

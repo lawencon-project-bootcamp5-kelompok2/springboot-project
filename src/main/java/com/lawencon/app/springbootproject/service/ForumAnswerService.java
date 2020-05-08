@@ -15,4 +15,6 @@ public interface ForumAnswerService {
 	void createForumAnswer(ForumAnswer forumAnswer) throws Exception;
 
 	void delete(String idAnswer) throws Exception;
+	
+	void validate(String idAnswer) throws Exception;
 }

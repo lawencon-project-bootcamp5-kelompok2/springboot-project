@@ -92,12 +92,12 @@ public class TrainerController extends BaseController {
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getInsert(@Valid @RequestBody SignupRequest signUpRequest) throws Exception{
-		if (loginService.existsByEmail(signUpRequest.getEmail())) {
-			return ResponseEntity.badRequest()
-					.body(new MessageResponse("Error: Email is already in use!"));
+		try {
+			loginService.signUp(signUpRequest);
+			return ResponseEntity.ok(new MessageResponse("Registered successfully!"));
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		loginService.signUp(signUpRequest);
-		return ResponseEntity.ok(new MessageResponse("Registered successfully!"));
 	}
 	
 	@PutMapping("/update")
@@ -125,18 +125,18 @@ public class TrainerController extends BaseController {
 		}
 	}
 	
-	@GetMapping("/report/{idTrainer}/{idKelas}")
-	@PreAuthorize("hasRole('TRAINER')")
-	public ResponseEntity<byte[]> getList(@PathVariable String idTrainer, @PathVariable String idKelas){
-		try {
-			HttpHeaders responseHeaders = new HttpHeaders();
-			responseHeaders.setContentType(MediaType.APPLICATION_PDF);
-			responseHeaders.add("content-disposition", "inline;filename='report'");
-			trainerService.cetakReportTrainer(idTrainer, idKelas);
-			return new ResponseEntity<>(trainerService.cetakReportTrainer(idTrainer, idKelas), responseHeaders, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
+	@GetMapping("/report/{idKelas}/{idSubcourse}")
+    @PreAuthorize("hasRole('TRAINER')")
+    public ResponseEntity<byte[]> getList(@PathVariable String idKelas, @PathVariable String idSubcourse){
+        try {
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.setContentType(MediaType.APPLICATION_PDF);
+            responseHeaders.add("content-disposition", "inline;filename='report'");
+            trainerService.cetakReportTrainer(idKelas, idSubcourse);
+            return new ResponseEntity<>(trainerService.cetakReportTrainer(idKelas, idSubcourse), responseHeaders, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

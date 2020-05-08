@@ -73,31 +73,36 @@ public class LoginServiceImpl implements LoginService {
 	public void signUp(SignupRequest signUpRequest) throws Exception {
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
-		if (strRoles == null) {
-			studentService.createStudents(signUpRequest);
-		} else {
-			strRoles.forEach(role -> {
-				switch (role) {
-				case "admin":
-					try {
-						adminService.createAdmin(signUpRequest);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					break;
-				case "trainer":
-					try {
-						trainerService.createTrainers(signUpRequest);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					
-					break;
-				default:
-					Role userRole = roleService.findRoleStudent();
-					roles.add(userRole);
-				}
-			});
+		if(existsByEmail(signUpRequest.getEmail())) {
+			throw new Exception("Error: Email is already in use!");
 		}
+		else {
+			if (strRoles == null) {
+				studentService.createStudents(signUpRequest);
+			} else {
+				strRoles.forEach(role -> {
+					switch (role) {
+					case "admin":
+						try {
+							adminService.createAdmin(signUpRequest);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						break;
+					case "trainer":
+						try {
+							trainerService.createTrainers(signUpRequest);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						
+						break;
+					default:
+						Role userRole = roleService.findRoleStudent();
+						roles.add(userRole);
+					}
+				});
+			}
+		}	
 	}
 }

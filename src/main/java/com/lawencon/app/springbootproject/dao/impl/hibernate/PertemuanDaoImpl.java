@@ -60,7 +60,7 @@ public class PertemuanDaoImpl extends BaseHibernate implements PertemuanDao{
 		Query q = em.createNativeQuery("select "
 				+ "p.id_pertemuan, p.pertemuan, "
 				+ "p.tanggal_pertemuan, p.id_subcourse, p.id_materi "
-				+ "from pertemuan p where p.id_subcourse = :idParam");
+				+ "from pertemuan p where p.id_subcourse = :idParam order by p.tanggal_pertemuan asc");
 		q.setParameter("idParam", idSubcourse);
 		return bMapperHibernate(q.getResultList(), "idPertemuan", "pertemuan", "tanggalPertemuan", "idSubcourse", "idMateri");
 	}

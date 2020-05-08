@@ -2,6 +2,8 @@ package com.lawencon.app.springbootproject.service.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,17 +36,22 @@ public class CourseServiceImpl implements CourseService{
 
 	@Override
 	public String insert(Course course) throws Exception {
+		if(validCourse(course)==true) {
+			throw new Exception("Data Already Exists");
+		}
 		courseDao.insert(course);
 		return "Success";
 	}
 
 	@Override
 	public Course update(Course course) throws Exception {
+		validate(course.getIdCourse());
 		return courseDao.update(course);
 	}
 
 	@Override
 	public void delete(String idCourse) throws Exception {
+		validate(idCourse);
 		courseDao.delete(idCourse);
 	}
 
@@ -75,5 +82,14 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public List<?> getRekapJadwal(String id) throws Exception {
 		return courseDao.getRekapJadwal(id);
+	}
+
+	@Override
+	public void validate(String idCourse) throws Exception {
+		try {
+			courseDao.findById(idCourse);
+		} catch (NoResultException e) {
+			throw new Exception("wrong id");
+		}
 	}
 }

@@ -9,7 +9,7 @@ public interface StudentDao {
 
 	List<Student> findAll() throws Exception;
 
-	List<?> cetakReportStudent(String idStudent, String idKelas) throws Exception;
+	List<?> cetakReportStudent(String idStudent, String idKelas, String course) throws Exception;
 
 	Student findById(String idStudent) throws Exception;
 

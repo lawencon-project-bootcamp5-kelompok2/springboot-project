@@ -13,6 +13,8 @@ public interface JawabanService {
 	List<Integer> findAverageStudentFromSubcourse(String idTest) throws Exception;
 
 	List<?> findResultStudentFromAllSubcourse(String idStudent) throws Exception;
+	
+	List<?> findResultByTest(String idTest) throws Exception;
 
 	List<Integer> findAverageStudentFromAllSubcourse(String idStudent) throws Exception;
 
@@ -23,4 +25,6 @@ public interface JawabanService {
 	void insert(Jawaban jawaban) throws Exception;
 
 	void delete(String idJawaban) throws Exception;
+	
+	void validate(String idJawaban) throws Exception;
 }

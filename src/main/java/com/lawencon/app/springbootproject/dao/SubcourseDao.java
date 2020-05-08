@@ -18,8 +18,6 @@ public interface SubcourseDao {
 
 	List<?> tampilanInputNilai(String idSubcourse, String idKelas) throws Exception;
 
-	List<?> getNilai(String idSubcourse, String idKelas) throws Exception;
-
 	Subcourse findById(String idSubcourse) throws Exception;
 
 	Subcourse update(Subcourse subcourse) throws Exception;

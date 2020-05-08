@@ -14,19 +14,19 @@ public interface TrainerService {
 	Trainer findById(String idTrainer) throws Exception;
 
 	Trainer findByEmail(String email) throws Exception;
-	
-	void validateId(String idTrainer) throws Exception;
 
 	Boolean validTrainers(SignupRequest signUpRequest) throws Exception;
 
 	String createTrainers(SignupRequest signUpRequest) throws Exception;
 
-	byte[] cetakReportTrainer(String idTrainer, String idKelas) throws Exception;
+	byte[] cetakReportTrainer(String idTrainer, String idSubcourse) throws Exception;
 
 	String getNamaTrainer(String idTrainer) throws Exception;
 
 	void updateTrainer(Trainer trainer) throws Exception;
 
 	void deleteTrainer(String idTrainer) throws Exception;
+	
+	void validateId(String idTrainer) throws Exception;
 
 }

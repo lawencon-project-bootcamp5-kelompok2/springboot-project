@@ -82,13 +82,15 @@ public class TestController extends BaseController{
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('TRAINER')")
-	public ResponseEntity<?> getInsert(@RequestBody String content) throws Exception {
-		Test test = readValue(content, Test.class);
-		if (testService.cekTest(test) == true) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Test Has Been Set on This Subcourse !"));
+	public ResponseEntity<?> getInsert(@RequestBody String content){
+		try {
+			Test test = readValue(content, Test.class);
+			testService.insert(test);
+			return new ResponseEntity<>(test, HttpStatus.OK);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
 		}
-		testService.insert(test);
-		return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
+		
 	}
 	
 	@PutMapping("/update")

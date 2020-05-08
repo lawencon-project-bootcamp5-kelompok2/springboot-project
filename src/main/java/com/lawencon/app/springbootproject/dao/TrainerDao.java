@@ -11,7 +11,7 @@ public interface TrainerDao {
 
 	List<Trainer> findByNamaAndEmail(String search) throws Exception;
 
-	List<?> cetakReportTrainer(String idTrainer, String idTest, String idKelas) throws Exception;
+	List<?> cetakReportTrainer(String idKelas, String idSubcourse) throws Exception;
 
 	Trainer validTrainers(SignupRequest signUpRequest) throws Exception;
 

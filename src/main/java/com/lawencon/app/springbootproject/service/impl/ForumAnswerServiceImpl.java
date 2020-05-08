@@ -2,6 +2,8 @@ package com.lawencon.app.springbootproject.service.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,7 @@ public class ForumAnswerServiceImpl implements ForumAnswerService{
 
 	@Override
 	public ForumAnswer update(ForumAnswer forumAnswer) throws Exception {
+		validate(forumAnswer.getIdAnswer());
 		return forumAnswerDao.update(forumAnswer);
 	}
 
@@ -39,6 +42,16 @@ public class ForumAnswerServiceImpl implements ForumAnswerService{
 
 	@Override
 	public void delete(String idAnswer) throws Exception {
+		validate(idAnswer);
 		forumAnswerDao.delete(idAnswer);
+	}
+
+	@Override
+	public void validate(String idAnswer) throws Exception {
+		try {
+			forumAnswerDao.findById(idAnswer);
+		} catch (NoResultException e) {
+			throw new Exception("Wrong id");
+		}
 	}
 }

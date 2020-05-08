@@ -2,6 +2,8 @@ package com.lawencon.app.springbootproject.service.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,16 +31,21 @@ public class TestServiceImpl implements TestService{
 
 	@Override
 	public void insert(Test test) throws Exception {
+		if(cekTest(test)==true) {
+			throw new Exception("Test Has Been Set on This Subcourse !");
+		}
 		testDao.insert(test);
 	}
 
 	@Override
 	public Test update(Test test) throws Exception {
+		validate(test.getIdTest());
 		return testDao.update(test);
 	}
 
 	@Override
 	public void delete(String idTest) throws Exception {
+		validate(idTest);
 		testDao.delete(idTest);
 	}
 
@@ -48,7 +55,7 @@ public class TestServiceImpl implements TestService{
 		try {
 			listWaktuSelesai = testDao.findWaktuSelesai(idTest);
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		if(listWaktuSelesai != null) {
 			return true;
@@ -62,7 +69,7 @@ public class TestServiceImpl implements TestService{
 		try {
 			t = testDao.cekTest(test);
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		if(t!=null) {
 			return true;
@@ -83,5 +90,14 @@ public class TestServiceImpl implements TestService{
 	@Override
 	public List<?> findTestByIdSubcourseAndKelas(String idSubcourse, String idKelas) throws Exception {
 		return testDao.findTestByIdSubcourseAndKelas(idSubcourse, idKelas);
+	}
+
+	@Override
+	public void validate(String idTest) throws Exception {
+		try {
+			testDao.findById(idTest);
+		} catch (NoResultException e) {
+			throw new Exception("Wrong id");
+		}
 	}
 }

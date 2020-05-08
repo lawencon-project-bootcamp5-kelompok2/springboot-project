@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class AbsensiServiceImpl implements AbsensiService {
 
 	@Override
 	public Absensi update(Absensi absensi) throws Exception {
+		validate(absensi.getIdAbsensi());
 		return absensiDao.update(absensi);
 	}
 
@@ -102,5 +104,15 @@ public class AbsensiServiceImpl implements AbsensiService {
 	@Override
 	public List<?> findByIdPertemuanAndKelas(String idPertemuan, String idSubcourse, String idKelas) throws Exception {
 		return absensiDao.findByIdPertemuanAndKelas(idPertemuan, idSubcourse, idKelas);
+	}
+
+	@Override
+	public void validate(String idAbsensi) throws Exception {
+		try {
+			absensiDao.findById(idAbsensi);
+		} catch (NoResultException e) {
+			throw new Exception("wrong id");
+		}
+		
 	}
 }

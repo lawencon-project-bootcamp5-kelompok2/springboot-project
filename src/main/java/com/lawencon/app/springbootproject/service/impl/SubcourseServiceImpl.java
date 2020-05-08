@@ -2,6 +2,8 @@ package com.lawencon.app.springbootproject.service.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,17 +31,22 @@ public class SubcourseServiceImpl implements SubcourseService{
 
 	@Override
 	public String insert(Subcourse subcourse) throws Exception {
+		if(validTime(subcourse)==true) {
+			throw new Exception("Schedule had been Book with another trainer, choose another Time");
+		}
 		subcourseDao.insert(subcourse);
 		return "Success Insert";
 	}
 
 	@Override
 	public Subcourse update(Subcourse subcourse) throws Exception {
+		validate(subcourse.getIdSubcourse());
 		return subcourseDao.update(subcourse);
 	}
 
 	@Override
 	public void delete(String idSubcourse) throws Exception {
+		validate(idSubcourse);
 		subcourseDao.delete(idSubcourse);
 	}
 
@@ -88,13 +95,17 @@ public class SubcourseServiceImpl implements SubcourseService{
 	}
 
 	@Override
-	public List<?> getNilai(String idSubcourse, String idKelas) throws Exception {
-		return subcourseDao.getNilai(idSubcourse, idKelas);
+	public List<?> findTanggalSelesai(String idSubcourse) throws Exception {
+		return subcourseDao.findTanggalSelesai(idSubcourse);
 	}
 
 	@Override
-	public List<?> findTanggalSelesai(String idSubcourse) throws Exception {
-		return subcourseDao.findTanggalSelesai(idSubcourse);
+	public void validate(String idSubcourse) throws Exception {
+		try {
+			subcourseDao.findById(idSubcourse);
+		} catch (NoResultException e) {
+			throw new Exception("Wrong id");
+		}
 	}
 	
 }

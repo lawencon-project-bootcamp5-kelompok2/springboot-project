@@ -99,13 +99,15 @@ public class KelasController extends BaseController{
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@RequestBody String content) throws Exception {
-		Kelas kelas = readValue(content, Kelas.class);
-		if (kelasService.validKelas(kelas) == true) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Waktu kelas sudah dipakai"));
+	public ResponseEntity<?> getInsert(@RequestBody String content) {
+		try {
+			Kelas kelas = readValue(content, Kelas.class);
+			kelasService.insert(kelas);
+			return new ResponseEntity<>(kelas, HttpStatus.OK);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
 		}
-		kelasService.insert(kelas);
-		return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
+		
 	}
 	
 	@PutMapping("/update")

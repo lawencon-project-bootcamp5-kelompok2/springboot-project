@@ -53,7 +53,7 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 				+ "s.id_subcourse, s.nama_subcourse, s.tanggal_mulai, s.tanggal_selesai, s.id_course "
 				+ "from "
 				+ "subcourse s join course c on c.id_course = s.id_course "
-				+ "where c.nama_course = :namaParam").
+				+ "where c.nama_course = :namaParam order by s.tanggal_mulai asc").
 				setParameter("namaParam", namaCourse);
 		return bMapperHibernate(q.getResultList(), "idSubcourse", "namaSubcourse", "tanggalMulai", "tanggalSelesai", "idCourse");
 	}
@@ -73,7 +73,7 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 				"	join pertemuan p on p.id_pertemuan = a.id_pertemuan " + 
 				"	join test t on t.id_pertemuan = p.id_pertemuan " +
 				"	where " + 
-				"	sk.kelas_id_kelas = :kelasParam and sc.id_subcourse = :subParam")
+				"	sk.kelas_id_kelas = :kelasParam and sc.id_subcourse = :subParam and j.id_test = t.id_test")
 				.setParameter("kelasParam", idKelas).setParameter("subParam", idSubcourse);
 		return bMapperHibernate(q.getResultList(), "namaSubcourse", "npm", "namaStudent", "status", "nilai");
 	}
@@ -118,20 +118,6 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 				"where sc.id_subcourse = :subParam and k.id_kelas = :kelasParam")
 				.setParameter("subParam", idSubcourse).setParameter("kelasParam", idKelas);
 		return bMapperHibernate(q.getResultList(), "npm", "namaStudent");
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<?> getNilai(String idSubcourse, String idKelas) throws Exception {
-		Query q = em.createNativeQuery("select j.nilai, s.npm " + 
-				"from jawaban j join student s on j.id_student = s.id_student " + 
-				"	join student_kelas sk on sk.student_id_student = s.id_student " + 
-				"	join kelas k on k.id_kelas = sk.kelas_id_kelas " + 
-				"	join course c on c.id_course = k.id_course " + 
-				"	join subcourse sc on sc.id_course = c.id_course " + 
-				"where sc.id_subcourse = :subParam and k.id_kelas = :kelasParam")
-				.setParameter("subParam", idSubcourse).setParameter("kelasParam", idKelas);
-		return bMapperHibernate(q.getResultList(), "nilai", "npm");
 	}
 
 	@SuppressWarnings("unchecked")

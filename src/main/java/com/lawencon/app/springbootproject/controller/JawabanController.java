@@ -22,7 +22,7 @@ import com.lawencon.app.springbootproject.service.JawabanService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/")
+@RequestMapping("/jawaban")
 public class JawabanController extends BaseController {
 
 	@Autowired
@@ -50,6 +50,19 @@ public class JawabanController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search/result/{idTest}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('STUDENT')")
+	public ResponseEntity<?> getResultByTest(@PathVariable("idTest") String idTest){
+		List<?> listResult = new ArrayList<>();
+		try {
+			listResult = jawabanService.findResultByTest(idTest);
+			return new ResponseEntity<>(listResult, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(listResult, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -106,7 +119,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@PostMapping("/insert")
-	@PreAuthorize("hasRole('STUDENT')")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getInsert(@RequestBody String content){
 		try {
 			Jawaban jawaban = readValue(content, Jawaban.class);
@@ -119,7 +132,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@PutMapping("/update")
-	@PreAuthorize("hasRole('STUDENT')")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getUpdate(@RequestBody String content){
 		try {
 			Jawaban jawaban = readValue(content, Jawaban.class);
@@ -132,7 +145,7 @@ public class JawabanController extends BaseController {
 	}
 	
 	@DeleteMapping("/delete/{idJawaban}")
-	@PreAuthorize("hasRole('STUDENT')")
+	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER')")
 	public ResponseEntity<?> getDelete(@PathVariable("idJawaban") String idJawaban){
 		try {
 			jawabanService.delete(idJawaban);

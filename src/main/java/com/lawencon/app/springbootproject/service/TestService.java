@@ -25,4 +25,6 @@ public interface TestService {
 	void insert(Test test) throws Exception;
 
 	void delete(String idTest) throws Exception;
+	
+	void validate(String idTest) throws Exception;
 }

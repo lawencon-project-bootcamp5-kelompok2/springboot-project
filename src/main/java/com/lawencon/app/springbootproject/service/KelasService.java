@@ -25,4 +25,6 @@ public interface KelasService {
 	void update(Kelas kelas) throws Exception;
 
 	void delete(String idKelas) throws Exception;
+	
+	void validate(String idKelas) throws Exception;
 }

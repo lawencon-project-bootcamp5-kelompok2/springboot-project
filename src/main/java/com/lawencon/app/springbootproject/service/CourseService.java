@@ -24,5 +24,7 @@ public interface CourseService {
 	Boolean validCourse(Course course) throws Exception;
 
 	void delete(String idCourse) throws Exception;
+	
+	void validate(String idCourse) throws Exception;
 
 }

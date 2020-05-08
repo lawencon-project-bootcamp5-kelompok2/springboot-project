@@ -18,8 +18,6 @@ public interface SubcourseService {
 
 	List<?> tampilanInputNilai(String idSubcourse, String idKelas) throws Exception;
 
-	List<?> getNilai(String idSubcourse, String idKelas) throws Exception;
-
 	Subcourse update(Subcourse subcourse) throws Exception;
 
 	Subcourse findById(String idSubcourse) throws Exception;
@@ -33,4 +31,6 @@ public interface SubcourseService {
 	Boolean validTime(Subcourse subcourse) throws Exception;
 
 	void delete(String idSubcourse) throws Exception;
+	
+	void validate(String idSubcourse) throws Exception;
 }

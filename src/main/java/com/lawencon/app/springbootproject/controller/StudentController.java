@@ -124,19 +124,20 @@ public class StudentController extends BaseController{
 		}
 	}
 	
-	@GetMapping("/report/{idStudent}/{idKelas}")
+	@GetMapping("/report/{idStudent}/{idKelas}/{idCourse}")
 	@PreAuthorize("hasRole('STUDENT')")
-	public ResponseEntity<byte[]> getList(@PathVariable String idStudent, @PathVariable String idKelas){
+	public ResponseEntity<byte[]> getList(@PathVariable String idStudent, @PathVariable String idKelas, @PathVariable String idCourse){
 		try {
 			HttpHeaders responseHeaders = new HttpHeaders();
 			responseHeaders.setContentType(MediaType.APPLICATION_PDF);
 			responseHeaders.add("content-disposition", "inline;filename='report'");
-			studentService.cetakReportStudent(idStudent, idKelas);
-			return new ResponseEntity<>(studentService.cetakReportStudent(idStudent, idKelas), responseHeaders, HttpStatus.OK);
+			studentService.cetakReportStudent(idStudent, idKelas, idCourse);
+			return new ResponseEntity<>(studentService.cetakReportStudent(idStudent, idKelas, idCourse), responseHeaders, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
 	
 }

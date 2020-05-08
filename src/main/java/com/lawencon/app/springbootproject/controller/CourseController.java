@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.app.springbootproject.model.Course;
-import com.lawencon.app.springbootproject.model.payload.response.MessageResponse;
 import com.lawencon.app.springbootproject.service.CourseService;
 
 @RestController
@@ -82,14 +81,14 @@ public class CourseController extends BaseController {
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@RequestBody String content)throws Exception{
-		Course course = readValue(content, Course.class);
-		if(courseService.validCourse(course)==true) {
-			return ResponseEntity.badRequest().
-					body(new MessageResponse("Data Already Exists"));
+	public ResponseEntity<?> getInsert(@RequestBody String content){
+		try {
+			Course course = readValue(content, Course.class);
+			courseService.insert(course);
+			return new ResponseEntity<>(course, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		courseService.insert(course);
-		return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
 	}
 	
 	@PutMapping("/update")

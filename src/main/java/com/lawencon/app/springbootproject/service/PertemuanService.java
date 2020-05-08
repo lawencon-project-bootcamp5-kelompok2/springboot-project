@@ -19,4 +19,6 @@ public interface PertemuanService {
 	Boolean validPertemuan(Pertemuan pertemuan) throws Exception;
 
 	void delete(String idPertemuan) throws Exception;
+	
+	void validate(String idPertemuan) throws Exception;
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +32,19 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public void updateStudent(Student student) throws Exception{
+		validate(student.getIdStudent());
 		studentDao.updateStudent(student);
 	}
 	
 	@Override
 	public void updateProfil(Student student) throws Exception {
+		validate(student.getIdStudent());
 		studentDao.updateProfil(student);
 	}
 
 	@Override
 	public void deleteStudent(String idStudent) throws Exception{
+		validate(idStudent);
 		studentDao.deleteStudent(idStudent);
 	}
 
@@ -55,9 +59,9 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public byte[] cetakReportStudent(String idStudent, String idKelas) throws Exception {
+	public byte[] cetakReportStudent(String idStudent, String idKelas, String idCourse) throws Exception {
 		List<?> data = new ArrayList<>();
-		data = studentDao.cetakReportStudent(idStudent, idKelas);
+		data = studentDao.cetakReportStudent(idStudent, idKelas, idCourse);
 		byte[] pdfReport = null;
 		try {
 			File file = ResourceUtils.getFile("classpath:report/reportStudent.jrxml");
@@ -99,5 +103,14 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Student findByEmail(String email) throws Exception {
 		return studentDao.findByEmail(email);
+	}
+
+	@Override
+	public void validate(String idStudent) throws Exception {
+		try {
+			studentDao.findById(idStudent);
+		} catch (NoResultException e) {
+			
+		}
 	}
 }

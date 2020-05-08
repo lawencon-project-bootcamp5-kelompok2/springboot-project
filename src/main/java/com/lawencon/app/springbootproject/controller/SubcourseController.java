@@ -117,29 +117,18 @@ public class SubcourseController extends BaseController{
 			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
 		}
 	}
-	@GetMapping("/nilaisiswa/{idSubcourse}/{idKelas}")
-	@PreAuthorize("hasRole('STUDENT') or hasRole('TRAINER') or hasRole('ADMIN')")
-	public ResponseEntity<?> getNilaiSiswa(@PathVariable("idSubcourse") String idSubcourse, @PathVariable("idKelas") String idKelas){
-		List<?> listCourse = new ArrayList<>();
-		try {
-			listCourse = subcourseService.getNilai(idSubcourse, idKelas);
-			return new ResponseEntity<>(listCourse, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(listCourse, HttpStatus.BAD_REQUEST);
-		}
-	}
 	
 	@PostMapping("/insert")
 	@PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
-	public ResponseEntity<?> getInsert(@RequestBody String content) throws Exception {
-		Subcourse subcourse = readValue(content, Subcourse.class);
-		if(subcourseService.validTime(subcourse)==true) {
-			return ResponseEntity.badRequest().
-					body(new MessageResponse("Schedule had been Book with another trainer, choose another Time"));
+	public ResponseEntity<?> getInsert(@RequestBody String content){
+		try {
+			Subcourse subcourse = readValue(content, Subcourse.class);
+			subcourseService.insert(subcourse);
+			return new ResponseEntity<>(subcourse, HttpStatus.OK);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
 		}
-		subcourseService.insert(subcourse);
-		return ResponseEntity.ok().body(new MessageResponse("Success Insert"));
+		
 	}
 	
 	@PutMapping("/update")

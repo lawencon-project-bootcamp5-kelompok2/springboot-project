@@ -17,8 +17,8 @@ public interface StudentService {
 
 	Boolean existsByEmail(String email);
 
-	byte[] cetakReportStudent(String idStudent, String idKelas) throws Exception;
-
+	byte[] cetakReportStudent(String idStudent, String idKelas, String idCourse) throws Exception;
+	
 	String createStudents(SignupRequest signUpRequest) throws Exception;
 
 	void updateStudent(Student student) throws Exception;
@@ -26,4 +26,6 @@ public interface StudentService {
 	void updateProfil(Student student) throws Exception;
 
 	void deleteStudent(String idStudent) throws Exception;
+	
+	void validate(String idStudent) throws Exception;
 }

@@ -26,4 +26,6 @@ public interface AbsensiService {
 	Boolean cekAbsen(Absensi absensi) throws Exception;
 
 	void insert(Absensi absensi) throws Exception;
+	
+	void validate(String idAbsensi) throws Exception;
 }

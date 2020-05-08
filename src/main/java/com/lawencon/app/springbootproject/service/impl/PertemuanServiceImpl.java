@@ -2,6 +2,7 @@ package com.lawencon.app.springbootproject.service.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +31,24 @@ public class PertemuanServiceImpl implements PertemuanService{
 
 	@Override
 	public String insert(Pertemuan pertemuan) throws Exception {
-		pertemuanDao.insert(pertemuan);
-		return "Success Insert";
+		if(validPertemuan(pertemuan)==true) {
+			throw new Exception("Error: Data Already Exist");
+		}
+		else {
+			pertemuanDao.insert(pertemuan);
+			return "Success Insert";
+		}
 	}
 
 	@Override
 	public Pertemuan update(Pertemuan pertemuan) throws Exception {
+		validate(pertemuan.getIdPertemuan());
 		return pertemuanDao.update(pertemuan);
 	}
 
 	@Override
 	public void delete(String idPertemuan) throws Exception {
+		validate(idPertemuan);
 		pertemuanDao.delete(idPertemuan);
 	}
 
@@ -61,6 +69,15 @@ public class PertemuanServiceImpl implements PertemuanService{
 	@Override
 	public List<?> findBySubcourse(String idSubcourse) throws Exception {
 		return pertemuanDao.findBySubcourse(idSubcourse);
+	}
+
+	@Override
+	public void validate(String idPertemuan) throws Exception {
+		try {
+			pertemuanDao.findById(idPertemuan);
+		} catch (NoResultException e) {
+			throw new Exception("Wrong id");
+		}
 	}
 	
 }

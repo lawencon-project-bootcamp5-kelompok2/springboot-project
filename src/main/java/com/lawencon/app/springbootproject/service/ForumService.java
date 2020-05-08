@@ -17,4 +17,6 @@ public interface ForumService {
 	void createForum(Forum forum) throws Exception;
 
 	void delete(String idForum) throws Exception;
+	
+	void validate(String idForum) throws Exception;
 }

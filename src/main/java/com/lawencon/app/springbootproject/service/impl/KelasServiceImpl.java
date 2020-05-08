@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,16 +46,21 @@ public class KelasServiceImpl implements KelasService{
 
 	@Override
 	public void insert(Kelas kelas) throws Exception {
+		if(validKelas(kelas)==true) {
+			throw new Exception("Waktu Kelas Sudah Dipakai");
+		}
 		kelasDao.insert(kelas);
 	}
 
 	@Override
 	public void update(Kelas kelas) throws Exception {
+		validate(kelas.getIdKelas());
 		kelasDao.update(kelas);
 	}
 
 	@Override
 	public void delete(String idKelas) throws Exception {
+		validate(idKelas);
 		kelasDao.delete(idKelas);
 	}
 
@@ -97,5 +103,14 @@ public class KelasServiceImpl implements KelasService{
 	@Override
 	public List<?> getByTrainer(String id) throws Exception {
 		return kelasDao.getByTrainer(id);
+	}
+
+	@Override
+	public void validate(String idKelas) throws Exception {
+		try {
+			kelasDao.findById(idKelas);
+		} catch (NoResultException e) {
+			throw new Exception("Wrong id");
+		}
 	}
 }

@@ -28,7 +28,12 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 
 	@Override
 	public void insert(Jawaban jawaban) throws Exception {
-		em.persist(jawaban);
+		Jawaban j = new Jawaban();
+		j.setIdStudent(jawaban.getIdStudent());
+		j.setIdTest(jawaban.getIdTest());
+		j.setFileJawaban(jawaban.getFileJawaban());
+		j.setNilai(0);
+		em.persist(j);
 	}
 
 	@Override
@@ -116,5 +121,19 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 				+ "where j.id_test = :idParam");
 		q.setParameter("idParam", jawaban.getIdTest());
 		return bMapperHibernate(q.getResultList(), "idCourse","idTest", "namaSubcourse","nilaiMean");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findResultByTest(String idTest) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "j.id_jawaban, s.nama_student, sc.nama_subcourse, j.nilai, j.id_file_jawaban, j.id_test "
+				+ "from jawaban j "
+				+ "join student s on s.id_student = j.id_student "
+				+ "join test t on t.id_test = j.id_test "
+				+ "join subcourse sc on sc.id_subcourse = t.id_subcourse "
+				+ "where j.id_test = :idParam");
+		q.setParameter("idParam", idTest);
+		return bMapperHibernate(q.getResultList(), "idJawaban", "namaStudent", "namaSubcourse", "nilai", "idFileJawaban", "idTest");
 	}	
 }

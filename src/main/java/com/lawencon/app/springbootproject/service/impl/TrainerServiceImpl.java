@@ -14,7 +14,6 @@ import org.springframework.util.ResourceUtils;
 import com.lawencon.app.springbootproject.dao.TrainerDao;
 import com.lawencon.app.springbootproject.model.Trainer;
 import com.lawencon.app.springbootproject.model.payload.request.SignupRequest;
-import com.lawencon.app.springbootproject.service.TestService;
 import com.lawencon.app.springbootproject.service.TrainerService;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -30,9 +29,6 @@ public class TrainerServiceImpl implements TrainerService {
 
 	@Autowired
 	private TrainerDao trainerDao;
-	
-	@Autowired
-	private TestService testService;
 
 	@Override
 	public void updateTrainer(Trainer trainer) throws Exception{
@@ -57,23 +53,22 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public byte[] cetakReportTrainer(String idTrainer, String idKelas) throws Exception {
-		String idTest = testService.getIdTestByKelas(idKelas);
-		List<?> data = new ArrayList<>();
-		data = trainerDao.cetakReportTrainer(idTrainer, idTest, idKelas);
-		byte[] pdfReport = null;
-		try {
-			File file = ResourceUtils.getFile("classpath:report/reportTrainer.jrxml");
-			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
-			
-		} catch (Exception e) {
-			e.printStackTrace();		
-		}
-		return pdfReport;
-	}
+    public byte[] cetakReportTrainer(String idKelas, String idSubcourse) throws Exception {
+        List<?> data = new ArrayList<>();
+        data = trainerDao.cetakReportTrainer(idKelas, idSubcourse);
+        byte[] pdfReport = null;
+        try {
+            File file = ResourceUtils.getFile("classpath:report/reportTrainer.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data,false);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+            pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pdfReport;
+    }
 
 	@Override
 	public String getNamaTrainer(String idTrainer) throws Exception {

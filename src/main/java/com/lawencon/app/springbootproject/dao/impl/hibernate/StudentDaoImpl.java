@@ -97,7 +97,7 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<?> cetakReportStudent(String idStudent, String idKelas) throws Exception {
+	public List<?> cetakReportStudent(String idStudent, String idKelas, String idCourse) throws Exception {
 		Query q = em
 				.createNativeQuery("select distinct s.nama_student , j.nilai, sc.nama_subcourse, c.nama_course, k.kode_kelas "
 						+ "	from student s join jawaban j on j.id_student = s.id_student "
@@ -106,8 +106,8 @@ public class StudentDaoImpl extends BaseHibernate implements StudentDao {
 						+ "	join course c on c.id_course = sc.id_course "
 						+ " join student_kelas sk on sk.student_id_student = s.id_student " 
 						+ "	join kelas k on k.id_kelas = sk.kelas_id_kelas "
-						+ "	where s.id_student = :studentParam and sk.kelas_id_kelas = :kelasParam")
-				.setParameter("studentParam", idStudent).setParameter("kelasParam", idKelas);
+						+ "	where s.id_student = :studentParam and sk.kelas_id_kelas = :kelasParam and c.id_course = :courseParam")
+				.setParameter("studentParam", idStudent).setParameter("kelasParam", idKelas).setParameter("courseParam", idCourse);
 		return bMapperHibernate(q.getResultList(), "namaStudent", "nilai", "namaSubcourse", "namaCourse", "kodeKelas");
 	}
 

@@ -135,7 +135,7 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 				+ "join pertemuan p on p.id_pertemuan = a.id_pertemuan "
 				+ "join student s on s.id_student = a.id_student "
 				+ "join subcourse s2 on s2.id_subcourse = a.id_subcourse "
-				+ "where a.id_pertemuan = :idParam");
+				+ "where a.id_pertemuan = :idParam order by a.tanggal asc");
 		q.setParameter("idParam", idPertemuan);
 		return bMapperHibernate(q.getResultList(), "idAbsensi", "namaStudent", "namaSubcourse", "pertemuan", "status", "tanggal");
 	}
@@ -149,7 +149,8 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 				+ " join student st on st.id_student = a.id_student "
 				+ " join student_kelas sk on sk.kelas_id_kelas = k.id_kelas "
 				+ " join pertemuan p on p.id_pertemuan = a.id_pertemuan "
-				+ " where p.id_pertemuan =:pertemuanParam and s.id_subcourse = :subParam and k.id_kelas = :kelasParam and sk.student_id_student = st.id_student ");
+				+ " where p.id_pertemuan =:pertemuanParam and s.id_subcourse = :subParam and "
+				+ "k.id_kelas = :kelasParam and sk.student_id_student = st.id_student order by p.tanggal_pertemuan asc");
 		q.setParameter("pertemuanParam", idPertemuan).
 		setParameter("subParam", idSubcourse).
 		setParameter("kelasParam", idKelas);

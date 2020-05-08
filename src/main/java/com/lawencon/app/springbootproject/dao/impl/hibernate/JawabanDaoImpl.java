@@ -21,7 +21,7 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 
 	@Override
 	public Jawaban findById(String idJawaban) throws Exception {
-		Query q = em.createQuery("from Jawaban idJawaban = idParam");
+		Query q = em.createQuery("from Jawaban idJawaban = :idParam");
 		q.setParameter("idParam", idJawaban);
 		return (Jawaban) q.getSingleResult();
 	}
@@ -49,6 +49,7 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 		em.remove(findById(idJawaban));
 	}
 	
+	//mencari nilai satu student di satu subcourse berdasarkan idTest dan idStudentnya.
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<?> findResultStudentFromSubcourse(String idTest, String idStudent) throws Exception {
@@ -63,20 +64,7 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 		return bMapperHibernate(q.getResultList(), "namaStudent", "nilai", "namaSubcourse");
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Map<String, Object>> findAverageStudentFromSubcourse(String idTest) throws Exception {
-		Query q = em.createNativeQuery("select "
-				+ "sum(nilai)/(select count(id_test = :idParam)) as mean "
-				+ "from jawaban");
-		q.setParameter("idParam", idTest);
-		List<Map<String, Object>> listResult = bMapperHibernate(q.getResultList(), "Mean");
-		if(!listResult.isEmpty()) {
-			return listResult;
-		}
-		return null;
-	}
-
+	//mencari nilai satu student dari semua subcoursenya berdasarkan idStudentnya.
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<?> findResultStudentFromAllSubcourse(String idStudent) throws Exception {
@@ -91,6 +79,7 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 		return bMapperHibernate(q.getResultList(), "namaStudent", "nilai", "namaSubcourse");
 	}
 
+	//mencari nilai rata-rata satu student dari semua subcourse berdasarkan idStudentnya.
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> findAverageStudentFromAllSubcourse(String idStudent) throws Exception {
@@ -107,6 +96,7 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 		return null;
 	}
 
+	//menyimpan hasil nilai rata-rata semua student ke entity nilai_mean_kelas berdasarkan satu subcourse yg diikuti student tersebut.
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<?> createResultAverageStudentFromSubcourse(Jawaban jawaban) throws Exception {
@@ -123,17 +113,44 @@ public class JawabanDaoImpl extends BaseHibernate implements JawabanDao{
 		return bMapperHibernate(q.getResultList(), "idCourse","idTest", "namaSubcourse","nilaiMean");
 	}
 
+	//mencari nilai semua student yang mengikuti satu subcourse berdasarkan idTestnya.
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<?> findResultByTest(String idTest) throws Exception {
+	public List<?> findResultAllStudentFromSubcourseByTest(String idTest) throws Exception {
 		Query q = em.createNativeQuery("select "
-				+ "j.id_jawaban, s.nama_student, sc.nama_subcourse, j.nilai, j.id_file_jawaban, j.id_test "
+				+ "j.id_jawaban, s.nama_student, sc.nama_subcourse, j.nilai "
 				+ "from jawaban j "
 				+ "join student s on s.id_student = j.id_student "
 				+ "join test t on t.id_test = j.id_test "
 				+ "join subcourse sc on sc.id_subcourse = t.id_subcourse "
 				+ "where j.id_test = :idParam");
 		q.setParameter("idParam", idTest);
-		return bMapperHibernate(q.getResultList(), "idJawaban", "namaStudent", "namaSubcourse", "nilai", "idFileJawaban", "idTest");
+		return bMapperHibernate(q.getResultList(), "idJawaban", "namaStudent", "namaSubcourse", "nilai");
 	}	
+	
+	//mencari nilai rata-rata semua student dari satu subcourse berdasarkan idTestnya.
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> findAverageStudentFromSubcourse(String idTest) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "sum(nilai)/(select count(j.id_test)) as mean "
+				+ "from jawaban j where j.id_test = :idParam");
+		q.setParameter("idParam", idTest);
+		List<Map<String, Object>> listResult = bMapperHibernate(q.getResultList(), "Mean");
+		if(!listResult.isEmpty()) {
+			return listResult;
+		}
+		return null;
+	}
+
+	//mencari isi table jawaban berdasarkan idTestnya.
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<?> findJawabanByTest(String idTest) throws Exception {
+		Query q = em.createNativeQuery("select "
+				+ "j.id_jawaban, j.nilai, j.id_file_jawaban, j.id_student, j.id_test "
+				+ "from jawaban j where j.id_test = :idParam");
+		q.setParameter("idParam", idTest);
+		return bMapperHibernate(q.getResultList(), "idJawaban", "nilai", "idFileJawaban", "idStudent", "idTest");
+	}
 }

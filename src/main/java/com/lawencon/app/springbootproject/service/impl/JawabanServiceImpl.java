@@ -88,7 +88,12 @@ public class JawabanServiceImpl implements JawabanService{
 	}
 
 	@Override
-	public List<?> findResultByTest(String idTest) throws Exception {
-		return jawabanDao.findResultByTest(idTest);
+	public List<?> findResultAllStudentFromSubcourseByTest(String idTest) throws Exception {
+		return jawabanDao.findResultAllStudentFromSubcourseByTest(idTest);
+	}
+
+	@Override
+	public List<?> findJawabanByTest(String idTest) throws Exception {
+		return jawabanDao.findJawabanByTest(idTest);
 	}
 }

@@ -13,7 +13,9 @@ public interface JawabanDao {
 
 	List<?> findResultStudentFromSubcourse(String idTest, String idStudent) throws Exception;
 	
-	List<?> findResultByTest(String idTest) throws Exception;
+	List<?> findResultAllStudentFromSubcourseByTest(String idTest) throws Exception;
+	
+	List<?> findJawabanByTest(String idTest) throws Exception;
 
 	List<Map<String, Object>> findAverageStudentFromSubcourse(String idTest) throws Exception;
 

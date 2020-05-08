@@ -14,7 +14,9 @@ public interface JawabanService {
 
 	List<?> findResultStudentFromAllSubcourse(String idStudent) throws Exception;
 	
-	List<?> findResultByTest(String idTest) throws Exception;
+	List<?> findJawabanByTest(String idTest) throws Exception;
+	
+	List<?> findResultAllStudentFromSubcourseByTest(String idTest) throws Exception;
 
 	List<Integer> findAverageStudentFromAllSubcourse(String idStudent) throws Exception;
 

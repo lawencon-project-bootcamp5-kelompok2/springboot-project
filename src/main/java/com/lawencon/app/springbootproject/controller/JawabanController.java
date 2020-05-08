@@ -58,7 +58,20 @@ public class JawabanController extends BaseController {
 	public ResponseEntity<?> getResultByTest(@PathVariable("idTest") String idTest){
 		List<?> listResult = new ArrayList<>();
 		try {
-			listResult = jawabanService.findResultByTest(idTest);
+			listResult = jawabanService.findJawabanByTest(idTest);
+			return new ResponseEntity<>(listResult, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(listResult, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/search/result/student/{idTest}")
+	@PreAuthorize("hasRole('TRAINER') or hasRole('STUDENT')")
+	public ResponseEntity<?> getResultAllStudentFromSubcourseByTest(@PathVariable("idTest") String idTest){
+		List<?> listResult = new ArrayList<>();
+		try {
+			listResult = jawabanService.findResultAllStudentFromSubcourseByTest(idTest);
 			return new ResponseEntity<>(listResult, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

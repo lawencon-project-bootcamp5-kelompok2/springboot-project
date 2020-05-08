@@ -69,11 +69,11 @@ public class SubcourseDaoImpl extends BaseHibernate implements SubcourseDao{
 				"	join jawaban j on j.id_student = s.id_student " + 
 				"	join course c on c.id_course = sc.id_course " + 
 				"	join kelas k on k.id_course = c.id_course " + 
-				"	join student_kelas sk on sk.kelas_id_kelas = k.id_kelas " + 
+				"	join student_kelas sk on sk.student_id_student = s.id_student " + 
 				"	join pertemuan p on p.id_pertemuan = a.id_pertemuan " + 
 				"	join test t on t.id_pertemuan = p.id_pertemuan " +
 				"	where " + 
-				"	k.id_kelas = :kelasParam and sc.id_subcourse = :subParam")
+				"	sk.kelas_id_kelas = :kelasParam and sc.id_subcourse = :subParam")
 				.setParameter("kelasParam", idKelas).setParameter("subParam", idSubcourse);
 		return bMapperHibernate(q.getResultList(), "namaSubcourse", "npm", "namaStudent", "status", "nilai");
 	}

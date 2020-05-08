@@ -90,11 +90,11 @@ public class TrainerDaoImpl extends BaseHibernate implements TrainerDao {
 				"	join jawaban j on j.id_student = s.id_student " + 
 				"	join course c on c.id_course = sc.id_course " + 
 				"	join kelas k on k.id_course = c.id_course " + 
-				"	join student_kelas sk on sk.kelas_id_kelas = k.id_kelas " + 
+				"	join student_kelas sk on sk.student_id_student = s.id_student " + 
 				"	join pertemuan p on p.id_pertemuan = a.id_pertemuan " + 
 				"	join test t on t.id_pertemuan = p.id_pertemuan " + 
 				"	join trainer tr on tr.id_trainer = c.id_trainer " +
-				"	where tr.id_trainer = :idTrainer and j.id_test = :idTest and k.id_kelas = :idKelas ")
+				"	where tr.id_trainer = :idTrainer and j.id_test = :idTest and k.id_kelas = :idKelas and sk.kelas_id_kelas = k.id_kelas ")
 				.setParameter("idTrainer", idTrainer).setParameter("idTest", idTest).setParameter("idKelas", idKelas);
 		return bMapperHibernate(q.getResultList(), "namaStudent", "status", "nilai", "namaSubcourse", "namaTrainer", "kodeKelas");
 	}

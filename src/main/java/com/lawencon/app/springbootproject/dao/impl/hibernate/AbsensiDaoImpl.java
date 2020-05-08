@@ -98,7 +98,7 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 				"	join student_kelas sk on sk.kelas_id_kelas = k.id_kelas " + 
 				"	join pertemuan p on p.id_pertemuan = a.id_pertemuan " + 
 				"	join trainer t on t.id_trainer = c.id_trainer " + 
-				"where k.id_kelas = :kelasParam and p.id_pertemuan = :pertemuanParam")
+				"where k.id_kelas = :kelasParam and p.id_pertemuan = :pertemuanParam and sk.student_id_student = st.id_student ")
 				.setParameter("kelasParam", idKelas).setParameter("pertemuanParam", idPertemuan);
 		return bMapperHibernate(q.getResultList(), "pertemuan", "kodeKelas", "namaStudent", "tanggalPertemuan", "status", "namaTrainer", "namaSubcourse");
 	}
@@ -145,12 +145,11 @@ public class AbsensiDaoImpl extends BaseHibernate implements AbsensiDao {
 	public List<?> findByIdPertemuanAndKelas(String idPertemuan, String idSubcourse, String idKelas) throws Exception {
 		Query q = em.createNativeQuery("select distinct st.nama_student, p.tanggal_pertemuan , a.status from "
 				+ " absensi a join subcourse s on a.id_subcourse = s.id_subcourse "
-				+ " join course c on c.id_course = s.id_course " 
-				+ " join kelas k on k.id_course = c.id_course "
+				+ " join course c on c.id_course = s.id_course " + " join kelas k on k.id_course = c.id_course "
 				+ " join student st on st.id_student = a.id_student "
 				+ " join student_kelas sk on sk.kelas_id_kelas = k.id_kelas "
 				+ " join pertemuan p on p.id_pertemuan = a.id_pertemuan "
-				+ " where p.id_pertemuan =:pertemuanParam and s.id_subcourse = :subParam and k.id_kelas = :kelasParam");
+				+ " where p.id_pertemuan =:pertemuanParam and s.id_subcourse = :subParam and k.id_kelas = :kelasParam and sk.student_id_student = st.id_student ");
 		q.setParameter("pertemuanParam", idPertemuan).
 		setParameter("subParam", idSubcourse).
 		setParameter("kelasParam", idKelas);

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +36,13 @@ public class TrainerServiceImpl implements TrainerService {
 
 	@Override
 	public void updateTrainer(Trainer trainer) throws Exception{
+		validateId(trainer.getIdTrainer());
 		trainerDao.updateTrainer(trainer);
 	}
 
 	@Override
 	public void deleteTrainer(String idTrainer) throws Exception{
+		validateId(idTrainer);
 		trainerDao.deleteTrainer(idTrainer);
 	}
 
@@ -105,5 +108,15 @@ public class TrainerServiceImpl implements TrainerService {
 	@Override
 	public Trainer findByEmail(String email) throws Exception {
 		return trainerDao.findByEmail(email);
+	}
+
+	@Override
+	public void validateId(String idTrainer) throws Exception {
+		try {
+			trainerDao.findById(idTrainer);
+		} catch (NoResultException e) {
+			throw new Exception("wrong id");
+		}
+			
 	}
 }

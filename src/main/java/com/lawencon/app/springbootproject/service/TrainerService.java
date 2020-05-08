@@ -14,6 +14,8 @@ public interface TrainerService {
 	Trainer findById(String idTrainer) throws Exception;
 
 	Trainer findByEmail(String email) throws Exception;
+	
+	void validateId(String idTrainer) throws Exception;
 
 	Boolean validTrainers(SignupRequest signUpRequest) throws Exception;
 
